@@ -6,9 +6,9 @@ use anchor_lang::prelude::Pubkey;
 use gpl_quadratic::error::QuadraticError;
 use gpl_quadratic::quadratic;
 use gpl_quadratic::state::QuadraticCoefficients;
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 
 use crate::program_test::predecessor_plugin_test::PredecessorPluginTest;
 use crate::program_test::quadratic_voter_test;

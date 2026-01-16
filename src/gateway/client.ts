@@ -1,10 +1,10 @@
 import { BN, Program, Provider } from '@coral-xyz/anchor';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@trezoa/web3.js';
 import { Gateway } from './gateway';
 import GatewayIDL  from './gateway.json';
 import { Client, DEFAULT_GOVERNANCE_PROGRAM_ID } from '../common/Client';
-import { getGatewayTokenAddressForOwnerAndGatekeeperNetwork, getGatewayToken } from '@identity.com/solana-gateway-ts';
-import { getTokenOwnerRecordAddress, VoterWeightAction } from '@solana/spl-governance';
+import { getGatewayTokenAddressForOwnerAndGatekeeperNetwork, getGatewayToken } from '@identity.com/trezoa-gateway-ts';
+import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/spl-governance';
 
 export const GATEWAY_PLUGIN_ID = new PublicKey(
   'GgathUhdrCWRHowoRKACjgWhYHfxCEdBi5ViqYN6HVxk'

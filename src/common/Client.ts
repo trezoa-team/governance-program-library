@@ -1,8 +1,8 @@
-import { PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, TransactionInstruction } from '@trezoa/web3.js';
 import { BN, Idl, Program } from '@coral-xyz/anchor';
 import { PluginProgramAccounts } from './types';
 import { IdlAccounts } from '@coral-xyz/anchor/dist/cjs/program/namespace/types';
-import { getTokenOwnerRecordAddress, VoterWeightAction } from '@solana/spl-governance';
+import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/spl-governance';
 
 export const DEFAULT_GOVERNANCE_PROGRAM_ID = new PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw");
 

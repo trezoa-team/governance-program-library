@@ -9,9 +9,9 @@ use anchor_spl::associated_token::{
     spl_associated_token_account::instruction::create_associated_token_account,
 };
 #[allow(deprecated)]
-use solana_program::{borsh::try_from_slice_unchecked, system_program};
-use solana_program_test::{BanksClientError, ProgramTest, ProgramTestContext};
-use solana_sdk::{
+use trezoa_program::{borsh::try_from_slice_unchecked, system_program};
+use trezoa_program_test::{BanksClientError, ProgramTest, ProgramTestContext};
+use trezoa_sdk::{
     account::{Account, ReadableAccount},
     instruction::Instruction,
     program_pack::Pack,
@@ -86,16 +86,16 @@ impl ProgramTestBench {
             .banks_client
             .process_transaction_with_commitment(
                 transaction,
-                solana_sdk::commitment_config::CommitmentLevel::Processed,
+                trezoa_sdk::commitment_config::CommitmentLevel::Processed,
             )
             .await
     }
 
-    pub async fn get_clock(&self) -> solana_program::clock::Clock {
+    pub async fn get_clock(&self) -> trezoa_program::clock::Clock {
         self.context
             .borrow_mut()
             .banks_client
-            .get_sysvar::<solana_program::clock::Clock>()
+            .get_sysvar::<trezoa_program::clock::Clock>()
             .await
             .unwrap()
     }
@@ -129,18 +129,18 @@ impl ProgramTestBench {
         mint_authority: &Pubkey,
         freeze_authority: Option<&Pubkey>,
     ) -> Result<(), BanksClientError> {
-        let mint_rent = self.rent.minimum_balance(spl_token::state::Mint::LEN);
+        let mint_rent = self.rent.minimum_balance(tpl_token::state::Mint::LEN);
 
         let instructions = [
             system_instruction::create_account(
                 &self.context.borrow().payer.pubkey(),
                 &mint_keypair.pubkey(),
                 mint_rent,
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                tpl_token::state::Mint::LEN as u64,
+                &tpl_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            tpl_token::instruction::initialize_mint(
+                &tpl_token::id(),
                 &mint_keypair.pubkey(),
                 mint_authority,
                 freeze_authority,
@@ -178,7 +178,7 @@ impl ProgramTestBench {
             &self.context.borrow().payer.pubkey(),
             owner,
             &mint_cookie.address,
-            &spl_token::id(),
+            &tpl_token::id(),
         );
         let token_account_address = get_associated_token_address(owner, &mint_cookie.address);
         self.process_transaction(&[create_ata_account], None)
@@ -203,8 +203,8 @@ impl ProgramTestBench {
         token_account: &Pubkey,
         amount: u64,
     ) -> Result<(), BanksClientError> {
-        let mint_instruction = spl_token::instruction::mint_to(
-            &spl_token::id(),
+        let mint_instruction = tpl_token::instruction::mint_to(
+            &tpl_token::id(),
             token_mint,
             token_account,
             &token_mint_authority.pubkey(),
@@ -235,13 +235,13 @@ impl ProgramTestBench {
         let create_account_instruction = system_instruction::create_account(
             &self.context.borrow().payer.pubkey(),
             &token_account_keypair.pubkey(),
-            rent.minimum_balance(spl_token::state::Account::get_packed_len()),
-            spl_token::state::Account::get_packed_len() as u64,
-            &spl_token::id(),
+            rent.minimum_balance(tpl_token::state::Account::get_packed_len()),
+            tpl_token::state::Account::get_packed_len() as u64,
+            &tpl_token::id(),
         );
 
-        let initialize_account_instruction = spl_token::instruction::initialize_account(
-            &spl_token::id(),
+        let initialize_account_instruction = tpl_token::instruction::initialize_account(
+            &tpl_token::id(),
             &token_account_keypair.pubkey(),
             token_mint,
             owner,

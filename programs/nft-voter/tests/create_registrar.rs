@@ -4,8 +4,8 @@ use anchor_lang::prelude::{ErrorCode, Pubkey};
 use gpl_nft_voter::error::NftVoterError;
 use program_test::nft_voter_test::NftVoterTest;
 
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 
 use program_test::tools::{assert_anchor_err, assert_nft_voter_err};
 

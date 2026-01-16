@@ -1,8 +1,8 @@
 use crate::program_test::bonk_plugin_test::BonkPluginTest;
-use program_test::{spl_token_staking_test::SplTokenStakingCookie, tools::assert_ix_err};
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use program_test::{tpl_token_staking_test::SplTokenStakingCookie, tools::assert_ix_err};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 
@@ -14,8 +14,8 @@ async fn test_create_voter_weight_record() -> Result<(), TransportError> {
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
 
     // Act
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test
@@ -47,8 +47,8 @@ async fn test_create_voter_weight_record_with_already_exists_error() -> Result<(
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
     // Act
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test

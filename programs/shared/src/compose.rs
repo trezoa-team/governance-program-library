@@ -5,13 +5,13 @@ use crate::{
     mint::MintMaxVoterWeight,
 };
 use anchor_lang::prelude::{Account, ProgramError, Pubkey};
-use anchor_lang::solana_program::program_pack::Pack;
+use anchor_lang::trezoa_program::program_pack::Pack;
 use anchor_lang::{
     error, prelude::AccountInfo, require_eq, AccountDeserialize, AccountSerialize, Owner, Result,
 };
 use spl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
 use spl_governance_tools::account::get_account_data;
-use spl_token::state::Mint;
+use tpl_token::state::Mint;
 
 pub trait RegistrarBase<'a> {
     fn get_realm(&'a self) -> &'a Pubkey;

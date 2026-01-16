@@ -1,5 +1,5 @@
 use {
-    crate::{error::*, state::*, tools::spl_token::transfer_spl_tokens_signed_checked, ID},
+    crate::{error::*, state::*, tools::tpl_token::transfer_tpl_tokens_signed_checked, ID},
     anchor_lang::prelude::*,
     anchor_spl::{
         associated_token::AssociatedToken,
@@ -85,7 +85,7 @@ pub fn withdraw<'info>(
     let voter = &mut ctx.accounts.voter;
 
     {
-        transfer_spl_tokens_signed_checked(
+        transfer_tpl_tokens_signed_checked(
             &ctx.accounts.vault.to_account_info(),
             &ctx.accounts.destination.to_account_info(),
             &voter.to_account_info(),

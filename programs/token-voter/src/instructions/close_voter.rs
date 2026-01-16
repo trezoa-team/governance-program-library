@@ -2,7 +2,7 @@ use {
     crate::{
         error::*,
         state::*,
-        tools::spl_token::{get_spl_token_amount, get_spl_token_owner},
+        tools::tpl_token::{get_tpl_token_amount, get_tpl_token_owner},
     },
     anchor_lang::prelude::*,
     anchor_spl::{
@@ -60,8 +60,8 @@ pub fn close_voter<'info>(ctx: Context<'_, '_, '_, 'info, CloseVoter<'info>>) ->
 
     for token_account in ctx.remaining_accounts {
         let token_account_clone = &token_account.clone();
-        let token_owner = get_spl_token_owner(token_account_clone)?;
-        let token_amount = get_spl_token_amount(token_account_clone)?;
+        let token_owner = get_tpl_token_owner(token_account_clone)?;
+        let token_amount = get_tpl_token_amount(token_account_clone)?;
 
         require_keys_eq!(
             token_owner,

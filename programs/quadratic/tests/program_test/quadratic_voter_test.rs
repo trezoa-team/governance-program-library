@@ -2,17 +2,17 @@ use std::sync::Arc;
 
 use anchor_lang::prelude::Pubkey;
 use itertools::Either;
-use solana_program::instruction::AccountMeta;
+use trezoa_program::instruction::AccountMeta;
 
 use gpl_quadratic::state::{get_registrar_address, Registrar, *};
-use solana_sdk::{instruction::Instruction, signature::Keypair, signer::Signer};
+use trezoa_sdk::{instruction::Instruction, signature::Keypair, signer::Signer};
 use spl_governance::{
     instruction::cast_vote,
     state::vote_record::{Vote, VoteChoice},
 };
 
 use gpl_quadratic::state::quadratic_coefficients::QuadraticCoefficients;
-use solana_program_test::{processor, BanksClientError, ProgramTest};
+use trezoa_program_test::{processor, BanksClientError, ProgramTest};
 
 use crate::program_test::{
     governance_test::{GovernanceTest, ProposalCookie, RealmCookie, TokenOwnerRecordCookie},
@@ -137,7 +137,7 @@ impl QuadraticVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -240,7 +240,7 @@ impl QuadraticVoterTest {
             registrar: registrar_cookie.address,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {

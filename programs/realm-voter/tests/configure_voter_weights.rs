@@ -2,10 +2,10 @@ use gpl_realm_voter::error::RealmVoterError;
 use gpl_realm_voter::state::CollectionItemChangeType;
 use program_test::realm_voter_test::RealmVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

@@ -1,4 +1,4 @@
-use anchor_lang::{prelude::*, solana_program::pubkey};
+use anchor_lang::{prelude::*, trezoa_program::pubkey};
 
 mod instructions;
 use instructions::*;

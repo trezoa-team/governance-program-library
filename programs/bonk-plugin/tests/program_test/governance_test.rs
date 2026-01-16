@@ -1,8 +1,8 @@
 use std::{str::FromStr, sync::Arc};
 
 use anchor_lang::prelude::Pubkey;
-use solana_program_test::ProgramTest;
-use solana_sdk::{
+use trezoa_program_test::ProgramTest;
+use trezoa_sdk::{
     instruction::Instruction, signature::Keypair, signer::Signer, transport::TransportError,
 };
 use spl_governance::{

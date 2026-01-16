@@ -3,8 +3,8 @@ use std::borrow::BorrowMut;
 use gpl_token_voter::error::TokenVoterError;
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 mod program_test;
 
 #[tokio::test]
@@ -65,7 +65,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -81,7 +81,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             1,
             amount_deposited,
             None,
@@ -96,7 +96,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &voter_cookie,
             &first_user_cookie,
             &token_voter_test.mints,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )
         .await
         .err()
@@ -111,7 +111,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -126,7 +126,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &voter_cookie,
             &first_user_cookie,
             &token_voter_test.mints,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )
         .await
         .err()
@@ -140,7 +140,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             1,
             amount_deposited,
             None,
@@ -154,7 +154,7 @@ async fn test_close_with_token_extensions() -> Result<(), TransportError> {
             &voter_cookie,
             &first_user_cookie,
             &token_voter_test.mints,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )
         .await?;
 

@@ -1,8 +1,8 @@
 use anchor_lang::prelude::ERROR_CODE_OFFSET;
 use gpl_nft_voter::error::NftVoterError;
-use solana_program::instruction::InstructionError;
-use solana_program_test::BanksClientError;
-use solana_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::BanksClientError;
+use trezoa_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError};
 use spl_governance::error::GovernanceError;
 use spl_governance_tools::error::GovernanceToolsError;
 

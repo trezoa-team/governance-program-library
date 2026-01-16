@@ -4,11 +4,11 @@ use anchor_spl::associated_token;
 use gpl_token_voter::error::TokenVoterError;
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::instruction::InstructionError;
-use solana_sdk::pubkey::Pubkey;
-use solana_sdk::signer::Signer;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::instruction::InstructionError;
+use trezoa_sdk::pubkey::Pubkey;
+use trezoa_sdk::signer::Signer;
+use trezoa_sdk::transport::TransportError;
 mod program_test;
 
 #[tokio::test]
@@ -54,7 +54,7 @@ async fn test_deposit_entry_with_token_extension() -> Result<(), TransportError>
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -157,12 +157,12 @@ async fn test_deposit_entry_with_token_extension_transfer_hooks() -> Result<(), 
     let vault = associated_token::get_associated_token_address_with_program_id(
         &voter_cookie.address,
         &first_mint_cookie_transfer_hook.address,
-        &spl_token_2022::id(),
+        &tpl_token_2022::id(),
     );
     let deposit_token = associated_token::get_associated_token_address_with_program_id(
         &first_user_cookie.key.pubkey(),
         &first_mint_cookie_transfer_hook.address,
-        &spl_token_2022::id(),
+        &tpl_token_2022::id(),
     );
     token_voter_test.bench.advance_clock().await;
     let additional_account_metas = token_voter_test
@@ -186,7 +186,7 @@ async fn test_deposit_entry_with_token_extension_transfer_hooks() -> Result<(), 
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie_transfer_hook,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             Some(additional_account_metas.to_vec()),
@@ -287,7 +287,7 @@ async fn test_deposit_entry_with_token_extension_transfer_fees() -> Result<(), T
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie_transfer_fees,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -302,7 +302,7 @@ async fn test_deposit_entry_with_token_extension_transfer_fees() -> Result<(), T
         .vault_balance(
             &voter_cookie,
             &first_mint_cookie_transfer_fees,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )
         .await;
     assert_eq!(voter_data.registrar, registrar_cookie.address);
@@ -357,7 +357,7 @@ async fn test_deposit_entry() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -459,7 +459,7 @@ async fn test_deposit_entry_multi_deposit() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -475,7 +475,7 @@ async fn test_deposit_entry_multi_deposit() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -490,7 +490,7 @@ async fn test_deposit_entry_multi_deposit() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -594,7 +594,7 @@ async fn test_deposit_entry_multi_token() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -608,7 +608,7 @@ async fn test_deposit_entry_multi_token() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             1,
             amount_deposited,
             None,
@@ -634,11 +634,11 @@ async fn test_deposit_entry_multi_token() -> Result<(), TransportError> {
     assert_eq!(voter_data.deposits.len(), 2);
 
     let first_vault_balance = token_voter_test
-        .vault_balance(&voter_cookie, &first_mint_cookie, &spl_token::id())
+        .vault_balance(&voter_cookie, &first_mint_cookie, &tpl_token::id())
         .await;
     assert_eq!(first_vault_balance, amount_deposited);
     let second_vault_balance = token_voter_test
-        .vault_balance(&voter_cookie, &second_mint_cookie, &spl_token::id())
+        .vault_balance(&voter_cookie, &second_mint_cookie, &tpl_token::id())
         .await;
     assert_eq!(second_vault_balance, amount_deposited);
 
@@ -727,7 +727,7 @@ async fn test_deposit_entry_invalid_deposit_entry_index() -> Result<(), Transpor
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -741,7 +741,7 @@ async fn test_deposit_entry_invalid_deposit_entry_index() -> Result<(), Transpor
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             2,
             amount_deposited,
             None,
@@ -804,7 +804,7 @@ async fn test_deposit_entry_insufficient_funds() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -873,7 +873,7 @@ async fn test_deposit_entry_with_invalid_registrar_error() -> Result<(), Transpo
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,

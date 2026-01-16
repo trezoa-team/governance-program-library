@@ -1,13 +1,13 @@
 use crate::program_test::bonk_plugin_test::BonkPluginTest;
 use program_test::program_test_bench::{airdrop, WalletCookie};
-use program_test::spl_token_staking_test::{find_reward_vault_key, find_stake_receipt_key};
-use program_test::{spl_token_staking_test::SplTokenStakingCookie, tools::*};
-use solana_program_test::*;
-use solana_sdk::native_token::sol_to_lamports;
-use solana_sdk::pubkey::Pubkey;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use program_test::tpl_token_staking_test::{find_reward_vault_key, find_stake_receipt_key};
+use program_test::{tpl_token_staking_test::SplTokenStakingCookie, tools::*};
+use trezoa_program_test::*;
+use trezoa_sdk::native_token::sol_to_lamports;
+use trezoa_sdk::pubkey::Pubkey;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 mod program_test;
-use solana_sdk::signature::Signer;
+use trezoa_sdk::signature::Signer;
 use spl_governance::error::GovernanceError;
 use spl_governance::state::governance::get_governance_address;
 use spl_governance::state::proposal::get_proposal_address;
@@ -18,8 +18,8 @@ async fn test_update_voter_weight_record_create_proposal() -> Result<(), Transpo
     let mut bonk_plugin_test = BonkPluginTest::start_new().await;
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test
@@ -44,9 +44,9 @@ async fn test_update_voter_weight_record_create_proposal() -> Result<(), Transpo
         depositor.pubkey(),
         stake_pool_pubkey,
         0,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
-    spl_token_staking_cookie
+    tpl_token_staking_cookie
         .deposit_into_stake_pool(
             &depositor,
             &stake_pool_pubkey,
@@ -137,8 +137,8 @@ async fn test_update_voter_weight_record_vote() -> Result<(), TransportError> {
     let mut bonk_plugin_test = BonkPluginTest::start_new().await;
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test
@@ -175,20 +175,20 @@ async fn test_update_voter_weight_record_vote() -> Result<(), TransportError> {
         depositor.pubkey(),
         stake_pool_pubkey,
         0,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
     let stake_pool_reciept_voter = find_stake_receipt_key(
         voter.pubkey(),
         stake_pool_pubkey,
         0,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
     let reward_vault_key = find_reward_vault_key(
         stake_pool_pubkey,
         community_mint_cookie.address,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
-    spl_token_staking_cookie
+    tpl_token_staking_cookie
         .deposit_into_stake_pool(
             &depositor,
             &stake_pool_pubkey,
@@ -197,7 +197,7 @@ async fn test_update_voter_weight_record_vote() -> Result<(), TransportError> {
             &[&reward_vault_key],
         )
         .await?;
-    spl_token_staking_cookie
+    tpl_token_staking_cookie
         .deposit_into_stake_pool(
             &voter,
             &stake_pool_pubkey,
@@ -345,8 +345,8 @@ async fn test_update_voter_weight_record_vote_invalid_action() -> Result<(), Tra
     let mut bonk_plugin_test = BonkPluginTest::start_new().await;
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test
@@ -371,14 +371,14 @@ async fn test_update_voter_weight_record_vote_invalid_action() -> Result<(), Tra
         depositor.pubkey(),
         stake_pool_pubkey,
         0,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
     let reward_vault_key = find_reward_vault_key(
         stake_pool_pubkey,
         community_mint_cookie.address,
-        spl_token_staking_cookie.program_id,
+        tpl_token_staking_cookie.program_id,
     );
-    spl_token_staking_cookie
+    tpl_token_staking_cookie
         .deposit_into_stake_pool(
             &depositor,
             &stake_pool_pubkey,

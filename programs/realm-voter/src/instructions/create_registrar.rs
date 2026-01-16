@@ -58,7 +58,7 @@ pub struct CreateRegistrar<'info> {
 /// used for governance
 ///
 /// max_governance_programs is used to allocate account size for the maximum number of configured spl-governance instances
-/// Note: Once Solana runtime supports account resizing the max value won't be required
+/// Note: Once Trezoa runtime supports account resizing the max value won't be required
 pub fn create_registrar(ctx: Context<CreateRegistrar>, _max_governance_programs: u8) -> Result<()> {
     let registrar = &mut ctx.accounts.registrar;
     registrar.governance_program_id = ctx.accounts.governance_program_id.key();

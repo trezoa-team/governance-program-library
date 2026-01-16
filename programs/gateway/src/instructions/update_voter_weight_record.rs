@@ -1,7 +1,7 @@
 use crate::error::GatewayError;
 use crate::state::*;
 use anchor_lang::prelude::*;
-use solana_gateway::Gateway;
+use trezoa_gateway::Gateway;
 use spl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
 use spl_governance_tools::account::get_account_data;
 use std::cmp::max;

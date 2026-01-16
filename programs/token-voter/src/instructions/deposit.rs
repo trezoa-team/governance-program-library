@@ -2,9 +2,9 @@ use {
     crate::{
         error::*,
         state::*,
-        tools::spl_token::{get_current_mint_fee, transfer_checked_spl_tokens},
+        tools::tpl_token::{get_current_mint_fee, transfer_checked_tpl_tokens},
     },
-    anchor_lang::{prelude::*, solana_program::sysvar::instructions as tx_instructions},
+    anchor_lang::{prelude::*, trezoa_program::sysvar::instructions as tx_instructions},
     anchor_spl::{
         associated_token::AssociatedToken,
         token_interface::{Mint, TokenAccount, TokenInterface},
@@ -91,7 +91,7 @@ pub fn deposit<'info>(
     // Deposit tokens into the vault and increase the amount too.
     // fail early if amount is insufficient.
     {
-        transfer_checked_spl_tokens(
+        transfer_checked_tpl_tokens(
             &ctx.accounts.deposit_token.to_account_info(),
             &ctx.accounts.vault.to_account_info(),
             &ctx.accounts.deposit_authority.to_account_info(),

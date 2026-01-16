@@ -1,8 +1,8 @@
 use std::{str::FromStr, sync::Arc};
 
 use anchor_lang::prelude::Pubkey;
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::{signature::Keypair, signer::Signer};
+use trezoa_program_test::{BanksClientError, ProgramTest};
+use trezoa_sdk::{signature::Keypair, signer::Signer};
 use spl_governance::state::realm::GoverningTokenConfigAccountArgs;
 use spl_governance::state::realm_config::GoverningTokenType;
 use spl_governance::state::token_owner_record::TOKEN_OWNER_RECORD_LAYOUT_VERSION;

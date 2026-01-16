@@ -7,8 +7,8 @@ use program_test::{
     tools::{assert_gov_err, assert_nft_voter_err},
 };
 
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 use spl_governance::error::GovernanceError;
 
 mod program_test;

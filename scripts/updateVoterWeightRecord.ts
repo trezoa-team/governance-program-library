@@ -1,5 +1,5 @@
 // Given a governance token wallet, a realm and a plugin name, send a transaction to update the voter weight record for the given wallet address.
-import { PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, TransactionInstruction } from '@trezoa/web3.js';
 import { GatewayClient, QuadraticClient } from '../src';
 import { Provider } from '@coral-xyz/anchor';
 import { createAndSendV0Tx } from './utils/plugin';

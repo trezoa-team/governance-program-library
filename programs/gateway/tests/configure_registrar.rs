@@ -4,9 +4,9 @@ use anchor_lang::prelude::Pubkey;
 use program_test::gateway_voter_test::GatewayVoterTest;
 
 use gpl_civic_gateway::error::GatewayError;
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
 
 use crate::program_test::tools::NopOverride;
 use crate::{

@@ -4,8 +4,8 @@ use gpl_nft_voter::state::*;
 use program_test::nft_voter_test::NftVoterTest;
 use program_test::token_metadata_test::CreateNftArgs;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

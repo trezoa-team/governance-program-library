@@ -1,7 +1,7 @@
 use {
     crate::{error::*, state::*},
     anchor_lang::prelude::*,
-    anchor_lang::solana_program::sysvar::instructions as tx_instructions,
+    anchor_lang::trezoa_program::sysvar::instructions as tx_instructions,
 };
 
 /// Creates VoterWeightRecord used by spl-gov

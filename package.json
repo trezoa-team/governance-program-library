@@ -1,15 +1,15 @@
 {
-    "name": "@solana/governance-program-library",
+    "name": "@trezoa/governance-program-library",
     "version": "0.18.0",
-    "description": "Client for Governance Program Library which is a set of extensions for Solana's spl-governance program.",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
+    "description": "Client for Governance Program Library which is a set of extensions for Trezoa's spl-governance program.",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
         "dist/**/*"
     ],
-    "repository": "https://github.com/solana-labs/governance-program-library",
+    "repository": "https://github.com/trezoa-labs/governance-program-library",
     "scripts": {
         "build": "tsc",
         "clean": "rm -rf dist",
@@ -38,8 +38,8 @@
         "trailingComma": "all"
     },
     "dependencies": {
-        "@identity.com/solana-gateway-ts": "^0.12.0",
-        "@solana/spl-governance": "^0.3.28",
+        "@identity.com/trezoa-gateway-ts": "^0.12.0",
+        "@trezoa/spl-governance": "^0.3.28",
         "@coral-xyz/anchor": "^0.30.1"
     }
 }

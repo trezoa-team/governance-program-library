@@ -5,7 +5,7 @@ import idl from "../../target/idl/bonk_plugin.json";
 import {StakeIdl, stakeIdl} from "./stake-idl";
 import { GovernanceConfig, SplGovernance } from "governance-idl-sdk";
 import secret from "../../../../sol/id.json";
-import { Connection, Transaction, sendAndConfirmTransaction, clusterApiUrl } from "@solana/web3.js";
+import { Connection, Transaction, sendAndConfirmTransaction, clusterApiUrl } from "@trezoa/web3.js";
 import { token } from "@coral-xyz/anchor/dist/cjs/utils";
 
 const connection = new anchor.web3.Connection(anchor.web3.clusterApiUrl("devnet"));

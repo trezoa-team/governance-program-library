@@ -2,7 +2,7 @@ use {
     super::{DepositEntry, Registrar},
     crate::error::TokenVoterError,
     anchor_lang::{prelude::*, Discriminator},
-    solana_program::pubkey::PUBKEY_BYTES,
+    trezoa_program::pubkey::PUBKEY_BYTES,
     spl_governance::state::token_owner_record,
 };
 

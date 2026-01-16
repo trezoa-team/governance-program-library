@@ -1,1 +1,1 @@
-pub mod spl_token;
+pub mod tpl_token;

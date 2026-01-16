@@ -5,8 +5,8 @@ use program_test::gateway_voter_test::GatewayVoterTest;
 
 use gpl_civic_gateway::error::GatewayError;
 
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 
 use crate::program_test::predecessor_plugin_test::PredecessorPluginTest;
 use crate::program_test::tools::NopOverride;

@@ -23,7 +23,7 @@ impl Log for LoggerWrapper {
     fn log(&self, record: &log::Record) {
         if record
             .target()
-            .starts_with("solana_runtime::message_processor")
+            .starts_with("trezoa_runtime::message_processor")
         {
             let msg = record.args().to_string();
             if let Some(data) = msg.strip_prefix("Program log: ") {

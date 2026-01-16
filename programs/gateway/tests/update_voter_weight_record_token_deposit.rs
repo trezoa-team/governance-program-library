@@ -2,8 +2,8 @@ use gpl_civic_gateway::error::GatewayError;
 use itertools::Either;
 use program_test::gateway_voter_test::GatewayVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

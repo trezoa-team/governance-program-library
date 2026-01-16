@@ -6,9 +6,9 @@ use program_test::token_voter_test::TokenVoterTest;
 
 use crate::program_test::program_test_bench::MintType;
 use program_test::tools::{assert_anchor_err, assert_ix_err, assert_token_voter_err};
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 
 #[tokio::test]
 async fn test_create_registrar_with_token_extensions() -> Result<(), TransportError> {

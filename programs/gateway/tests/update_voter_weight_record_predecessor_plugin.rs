@@ -1,9 +1,9 @@
 use crate::program_test::governance_test::RealmCookie;
 use itertools::Either;
 use program_test::{gateway_voter_test::GatewayVoterTest, tools::*};
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 use spl_governance::state::realm::RealmV2;
 
 mod program_test;

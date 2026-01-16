@@ -4,9 +4,9 @@ use program_test::token_voter_test::TokenVoterTest;
 use crate::program_test::program_test_bench::MintType;
 use crate::program_test::tools::assert_token_voter_err;
 use gpl_token_voter::error::TokenVoterError;
-use solana_program_test::*;
-use solana_sdk::signer::Signer;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::signer::Signer;
+use trezoa_sdk::transport::TransportError;
 
 #[tokio::test]
 async fn test_resize_registrar() -> Result<(), TransportError> {

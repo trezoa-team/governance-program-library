@@ -4,8 +4,8 @@ use program_test::{
     tools::{assert_anchor_err, assert_nft_voter_err},
 };
 
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
 
 use crate::program_test::nft_voter_test::ConfigureCollectionArgs;
 

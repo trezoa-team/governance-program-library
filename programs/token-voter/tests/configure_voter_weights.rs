@@ -1,8 +1,8 @@
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::pubkey::Pubkey;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::pubkey::Pubkey;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

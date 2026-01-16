@@ -1,7 +1,7 @@
 use crate::state::VoterWeightAction;
 use enum_dispatch::enum_dispatch;
 use num_traits::FromPrimitive;
-use solana_program::pubkey::Pubkey;
+use trezoa_program::pubkey::Pubkey;
 use spl_governance::state::token_owner_record::TokenOwnerRecordV2;
 
 /// A generic trait representing a voter weight,

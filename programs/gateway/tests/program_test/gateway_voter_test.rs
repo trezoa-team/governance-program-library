@@ -3,14 +3,14 @@ use std::sync::Arc;
 
 use anchor_lang::prelude::Pubkey;
 use itertools::Either;
-use solana_gateway::{
+use trezoa_gateway::{
     instruction::{add_gatekeeper, issue},
     state::{get_gatekeeper_account_address, get_gateway_token_address_with_seed},
 };
-use solana_program::instruction::AccountMeta;
+use trezoa_program::instruction::AccountMeta;
 
 use gpl_civic_gateway::state::{get_registrar_address, Registrar, *};
-use solana_sdk::{
+use trezoa_sdk::{
     instruction::Instruction, signature::Keypair, signer::Signer, transport::TransportError,
 };
 use spl_governance::{
@@ -18,7 +18,7 @@ use spl_governance::{
     state::vote_record::{Vote, VoteChoice},
 };
 
-use solana_program_test::{processor, BanksClientError, ProgramTest};
+use trezoa_program_test::{processor, BanksClientError, ProgramTest};
 
 use crate::program_test::{
     governance_test::{GovernanceTest, ProposalCookie, RealmCookie, TokenOwnerRecordCookie},
@@ -99,9 +99,9 @@ impl GatewayVoterTest {
             None,
         );
         program_test.add_program(
-            "solana_gateway",
+            "trezoa_gateway",
             Pubkey::from_str("gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs").unwrap(),
-            // processor!(solana_gateway::processor::process_instruction),
+            // processor!(trezoa_gateway::processor::process_instruction),
             None,
         );
     }
@@ -179,7 +179,7 @@ impl GatewayVoterTest {
                 gatekeeper_network: gateway_cookie.gatekeeper_network.pubkey(),
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -375,7 +375,7 @@ impl GatewayVoterTest {
             registrar: registrar_cookie.address,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {

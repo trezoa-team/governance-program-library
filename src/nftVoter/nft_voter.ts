@@ -548,7 +548,7 @@ export type NftVoter = {
             "name": "size",
             "docs": [
               "The size of the NFT collection used to calculate max voter weight",
-              "Note: At the moment the size is not captured on Metaplex accounts",
+              "Note: At the moment the size is not captured on Trezoaplex accounts",
               "and it has to be manually updated on the Registrar"
             ],
             "type": "u32"

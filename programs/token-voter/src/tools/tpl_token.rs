@@ -4,15 +4,15 @@ use {
     crate::error::TokenVoterError,
     anchor_lang::prelude::*,
     arrayref::array_ref,
-    solana_program::{
+    trezoa_program::{
         entrypoint::ProgramResult,
         msg,
         program::{invoke, invoke_signed},
         program_pack::Pack,
         sysvar::Sysvar,
     },
-    spl_token::state::Multisig,
-    spl_token_2022::{
+    tpl_token::state::Multisig,
+    tpl_token_2022::{
         extension::{
             transfer_fee::TransferFeeConfig, transfer_hook, AccountType, BaseStateWithExtensions,
             PodStateWithExtensions, StateWithExtensions,
@@ -26,8 +26,8 @@ use {
 
 /// Computationally cheap method to get amount from a token account
 /// It reads amount without deserializing full account data
-pub fn get_spl_token_amount(token_account_info: &AccountInfo) -> Result<u64> {
-    assert_is_valid_spl_token_account(token_account_info)?;
+pub fn get_tpl_token_amount(token_account_info: &AccountInfo) -> Result<u64> {
+    assert_is_valid_tpl_token_account(token_account_info)?;
 
     // TokeAccount layout:   mint(32), owner(32), amount(8), ...
     let data = token_account_info.try_borrow_data()?;
@@ -37,19 +37,19 @@ pub fn get_spl_token_amount(token_account_info: &AccountInfo) -> Result<u64> {
 }
 
 /// Transfers SPL Tokens
-pub fn transfer_checked_spl_tokens<'a>(
+pub fn transfer_checked_tpl_tokens<'a>(
     source_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
     authority_info: &AccountInfo<'a>,
     amount: u64,
-    spl_token_info: &AccountInfo<'a>,
+    tpl_token_info: &AccountInfo<'a>,
     mint_info: &AccountInfo<'a>,
     additional_accounts: &[AccountInfo<'a>],
 ) -> ProgramResult {
-    let spl_token_program_id = spl_token_info.key;
+    let tpl_token_program_id = tpl_token_info.key;
 
-    let mut transfer_instruction = spl_token_2022::instruction::transfer_checked(
-        spl_token_program_id,
+    let mut transfer_instruction = tpl_token_2022::instruction::transfer_checked(
+        tpl_token_program_id,
         source_info.key,
         mint_info.key,
         destination_info.key,
@@ -105,14 +105,14 @@ pub fn transfer_checked_spl_tokens<'a>(
 /// Transfers SPL Tokens checked from a token account owned by the provided PDA
 /// authority with seeds
 #[allow(clippy::too_many_arguments)]
-pub fn transfer_spl_tokens_signed_checked<'a>(
+pub fn transfer_tpl_tokens_signed_checked<'a>(
     source_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
     authority_info: &AccountInfo<'a>,
     authority_seeds: &[&[u8]],
     program_id: &Pubkey,
     amount: u64,
-    spl_token_info: &AccountInfo<'a>,
+    tpl_token_info: &AccountInfo<'a>,
     mint_info: &AccountInfo<'a>,
     additional_accounts: &[AccountInfo<'a>],
 ) -> ProgramResult {
@@ -127,10 +127,10 @@ pub fn transfer_spl_tokens_signed_checked<'a>(
         return Err(ProgramError::InvalidSeeds);
     }
 
-    let spl_token_program_id = spl_token_info.key;
+    let tpl_token_program_id = tpl_token_info.key;
 
-    let mut transfer_instruction = spl_token_2022::instruction::transfer_checked(
-        spl_token_program_id,
+    let mut transfer_instruction = tpl_token_2022::instruction::transfer_checked(
+        tpl_token_program_id,
         source_info.key,
         mint_info.key,
         destination_info.key,
@@ -193,13 +193,13 @@ pub fn transfer_spl_tokens_signed_checked<'a>(
 }
 
 /// Asserts the given account_info represents a valid SPL Token account which is
-/// initialized and belongs to spl_token program
-pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<()> {
+/// initialized and belongs to tpl_token program
+pub fn assert_is_valid_tpl_token_account(account_info: &AccountInfo) -> Result<()> {
     if account_info.data_is_empty() {
         return Err(TokenVoterError::SplTokenAccountDoesNotExist.into());
     }
 
-    if account_info.owner != &spl_token_2022::id() && account_info.owner != &spl_token::id() {
+    if account_info.owner != &tpl_token_2022::id() && account_info.owner != &tpl_token::id() {
         return Err(TokenVoterError::SplTokenAccountWithInvalidOwner.into());
     }
 
@@ -213,13 +213,13 @@ pub fn assert_is_valid_spl_token_account(account_info: &AccountInfo) -> Result<(
 }
 
 /// Asserts the given mint_info represents a valid SPL Token Mint account  which
-/// is initialized and belongs to spl_token program
-pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<()> {
+/// is initialized and belongs to tpl_token program
+pub fn assert_is_valid_tpl_token_mint(mint_info: &AccountInfo) -> Result<()> {
     if mint_info.data_is_empty() {
         return Err(TokenVoterError::SplTokenMintDoesNotExist.into());
     }
 
-    if mint_info.owner != &spl_token_2022::id() && mint_info.owner != &spl_token::id() {
+    if mint_info.owner != &tpl_token_2022::id() && mint_info.owner != &tpl_token::id() {
         return Err(TokenVoterError::SplTokenMintWithInvalidOwner.into());
     }
 
@@ -241,8 +241,8 @@ pub fn assert_is_valid_spl_token_mint(mint_info: &AccountInfo) -> Result<()> {
 
 /// Computationally cheap method to just get supply from a mint without
 /// unpacking the whole object
-pub fn get_spl_token_mint_supply(mint_info: &AccountInfo) -> Result<u64> {
-    assert_is_valid_spl_token_mint(mint_info)?;
+pub fn get_tpl_token_mint_supply(mint_info: &AccountInfo) -> Result<u64> {
+    assert_is_valid_tpl_token_mint(mint_info)?;
     // In token program, 36, 8, 1, 1 is the layout, where the first 8 is supply u64.
     // so we start at 36.
     let data = mint_info.try_borrow_data().unwrap();
@@ -276,8 +276,8 @@ fn valid_mint_length(mint_data: &[u8]) -> bool {
 
 /// Computationally cheap method to get owner from a token account
 /// It reads owner without deserializing full account data
-pub fn get_spl_token_owner(token_account_info: &AccountInfo) -> Result<Pubkey> {
-    assert_is_valid_spl_token_account(token_account_info)?;
+pub fn get_tpl_token_owner(token_account_info: &AccountInfo) -> Result<Pubkey> {
+    assert_is_valid_tpl_token_account(token_account_info)?;
 
     // TokeAccount layout:   mint(32), owner(32), amount(8)
     let data = token_account_info.try_borrow_data()?;

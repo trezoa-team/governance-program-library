@@ -24,6 +24,6 @@ num-traits = "0.2"
 spl-governance = { version = "4.0", features = ["no-entrypoint"] }
 spl-governance-tools =  "0.1.4"
 spl-governance-addin-api = "0.1.4"
-spl-token = { version = "4.0.0", features = [ "no-entrypoint" ] }
+tpl-token = { version = "4.0.0", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]

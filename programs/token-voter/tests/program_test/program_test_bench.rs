@@ -7,9 +7,9 @@ use std::convert::TryInto;
 
 use anchor_spl::associated_token;
 use borsh::BorshDeserialize;
-use solana_program::system_program;
-use solana_program_test::{BanksClientError, ProgramTest, ProgramTestContext};
-use solana_sdk::{
+use trezoa_program::system_program;
+use trezoa_program_test::{BanksClientError, ProgramTest, ProgramTestContext};
+use trezoa_sdk::{
     account::{Account, ReadableAccount},
     borsh1::try_from_slice_unchecked,
     instruction::{AccountMeta, Instruction},
@@ -25,8 +25,8 @@ use spl_associated_token_account::get_associated_token_address_with_program_id;
 use spl_tlv_account_resolution::{
     account::ExtraAccountMeta, seeds::Seed, state::ExtraAccountMetaList,
 };
-use spl_token_2022::extension::ExtensionType;
-use spl_token_client::token::ExtensionInitializationParams;
+use tpl_token_2022::extension::ExtensionType;
+use tpl_token_client::token::ExtensionInitializationParams;
 use spl_transfer_hook_interface::{
     get_extra_account_metas_address,
     instruction::{initialize_extra_account_meta_list, update_extra_account_meta_list},
@@ -36,7 +36,7 @@ use crate::program_test::tools::clone_keypair;
 
 use super::token_voter_test::UserCookie;
 
-use spl_token_2022::extension::transfer_fee::{TransferFee, TransferFeeConfig};
+use tpl_token_2022::extension::transfer_fee::{TransferFee, TransferFeeConfig};
 
 pub struct TransferFeeConfigWithKeypairs {
     pub transfer_fee_config: TransferFeeConfig,
@@ -141,7 +141,7 @@ impl AddPacked for ProgramTest {
         data: &T,
         owner: &Pubkey,
     ) {
-        let mut account = solana_sdk::account::Account::new(amount, T::get_packed_len(), owner);
+        let mut account = trezoa_sdk::account::Account::new(amount, T::get_packed_len(), owner);
         data.pack_into_slice(&mut account.data);
         self.add_account(pubkey, account);
     }
@@ -179,13 +179,13 @@ impl ProgramTestBench {
     }
 
     #[allow(dead_code)]
-    pub fn add_mints_and_user_cookies_spl_token(
+    pub fn add_mints_and_user_cookies_tpl_token(
         program_test: &mut ProgramTest,
         mint_type: MintType,
     ) -> (Vec<MintCookie>, Vec<UserCookie>) {
         let (token_program_id, is_token_2022) = match mint_type {
-            MintType::SplToken => (spl_token::id(), false),
-            _ => (spl_token_2022::id(), true),
+            MintType::SplToken => (tpl_token::id(), false),
+            _ => (tpl_token_2022::id(), true),
         };
         // Mints
         let mints: Vec<MintCookie> = vec![
@@ -220,12 +220,12 @@ impl ProgramTestBench {
             program_test.add_packable_account(
                 mint_pk,
                 u32::MAX as u64,
-                &spl_token_2022::state::Mint {
+                &tpl_token_2022::state::Mint {
                     is_initialized: true,
                     mint_authority: COption::Some(mints[mint_index].mint_authority.pubkey()),
                     decimals: mints[mint_index].decimals,
                     supply: 100,
-                    ..spl_token_2022::state::Mint::default()
+                    ..tpl_token_2022::state::Mint::default()
                 },
                 &token_program_id,
             );
@@ -238,10 +238,10 @@ impl ProgramTestBench {
             let user_key = Keypair::new();
             program_test.add_account(
                 user_key.pubkey(),
-                solana_sdk::account::Account::new(
+                trezoa_sdk::account::Account::new(
                     u32::MAX as u64,
                     0,
-                    &solana_sdk::system_program::id(),
+                    &trezoa_sdk::system_program::id(),
                 ),
             );
 
@@ -257,12 +257,12 @@ impl ProgramTestBench {
                 program_test.add_packable_account(
                     token_key,
                     u32::MAX as u64,
-                    &spl_token_2022::state::Account {
+                    &tpl_token_2022::state::Account {
                         mint: mints[mint_index].address,
                         owner: user_key.pubkey(),
                         amount: 10,
-                        state: spl_token_2022::state::AccountState::Initialized,
-                        ..spl_token_2022::state::Account::default()
+                        state: tpl_token_2022::state::AccountState::Initialized,
+                        ..tpl_token_2022::state::Account::default()
                     },
                     &token_program_id,
                 );
@@ -301,16 +301,16 @@ impl ProgramTestBench {
             .banks_client
             .process_transaction_with_commitment(
                 transaction,
-                solana_sdk::commitment_config::CommitmentLevel::Processed,
+                trezoa_sdk::commitment_config::CommitmentLevel::Processed,
             )
             .await
     }
 
-    pub async fn get_clock(&self) -> solana_program::clock::Clock {
+    pub async fn get_clock(&self) -> trezoa_program::clock::Clock {
         self.context
             .borrow_mut()
             .banks_client
-            .get_sysvar::<solana_program::clock::Clock>()
+            .get_sysvar::<trezoa_program::clock::Clock>()
             .await
             .unwrap()
     }
@@ -381,18 +381,18 @@ impl ProgramTestBench {
         mint_authority: &Pubkey,
         freeze_authority: Option<&Pubkey>,
     ) -> Result<(), BanksClientError> {
-        let mint_rent = self.rent.minimum_balance(spl_token::state::Mint::LEN);
+        let mint_rent = self.rent.minimum_balance(tpl_token::state::Mint::LEN);
 
         let instructions = [
             system_instruction::create_account(
                 &self.context.borrow().payer.pubkey(),
                 &mint_keypair.pubkey(),
                 mint_rent,
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                tpl_token::state::Mint::LEN as u64,
+                &tpl_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            tpl_token::instruction::initialize_mint(
+                &tpl_token::id(),
                 &mint_keypair.pubkey(),
                 mint_authority,
                 freeze_authority,
@@ -412,18 +412,18 @@ impl ProgramTestBench {
         mint_authority: &Pubkey,
         freeze_authority: Option<&Pubkey>,
     ) -> Result<(), BanksClientError> {
-        let mint_rent = self.rent.minimum_balance(spl_token_2022::state::Mint::LEN);
+        let mint_rent = self.rent.minimum_balance(tpl_token_2022::state::Mint::LEN);
 
         let instructions = [
             system_instruction::create_account(
                 &self.context.borrow().payer.pubkey(),
                 &mint_keypair.pubkey(),
                 mint_rent,
-                spl_token_2022::state::Mint::LEN as u64,
-                &spl_token_2022::id(),
+                tpl_token_2022::state::Mint::LEN as u64,
+                &tpl_token_2022::id(),
             ),
-            spl_token_2022::instruction::initialize_mint(
-                &spl_token_2022::id(),
+            tpl_token_2022::instruction::initialize_mint(
+                &tpl_token_2022::id(),
                 &mint_keypair.pubkey(),
                 mint_authority,
                 freeze_authority,
@@ -466,7 +466,7 @@ impl ProgramTestBench {
             .iter()
             .map(|e| e.extension())
             .collect::<Vec<_>>();
-        let space = ExtensionType::try_calculate_account_len::<spl_token_2022::state::Mint>(
+        let space = ExtensionType::try_calculate_account_len::<tpl_token_2022::state::Mint>(
             &extension_types,
         )
         .unwrap();
@@ -478,20 +478,20 @@ impl ProgramTestBench {
             &mint_keypair.pubkey(),
             mint_rent,
             space as u64,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )];
 
         for params in extension_initialization_params {
             instructions.push(
                 params
-                    .instruction(&spl_token_2022::id(), &mint_keypair.pubkey())
+                    .instruction(&tpl_token_2022::id(), &mint_keypair.pubkey())
                     .unwrap(),
             );
         }
 
         instructions.push(
-            spl_token_2022::instruction::initialize_mint(
-                &spl_token_2022::id(),
+            tpl_token_2022::instruction::initialize_mint(
+                &tpl_token_2022::id(),
                 &mint_keypair.pubkey(),
                 mint_authority,
                 freeze_authority,
@@ -714,7 +714,7 @@ impl ProgramTestBench {
             .iter()
             .map(|e| e.extension())
             .collect::<Vec<_>>();
-        let space = ExtensionType::try_calculate_account_len::<spl_token_2022::state::Mint>(
+        let space = ExtensionType::try_calculate_account_len::<tpl_token_2022::state::Mint>(
             &extension_types,
         )
         .unwrap();
@@ -725,20 +725,20 @@ impl ProgramTestBench {
             &mint_keypair.pubkey(),
             mint_rent,
             space as u64,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
         )];
 
         for params in extension_initialization_params {
             instructions.push(
                 params
-                    .instruction(&spl_token_2022::id(), &mint_keypair.pubkey())
+                    .instruction(&tpl_token_2022::id(), &mint_keypair.pubkey())
                     .unwrap(),
             );
         }
 
         instructions.push(
-            spl_token_2022::instruction::initialize_mint(
-                &spl_token_2022::id(),
+            tpl_token_2022::instruction::initialize_mint(
+                &tpl_token_2022::id(),
                 &mint_keypair.pubkey(),
                 mint_authority,
                 freeze_authority,
@@ -820,8 +820,8 @@ impl ProgramTestBench {
     ) -> Result<(), BanksClientError> {
         match mint_type {
             MintType::SplToken => {
-                let mint_instruction = spl_token_2022::instruction::mint_to(
-                    &spl_token::id(),
+                let mint_instruction = tpl_token_2022::instruction::mint_to(
+                    &tpl_token::id(),
                     token_mint,
                     token_account,
                     &token_mint_authority.pubkey(),
@@ -835,8 +835,8 @@ impl ProgramTestBench {
             }
             _ => {
                 let mint_instruction = if is_token_account {
-                    spl_token_2022::instruction::mint_to(
-                        &spl_token_2022::id(),
+                    tpl_token_2022::instruction::mint_to(
+                        &tpl_token_2022::id(),
                         token_mint,
                         token_account,
                         &token_mint_authority.pubkey(),
@@ -845,13 +845,13 @@ impl ProgramTestBench {
                     )
                     .unwrap()
                 } else {
-                    spl_token_2022::instruction::mint_to(
-                        &spl_token_2022::id(),
+                    tpl_token_2022::instruction::mint_to(
+                        &tpl_token_2022::id(),
                         token_mint,
                         &associated_token::get_associated_token_address_with_program_id(
                             &owner,
                             &token_mint,
-                            &spl_token_2022::id(),
+                            &tpl_token_2022::id(),
                         ),
                         &token_mint_authority.pubkey(),
                         &[],
@@ -880,13 +880,13 @@ impl ProgramTestBench {
                 let create_account_instruction = system_instruction::create_account(
                     &self.context.borrow().payer.pubkey(),
                     &token_account_keypair.pubkey(),
-                    self.rent.minimum_balance(spl_token::state::Account::LEN),
-                    spl_token::state::Account::LEN as u64,
-                    &spl_token::id(),
+                    self.rent.minimum_balance(tpl_token::state::Account::LEN),
+                    tpl_token::state::Account::LEN as u64,
+                    &tpl_token::id(),
                 );
 
-                let initialize_account_instruction = spl_token::instruction::initialize_account(
-                    &spl_token::id(),
+                let initialize_account_instruction = tpl_token::instruction::initialize_account(
+                    &tpl_token::id(),
                     &token_account_keypair.pubkey(),
                     token_mint,
                     owner,
@@ -901,7 +901,7 @@ impl ProgramTestBench {
             }
             MintType::SplTokenExtensionsWithTransferFees => {
                 let extension_type_space = ExtensionType::try_calculate_account_len::<
-                    spl_token_2022::state::Account,
+                    tpl_token_2022::state::Account,
                 >(&[ExtensionType::TransferFeeConfig])
                 .unwrap();
                 if is_token_account {
@@ -910,12 +910,12 @@ impl ProgramTestBench {
                         &token_account_keypair.pubkey(),
                         self.rent.minimum_balance(extension_type_space),
                         extension_type_space as u64,
-                        &spl_token_2022::id(),
+                        &tpl_token_2022::id(),
                     );
 
                     let initialize_account_instruction =
-                        spl_token_2022::instruction::initialize_account(
-                            &spl_token_2022::id(),
+                        tpl_token_2022::instruction::initialize_account(
+                            &tpl_token_2022::id(),
                             &token_account_keypair.pubkey(),
                             token_mint,
                             owner,
@@ -932,7 +932,7 @@ impl ProgramTestBench {
                             &self.context.borrow().payer.pubkey(),
                             owner,
                             token_mint,
-                            &spl_token_2022::id(),
+                            &tpl_token_2022::id(),
                         );
                     self.process_transaction(&[create_ata_account], None).await
                 }
@@ -943,14 +943,14 @@ impl ProgramTestBench {
                         &self.context.borrow().payer.pubkey(),
                         &token_account_keypair.pubkey(),
                         self.rent
-                            .minimum_balance(spl_token_2022::state::Account::get_packed_len()),
-                        spl_token_2022::state::Account::get_packed_len() as u64,
-                        &spl_token_2022::id(),
+                            .minimum_balance(tpl_token_2022::state::Account::get_packed_len()),
+                        tpl_token_2022::state::Account::get_packed_len() as u64,
+                        &tpl_token_2022::id(),
                     );
 
                     let initialize_account_instruction =
-                        spl_token_2022::instruction::initialize_account(
-                            &spl_token_2022::id(),
+                        tpl_token_2022::instruction::initialize_account(
+                            &tpl_token_2022::id(),
                             &token_account_keypair.pubkey(),
                             token_mint,
                             owner,
@@ -968,7 +968,7 @@ impl ProgramTestBench {
                             &self.context.borrow().payer.pubkey(),
                             owner,
                             token_mint,
-                            &spl_token_2022::id(),
+                            &tpl_token_2022::id(),
                         );
                     self.process_transaction(&[create_ata_account], None).await
                 }
@@ -994,13 +994,13 @@ impl ProgramTestBench {
         let create_account_instruction = system_instruction::create_account(
             &self.context.borrow().payer.pubkey(),
             &token_account_keypair.pubkey(),
-            rent.minimum_balance(spl_token_2022::state::Account::get_packed_len()),
-            spl_token_2022::state::Account::get_packed_len() as u64,
-            &spl_token_2022::id(),
+            rent.minimum_balance(tpl_token_2022::state::Account::get_packed_len()),
+            tpl_token_2022::state::Account::get_packed_len() as u64,
+            &tpl_token_2022::id(),
         );
 
-        let initialize_account_instruction = spl_token_2022::instruction::initialize_account(
-            &spl_token_2022::id(),
+        let initialize_account_instruction = tpl_token_2022::instruction::initialize_account(
+            &tpl_token_2022::id(),
             &token_account_keypair.pubkey(),
             token_mint,
             owner,
@@ -1058,7 +1058,7 @@ impl ProgramTestBench {
     #[allow(dead_code)]
     pub async fn get_borsh_account<
         T: BorshDeserialize
-            + anchor_spl::token_2022_extensions::spl_token_metadata_interface::borsh::BorshDeserialize,
+            + anchor_spl::token_2022_extensions::tpl_token_metadata_interface::borsh::BorshDeserialize,
     >(
         &self,
         address: &Pubkey,

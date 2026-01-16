@@ -3,8 +3,8 @@ use gpl_quadratic::state::QuadraticCoefficients;
 use itertools::Either;
 use program_test::quadratic_voter_test::QuadraticVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

@@ -1,5 +1,5 @@
 // Load the payer keypair
-import { Connection, Keypair } from '@solana/web3.js';
+import { Connection, Keypair } from '@trezoa/web3.js';
 import { DEFAULT_KEYPAIR_PATH } from './constants';
 import { AnchorProvider, Wallet } from '@coral-xyz/anchor';
 

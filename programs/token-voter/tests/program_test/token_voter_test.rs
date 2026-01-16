@@ -7,16 +7,16 @@ use anchor_spl::{
     token_interface::TokenAccount,
 };
 use gpl_token_voter::state::*;
-use solana_sdk::{instruction::AccountMeta, sysvar::instructions};
+use trezoa_sdk::{instruction::AccountMeta, sysvar::instructions};
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
 use anchor_lang::ToAccountMetas;
-use solana_program::program_pack::Pack;
-use solana_program_test::{processor, BanksClientError, ProgramTest};
-use solana_sdk::instruction::Instruction;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
+use trezoa_program::program_pack::Pack;
+use trezoa_program_test::{processor, BanksClientError, ProgramTest};
+use trezoa_sdk::instruction::Instruction;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
 
 use crate::program_test::governance_test::RealmCookie;
 
@@ -81,7 +81,7 @@ impl TokenVoterTest {
     #[allow(dead_code)]
     pub async fn start_new() -> Self {
         let mut program_test = ProgramTest::new("gpl_token_voter", gpl_token_voter::id(), None);
-        let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_spl_token(
+        let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_tpl_token(
             &mut program_test,
             MintType::SplToken,
         );
@@ -96,10 +96,10 @@ impl TokenVoterTest {
 
         // Setup the environment
         // We need to intercept logs to capture program log output
-        let log_filter = "solana_rbpf=trace,\
-        solana_runtime::message_processor=debug,\
-        solana_runtime::system_instruction_processor=trace,\
-        solana_program_test=info";
+        let log_filter = "trezoa_rbpf=trace,\
+        trezoa_runtime::message_processor=debug,\
+        trezoa_runtime::system_instruction_processor=trace,\
+        trezoa_program_test=info";
         let env_logger =
             env_logger::Builder::from_env(env_logger::Env::new().default_filter_or(log_filter))
                 .format_timestamp_nanos()
@@ -122,7 +122,7 @@ impl TokenVoterTest {
     #[allow(dead_code)]
     pub async fn start_new_token_extensions(transfer_hook_program_id: Option<&Pubkey>) -> Self {
         let mut program_test = ProgramTest::new("gpl_token_voter", gpl_token_voter::id(), None);
-        let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_spl_token(
+        let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_tpl_token(
             &mut program_test,
             MintType::SplTokenExtensions,
         );
@@ -147,10 +147,10 @@ impl TokenVoterTest {
 
         // Setup the environment
         // We need to intercept logs to capture program log output
-        let log_filter = "solana_rbpf=trace,\
-        solana_runtime::message_processor=debug,\
-        solana_runtime::system_instruction_processor=trace,\
-        solana_program_test=info";
+        let log_filter = "trezoa_rbpf=trace,\
+        trezoa_runtime::message_processor=debug,\
+        trezoa_runtime::system_instruction_processor=trace,\
+        trezoa_program_test=info";
         let env_logger =
             env_logger::Builder::from_env(env_logger::Env::new().default_filter_or(log_filter))
                 .format_timestamp_nanos()
@@ -214,7 +214,7 @@ impl TokenVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -285,7 +285,7 @@ impl TokenVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -366,8 +366,8 @@ impl TokenVoterTest {
             voter: voter_key,
             voter_weight_record: voter_weight_record_key,
             voter_authority: governing_token_owner,
-            system_program: solana_sdk::system_program::id(),
-            instructions: solana_program::sysvar::instructions::id(),
+            system_program: trezoa_sdk::system_program::id(),
+            instructions: trezoa_program::sysvar::instructions::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {
@@ -435,7 +435,7 @@ impl TokenVoterTest {
             realm: registrar_cookie.account.realm,
             governance_program_id: self.governance.program_id,
             realm_governing_token_mint: registrar_cookie.account.governing_token_mint,
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_max_voter_weight_record_ix = Instruction {
@@ -862,8 +862,8 @@ impl TokenVoterTest {
     #[allow(dead_code)]
     pub async fn token_balance(&self, token_account: &Pubkey) -> u64 {
         let token_account_data = self.bench.get_account(token_account).await.unwrap();
-        let account_info: spl_token::state::Account =
-            spl_token::state::Account::unpack_from_slice(token_account_data.data.as_slice())
+        let account_info: tpl_token::state::Account =
+            tpl_token::state::Account::unpack_from_slice(token_account_data.data.as_slice())
                 .unwrap();
         account_info.amount
     }

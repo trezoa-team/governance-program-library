@@ -14,10 +14,10 @@ use gpl_nft_voter::state::{
     get_nft_vote_record_address, get_registrar_address, CollectionConfig, NftVoteRecord, Registrar,
 };
 
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::instruction::Instruction;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
+use trezoa_program_test::{BanksClientError, ProgramTest};
+use trezoa_sdk::instruction::Instruction;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
@@ -151,7 +151,7 @@ impl NftVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -228,7 +228,7 @@ impl NftVoterTest {
             realm_governing_token_mint: registrar_cookie.account.governing_token_mint,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {
@@ -290,7 +290,7 @@ impl NftVoterTest {
             realm_governing_token_mint: registrar_cookie.account.governing_token_mint,
             max_voter_weight_record: max_voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_max_voter_weight_record_ix = Instruction {
@@ -498,7 +498,7 @@ impl NftVoterTest {
             voter_token_owner_record: voter_token_owner_record_cookie.address,
             voter_authority: nft_voter_cookie.address,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);

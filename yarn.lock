@@ -44,7 +44,7 @@
     "@coral-xyz/anchor-errors" "^0.30.1"
     "@coral-xyz/borsh" "^0.30.1"
     "@noble/hashes" "^1.3.1"
-    "@solana/web3.js" "^1.68.0"
+    "@trezoa/web3.js" "^1.68.0"
     bn.js "^5.1.2"
     bs58 "^4.0.1"
     buffer-layout "^1.2.2"
@@ -94,12 +94,12 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@identity.com/solana-gateway-ts@^0.12.0":
+"@identity.com/trezoa-gateway-ts@^0.12.0":
   version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@identity.com/solana-gateway-ts/-/solana-gateway-ts-0.12.0.tgz#8954dfacd0c4f3b02437541d6ab15a8069a6814b"
+  resolved "https://registry.yarnpkg.com/@identity.com/trezoa-gateway-ts/-/trezoa-gateway-ts-0.12.0.tgz#8954dfacd0c4f3b02437541d6ab15a8069a6814b"
   integrity sha512-VF3sjYLu9mD2fvSyTfR07HYRz3LnEhZPtqZ53Jmm3+CnlabsVLLShSvCvPSz+4TQtD/4gNKMG1VAJenxBr8W5Q==
   dependencies:
-    "@solana/web3.js" "^1.63.0"
+    "@trezoa/web3.js" "^1.63.0"
     async-retry "^1.3.3"
     bn.js "^5.2.0"
     borsh "^0.4.0"
@@ -139,19 +139,19 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@solana/buffer-layout@^4.0.1":
+"@trezoa/buffer-layout@^4.0.1":
   version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@solana/buffer-layout/-/buffer-layout-4.0.1.tgz#b996235eaec15b1e0b5092a8ed6028df77fa6c15"
+  resolved "https://registry.yarnpkg.com/@trezoa/buffer-layout/-/buffer-layout-4.0.1.tgz#b996235eaec15b1e0b5092a8ed6028df77fa6c15"
   integrity sha512-E1ImOIAD1tBZFRdjeM4/pzTiTApC0AOBGwyAMS4fwIodCWArzJ3DWdoh8cKxeFM2fElkxBh2Aqts1BPC373rHA==
   dependencies:
     buffer "~6.0.3"
 
-"@solana/spl-governance@^0.3.28":
+"@trezoa/spl-governance@^0.3.28":
   version "0.3.28"
-  resolved "https://registry.yarnpkg.com/@solana/spl-governance/-/spl-governance-0.3.28.tgz#63ff71f235206f069f8ea1e66a40e7cdb6252d3f"
+  resolved "https://registry.yarnpkg.com/@trezoa/spl-governance/-/spl-governance-0.3.28.tgz#63ff71f235206f069f8ea1e66a40e7cdb6252d3f"
   integrity sha512-CUi1hMvzId2rAtMFTlxMwOy0EmFeT0VcmiC+iQnDhRBuM8LLLvRrbTYBWZo3xIvtPQW9HfhVBoL7P/XNFIqYVQ==
   dependencies:
-    "@solana/web3.js" "^1.22.0"
+    "@trezoa/web3.js" "^1.22.0"
     axios "^1.1.3"
     bignumber.js "^9.0.1"
     bn.js "^5.1.3"
@@ -159,15 +159,15 @@
     bs58 "^4.0.1"
     superstruct "^0.15.2"
 
-"@solana/web3.js@^1.22.0", "@solana/web3.js@^1.63.0", "@solana/web3.js@^1.68.0":
+"@trezoa/web3.js@^1.22.0", "@trezoa/web3.js@^1.63.0", "@trezoa/web3.js@^1.68.0":
   version "1.95.2"
-  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.95.2.tgz#6f8a0362fa75886a21550dbec49aad54481463a6"
+  resolved "https://registry.yarnpkg.com/@trezoa/web3.js/-/web3.js-1.95.2.tgz#6f8a0362fa75886a21550dbec49aad54481463a6"
   integrity sha512-SjlHp0G4qhuhkQQc+YXdGkI8EerCqwxvgytMgBpzMUQTafrkNant3e7pgilBGgjy/iM40ICvWBLgASTPMrQU7w==
   dependencies:
     "@babel/runtime" "^7.24.8"
     "@noble/curves" "^1.4.2"
     "@noble/hashes" "^1.4.0"
-    "@solana/buffer-layout" "^4.0.1"
+    "@trezoa/buffer-layout" "^4.0.1"
     agentkeepalive "^4.5.0"
     bigint-buffer "^1.1.5"
     bn.js "^5.2.1"

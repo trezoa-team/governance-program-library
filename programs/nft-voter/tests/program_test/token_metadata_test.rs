@@ -2,8 +2,8 @@ use std::{str::FromStr, sync::Arc};
 
 use anchor_lang::prelude::Pubkey;
 use mpl_token_metadata::{types::Collection, types::DataV2};
-use solana_program_test::ProgramTest;
-use solana_sdk::{signer::Signer, system_program, transport::TransportError};
+use trezoa_program_test::ProgramTest;
+use trezoa_sdk::{signer::Signer, system_program, transport::TransportError};
 
 use crate::program_test::program_test_bench::{MintCookie, ProgramTestBench, WalletCookie};
 
@@ -141,7 +141,7 @@ impl TokenMetadataTest {
                 payer: payer,
                 update_authority: payer,
                 system_program: system_program::ID,
-                token_program: spl_token::id(),
+                token_program: tpl_token::id(),
                 rent: None,
             };
 

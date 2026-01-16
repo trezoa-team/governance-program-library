@@ -4,7 +4,7 @@ use std::sync::Arc;
 use anchor_lang::prelude::Pubkey;
 
 use gpl_civic_gateway::state::*;
-use solana_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
+use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
 use spl_governance_addin_mock::instruction::*;
 
 use crate::program_test::{
@@ -12,7 +12,7 @@ use crate::program_test::{
     governance_test::RealmCookie,
     program_test_bench::{ProgramTestBench, WalletCookie},
 };
-use solana_program_test::{processor, ProgramTest};
+use trezoa_program_test::{processor, ProgramTest};
 
 pub struct PredecessorPluginTest {
     pub bench: Arc<ProgramTestBench>,

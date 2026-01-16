@@ -1,8 +1,8 @@
 use program_test::gateway_voter_test::GatewayVoterTest;
 use program_test::tools::assert_ix_err;
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 
 mod program_test;
 

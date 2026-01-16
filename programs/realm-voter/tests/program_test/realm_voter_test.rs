@@ -7,10 +7,10 @@ use gpl_realm_voter::state::max_voter_weight_record::{
 };
 use gpl_realm_voter::state::*;
 
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::instruction::Instruction;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
+use trezoa_program_test::{BanksClientError, ProgramTest};
+use trezoa_sdk::instruction::Instruction;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
@@ -128,7 +128,7 @@ impl RealmVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -205,7 +205,7 @@ impl RealmVoterTest {
             registrar: registrar_cookie.address,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {
@@ -265,7 +265,7 @@ impl RealmVoterTest {
             registrar: registrar_cookie.address,
             max_voter_weight_record: max_voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_max_voter_weight_record_ix = Instruction {

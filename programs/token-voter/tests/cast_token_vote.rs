@@ -1,11 +1,11 @@
 use crate::program_test::program_test_bench::MintType;
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::instruction::InstructionError;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::instruction::InstructionError;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
+use trezoa_sdk::transport::TransportError;
 mod program_test;
 use crate::program_test::program_test_bench::TokenAccountCookie;
 use anchor_lang::AnchorDeserialize;
@@ -98,7 +98,7 @@ async fn test_cast_token_vote() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             0,
             amount_deposited,
             None,
@@ -112,7 +112,7 @@ async fn test_cast_token_vote() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token::id(),
+            &tpl_token::id(),
             1,
             amount_deposited,
             None,
@@ -278,7 +278,7 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -292,7 +292,7 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             1,
             amount_deposited,
             None,
@@ -461,7 +461,7 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
             &first_user_cookie,
             &token_owner_record_cookie,
             &first_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             0,
             amount_deposited,
             None,
@@ -475,7 +475,7 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
             &first_user_cookie,
             &token_owner_record_cookie,
             &second_mint_cookie,
-            &spl_token_2022::id(),
+            &tpl_token_2022::id(),
             1,
             amount_deposited,
             None,

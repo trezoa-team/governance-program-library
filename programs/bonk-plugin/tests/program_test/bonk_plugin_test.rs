@@ -3,10 +3,10 @@ use std::sync::Arc;
 use anchor_lang::prelude::{AccountMeta, Pubkey};
 use gpl_bonk_plugin::state::*;
 
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::instruction::Instruction;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
+use trezoa_program_test::{BanksClientError, ProgramTest};
+use trezoa_sdk::instruction::Instruction;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
@@ -17,7 +17,7 @@ use crate::program_test::program_test_bench::WalletCookie;
 use crate::program_test::tools::NopOverride;
 
 use super::governance_test::TokenOwnerRecordCookie;
-use super::spl_token_staking_test::SplTokenStakingCookie;
+use super::tpl_token_staking_test::SplTokenStakingCookie;
 
 #[derive(Debug, PartialEq)]
 pub struct RegistrarCookie {
@@ -121,7 +121,7 @@ impl BonkPluginTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -207,7 +207,7 @@ impl BonkPluginTest {
             stake_deposit_record: stake_deposit_record_key,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {
@@ -282,7 +282,7 @@ impl BonkPluginTest {
             proposal,
             voter_authority: voter_authority.pubkey(),
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);

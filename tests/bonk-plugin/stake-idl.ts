@@ -1,7 +1,7 @@
 export type StakeIdl = {
   "metadata": {
     "version": "0.1.4",
-    "name": "spl_token_staking",
+    "name": "tpl_token_staking",
     "spec": "none"
   },
   "instructions": [
@@ -897,7 +897,7 @@ export type StakeIdl = {
 export const stakeIdl: StakeIdl = {
   "metadata": {
     "version": "0.1.4",
-    "name": "spl_token_staking",
+    "name": "tpl_token_staking",
     "spec": "none"
   },
   "instructions": [

@@ -41,7 +41,7 @@ macro_rules! vote_weight_record {
                 let vwr: spl_governance_addin_api::voter_weight::VoterWeightRecord =
                     anchor_lang::AnchorDeserialize::deserialize(&mut data)
                         .map_err(|_| anchor_lang::error::ErrorCode::AccountDidNotDeserialize)?;
-                if !solana_program::program_pack::IsInitialized::is_initialized(&vwr) {
+                if !trezoa_program::program_pack::IsInitialized::is_initialized(&vwr) {
                     return Err(anchor_lang::error::ErrorCode::AccountDidNotSerialize.into());
                 }
                 Ok(VoterWeightRecord(vwr))
@@ -114,7 +114,7 @@ macro_rules! max_voter_weight_record {
                 realm: Pubkey,
                 governing_token_mint: Pubkey,
                 max_voter_weight: u64,
-                max_voter_weight_expiry: Option<solana_program::clock::Slot>,
+                max_voter_weight_expiry: Option<trezoa_program::clock::Slot>,
             ) -> Self {
                 let mvwr = spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord {
                     account_discriminator: spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord::ACCOUNT_DISCRIMINATOR,
@@ -159,7 +159,7 @@ macro_rules! max_voter_weight_record {
                 let mvwr: spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord =
                     anchor_lang::AnchorDeserialize::deserialize(&mut data)
                         .map_err(|_| anchor_lang::error::ErrorCode::AccountDidNotDeserialize)?;
-                if !solana_program::program_pack::IsInitialized::is_initialized(&mvwr) {
+                if !trezoa_program::program_pack::IsInitialized::is_initialized(&mvwr) {
                     return Err(anchor_lang::error::ErrorCode::AccountDidNotSerialize.into());
                 }
                 Ok(MaxVoterWeightRecord(mvwr))

@@ -58,7 +58,7 @@ pub struct CreateRegistrar<'info> {
 /// used for governance
 ///
 /// max_collections is used allocate account size for the maximum number of governing NFT collections
-/// Note: Once Solana runtime supports account resizing the max value won't be required
+/// Note: Once Trezoa runtime supports account resizing the max value won't be required
 pub fn create_registrar(ctx: Context<CreateRegistrar>, _max_collections: u8) -> Result<()> {
     let registrar = &mut ctx.accounts.registrar;
     registrar.governance_program_id = ctx.accounts.governance_program_id.key();

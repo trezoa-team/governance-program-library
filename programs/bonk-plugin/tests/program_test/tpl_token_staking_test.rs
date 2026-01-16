@@ -6,8 +6,8 @@ use anchor_lang::ToAccountMetas;
 use anchor_lang::{prelude::Pubkey, system_program, InstructionData};
 use anchor_spl::associated_token::get_associated_token_address;
 use anchor_spl::associated_token::spl_associated_token_account::instruction::create_associated_token_account;
-use solana_program_test::ProgramTest;
-use solana_sdk::{
+use trezoa_program_test::ProgramTest;
+use trezoa_sdk::{
     instruction::Instruction, signature::Keypair, signer::Signer, sysvar::rent,
     transport::TransportError,
 };
@@ -16,7 +16,7 @@ use anchor_lang::declare_program;
 
 use super::program_test_bench::ProgramTestBench;
 
-declare_program!(spl_token_staking);
+declare_program!(tpl_token_staking);
 
 pub struct SplTokenStakingCookie {
     pub program_id: Pubkey,
@@ -30,7 +30,7 @@ impl SplTokenStakingCookie {
 
     #[allow(dead_code)]
     pub fn add_program(program_test: &mut ProgramTest) {
-        program_test.add_program("spl_token_staking", Self::program_id(), None);
+        program_test.add_program("tpl_token_staking", Self::program_id(), None);
     }
 
     #[allow(dead_code)]
@@ -46,7 +46,7 @@ impl SplTokenStakingCookie {
         &mut self,
         community_token_mint: &Pubkey,
     ) -> Result<Pubkey, TransportError> {
-        let create_stake_pool_args = spl_token_staking::client::args::InitializeStakePool {
+        let create_stake_pool_args = tpl_token_staking::client::args::InitializeStakePool {
             nonce: 0,
             max_duration: 1000,
             max_weight: u64::MAX,
@@ -59,14 +59,14 @@ impl SplTokenStakingCookie {
             self.program_id,
         );
 
-        let create_stake_pool_accounts = spl_token_staking::client::accounts::InitializeStakePool {
+        let create_stake_pool_accounts = tpl_token_staking::client::accounts::InitializeStakePool {
             payer: self.bench.payer.pubkey(),
             stake_pool: stake_pool_key,
             authority: self.bench.payer.pubkey(),
             mint: *community_token_mint,
             stake_mint: find_stake_mint(stake_pool_key, self.program_id),
             vault: find_vault_key(stake_pool_key, self.program_id),
-            token_program: spl_token::id(),
+            token_program: tpl_token::id(),
             rent: rent::id(),
             system_program: system_program::ID,
         };
@@ -76,9 +76,9 @@ impl SplTokenStakingCookie {
             data: create_stake_pool_args.data(),
         };
 
-        let add_reward_pool_args = spl_token_staking::client::args::AddRewardPool { index: 0 };
+        let add_reward_pool_args = tpl_token_staking::client::args::AddRewardPool { index: 0 };
 
-        let add_reward_pool_accounts = spl_token_staking::client::accounts::AddRewardPool {
+        let add_reward_pool_accounts = tpl_token_staking::client::accounts::AddRewardPool {
             payer: self.bench.payer.pubkey(),
             stake_pool: stake_pool_key,
             authority: self.bench.payer.pubkey(),
@@ -88,7 +88,7 @@ impl SplTokenStakingCookie {
                 *community_token_mint,
                 self.program_id,
             ),
-            token_program: spl_token::id(),
+            token_program: tpl_token::id(),
             rent: rent::id(),
             system_program: system_program::ID,
         };
@@ -113,7 +113,7 @@ impl SplTokenStakingCookie {
         mint_to_be_staked_account: &Pubkey,
         reward_vault_accounts: &[&Pubkey],
     ) -> Result<(), TransportError> {
-        let deposit_to_pool_args = spl_token_staking::client::args::Deposit {
+        let deposit_to_pool_args = tpl_token_staking::client::args::Deposit {
             nonce: 0,
             amount: 100,
             lockup_duration: 1000,
@@ -121,7 +121,7 @@ impl SplTokenStakingCookie {
         let stake_mint = find_stake_mint(*stake_pool_key, self.program_id);
         let stake_mint_account_key = get_associated_token_address(&owner.pubkey(), &stake_mint);
 
-        let deposit_to_pool_accounts = spl_token_staking::client::accounts::Deposit {
+        let deposit_to_pool_accounts = tpl_token_staking::client::accounts::Deposit {
             payer: owner.pubkey(),
             owner: owner.pubkey(),
             stake_pool: *stake_pool_key,
@@ -130,7 +130,7 @@ impl SplTokenStakingCookie {
             destination: stake_mint_account_key,
             vault: find_vault_key(*stake_pool_key, self.program_id),
             stake_deposit_receipt: *stake_deposit_receipt,
-            token_program: spl_token::id(),
+            token_program: tpl_token::id(),
             rent: rent::id(),
             system_program: system_program::ID,
         };
@@ -149,7 +149,7 @@ impl SplTokenStakingCookie {
             &self.bench.payer.pubkey(),
             &owner.pubkey(),
             &stake_mint,
-            &spl_token::id(),
+            &tpl_token::id(),
         );
         self.bench
             .process_transaction(

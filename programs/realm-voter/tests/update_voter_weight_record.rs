@@ -1,8 +1,8 @@
 use crate::program_test::realm_voter_test::RealmVoterTest;
 use gpl_realm_voter::{error::RealmVoterError, state::CollectionItemChangeType};
 use program_test::tools::*;
-use solana_program_test::*;
-use solana_sdk::transport::TransportError;
+use trezoa_program_test::*;
+use trezoa_sdk::transport::TransportError;
 mod program_test;
 
 #[tokio::test]

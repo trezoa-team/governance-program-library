@@ -2,12 +2,12 @@ mod program_test;
 
 use anchor_lang::prelude::{ErrorCode, Pubkey};
 use program_test::{
-    bonk_plugin_test::BonkPluginTest, spl_token_staking_test::SplTokenStakingCookie,
+    bonk_plugin_test::BonkPluginTest, tpl_token_staking_test::SplTokenStakingCookie,
 };
 
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transport::TransportError};
+use trezoa_program::instruction::InstructionError;
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, transport::TransportError};
 
 use program_test::tools::{assert_anchor_err, assert_bonks_plugin_err, assert_ix_err};
 
@@ -19,8 +19,8 @@ async fn test_create_registrar() -> Result<(), TransportError> {
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
 
     // Act
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     let registrar_cookie = bonk_plugin_test
@@ -44,8 +44,8 @@ async fn test_create_registrar_with_invalid_realm_authority_error() -> Result<()
 
     let mut realm_cookie = bonk_plugin_test.governance.with_realm().await?;
     realm_cookie.realm_authority = Keypair::new();
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
 
@@ -71,8 +71,8 @@ async fn test_create_registrar_with_realm_authority_must_sign_error() -> Result<
     let mut bonk_plugin_test = BonkPluginTest::start_new().await;
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
 
@@ -100,8 +100,8 @@ async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result
     let mut bonk_plugin_test = BonkPluginTest::start_new().await;
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
 
@@ -132,8 +132,8 @@ async fn test_create_registrar_with_invalid_realm_error() -> Result<(), Transpor
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
 
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
 
@@ -165,8 +165,8 @@ async fn test_create_registrar_with_invalid_governing_token_mint_error(
 
     let mint_cookie = bonk_plugin_test.bench.with_mint().await?;
 
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
 
@@ -195,8 +195,8 @@ async fn test_create_registrar_with_registrar_already_exists_error() -> Result<(
 
     let realm_cookie = bonk_plugin_test.governance.with_realm().await?;
 
-    let mut spl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
-    let stake_pool_pubkey = spl_token_staking_cookie
+    let mut tpl_token_staking_cookie = SplTokenStakingCookie::new(bonk_plugin_test.bench.clone());
+    let stake_pool_pubkey = tpl_token_staking_cookie
         .with_stake_pool(&realm_cookie.community_mint_cookie.address)
         .await?;
     bonk_plugin_test

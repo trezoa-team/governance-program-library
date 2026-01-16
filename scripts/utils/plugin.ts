@@ -1,4 +1,4 @@
-import { Connection, Keypair, PublicKey, TransactionInstruction, TransactionMessage, VersionedTransaction } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, TransactionInstruction, TransactionMessage, VersionedTransaction } from '@trezoa/web3.js';
 
 export const createAndSendV0Tx = async (connection: Connection, signer: Keypair, txInstructions: TransactionInstruction[]) => {
   const latestBlockhash = await connection.getLatestBlockhash('confirmed');

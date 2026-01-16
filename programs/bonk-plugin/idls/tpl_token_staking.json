@@ -1,7 +1,7 @@
 {
   "address": "STAKEGztX7S1MUHxcQHieZhELCntb9Ys9BgUbeEtMu1",
   "metadata": {
-    "name": "spl_token_staking",
+    "name": "tpl_token_staking",
     "version": "1.1.2",
     "spec": "0.1.0",
     "description": "Created with Anchor"

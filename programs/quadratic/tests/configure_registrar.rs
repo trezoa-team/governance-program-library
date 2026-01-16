@@ -4,9 +4,9 @@ use anchor_lang::prelude::Pubkey;
 
 use gpl_quadratic::error::QuadraticError;
 use gpl_quadratic::state::QuadraticCoefficients;
-use solana_program::instruction::{Instruction, InstructionError};
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, signer::Signer};
+use trezoa_program::instruction::{Instruction, InstructionError};
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, signer::Signer};
 
 use crate::program_test::quadratic_voter_test::QuadraticVoterTest;
 use crate::program_test::tools::NopOverride;

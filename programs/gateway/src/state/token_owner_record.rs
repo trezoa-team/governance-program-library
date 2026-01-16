@@ -1,4 +1,4 @@
-use solana_program::pubkey::Pubkey;
+use trezoa_program::pubkey::Pubkey;
 // Add the generic voter weight trait to TokenOwnerRecord structs
 // so that they can be used as input voter weights into the plugin
 use crate::state::generic_voter_weight::GenericVoterWeight;

@@ -3,14 +3,14 @@ use crate::{
     id,
     state::{CollectionConfig, VoterWeightRecord},
     tools::{
-        anchor::DISCRIMINATOR_SIZE, spl_token::get_spl_token_amount,
+        anchor::DISCRIMINATOR_SIZE, tpl_token::get_tpl_token_amount,
         token_metadata::get_token_metadata_for_mint,
     },
 };
 use anchor_lang::prelude::*;
-use solana_program::pubkey::PUBKEY_BYTES;
+use trezoa_program::pubkey::PUBKEY_BYTES;
 use spl_governance::state::token_owner_record;
-use spl_governance::tools::spl_token::{get_spl_token_mint, get_spl_token_owner};
+use spl_governance::tools::tpl_token::{get_tpl_token_mint, get_tpl_token_owner};
 
 /// Registrar which stores NFT voting configuration for the given Realm
 #[account]
@@ -105,7 +105,7 @@ pub fn resolve_nft_vote_weight_and_mint(
     nft_metadata_info: &AccountInfo,
     unique_nft_mints: &mut Vec<Pubkey>,
 ) -> Result<(u64, Pubkey)> {
-    let nft_owner = get_spl_token_owner(nft_info)?;
+    let nft_owner = get_tpl_token_owner(nft_info)?;
 
     // voter_weight_record.governing_token_owner must be the owner of the NFT
     require!(
@@ -113,7 +113,7 @@ pub fn resolve_nft_vote_weight_and_mint(
         NftVoterError::VoterDoesNotOwnNft
     );
 
-    let nft_mint = get_spl_token_mint(nft_info)?;
+    let nft_mint = get_tpl_token_mint(nft_info)?;
 
     // Ensure the same NFT was not provided more than once
     if unique_nft_mints.contains(&nft_mint) {
@@ -122,7 +122,7 @@ pub fn resolve_nft_vote_weight_and_mint(
     unique_nft_mints.push(nft_mint);
 
     // Ensure the token amount is exactly 1
-    let nft_amount = get_spl_token_amount(nft_info)?;
+    let nft_amount = get_tpl_token_amount(nft_info)?;
 
     require!(nft_amount == 1, NftVoterError::InvalidNftAmount);
 
