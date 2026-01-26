@@ -25,7 +25,7 @@ pub struct ConfigureCollection<'info> {
        address = registrar.realm @ NftVoterError::InvalidRealmForRegistrar,
        owner = registrar.governance_program_id
     )]
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     pub realm: UncheckedAccount<'info>,
 
     /// Authority of the Realm must sign and match Realm.authority

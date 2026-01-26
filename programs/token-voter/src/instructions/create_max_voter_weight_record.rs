@@ -3,7 +3,7 @@ use {
     spl_governance::state::realm,
 };
 
-/// Creates MaxVoterWeightRecord used by spl-governance
+/// Creates MaxVoterWeightRecord used by tpl-governance
 /// This instruction should only be executed once per realm/governing_token_mint to create the account
 #[derive(Accounts)]
 pub struct CreateMaxVoterWeightRecord<'info> {
@@ -21,13 +21,13 @@ pub struct CreateMaxVoterWeightRecord<'info> {
     )]
     pub max_voter_weight_record: Account<'info, MaxVoterWeightRecord>,
 
-    /// The program id of the spl-governance program the realm belongs to
-    /// CHECK: Can be any instance of spl-governance and it's not known at the compilation time
+    /// The program id of the tpl-governance program the realm belongs to
+    /// CHECK: Can be any instance of tpl-governance and it's not known at the compilation time
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 
     #[account(owner = governance_program_id.key())]
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     pub realm: UncheckedAccount<'info>,
 
     /// Either the realm community mint or the council mint.

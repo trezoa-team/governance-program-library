@@ -24,13 +24,13 @@ pub struct CreateRegistrar<'info> {
     pub registrar: Account<'info, Registrar>,
 
     #[account(executable)]
-    /// CHECK: Can be any instance of spl-governance and it's not known at the compilation time
+    /// CHECK: Can be any instance of tpl-governance and it's not known at the compilation time
     pub governance_program_id: UncheckedAccount<'info>,
 
     /// CHECK: The account data is not used
     pub previous_voter_weight_plugin_program_id: Option<UncheckedAccount<'info>>,
 
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     #[account(owner = governance_program_id.key())]
     pub realm: UncheckedAccount<'info>,
 

@@ -179,7 +179,7 @@ export type NftVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
@@ -253,13 +253,13 @@ export type NftVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -361,7 +361,7 @@ export type NftVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
@@ -581,7 +581,7 @@ export type NftVoter = {
     {
       "name": "maxVoterWeightRecord",
       "docs": [
-        "MaxVoterWeightRecord account as defined in spl-governance-addin-api",
+        "MaxVoterWeightRecord account as defined in tpl-governance-addin-api",
         "It's redefined here without account_discriminator for Anchor to treat it as native account",
         "",
         "The account is used as an api interface to provide max voting power to the governance program from external addin contracts"
@@ -651,7 +651,7 @@ export type NftVoter = {
           {
             "name": "governanceProgramId",
             "docs": [
-              "spl-governance program the Realm belongs to"
+              "tpl-governance program the Realm belongs to"
             ],
             "type": "pubkey"
           },
@@ -703,7 +703,7 @@ export type NftVoter = {
     {
       "name": "voterWeightAction",
       "docs": [
-        "VoterWeightAction enum as defined in spl-governance-addin-api",
+        "VoterWeightAction enum as defined in tpl-governance-addin-api",
         "It's redefined here for Anchor to export it to IDL"
       ],
       "type": {
@@ -730,7 +730,7 @@ export type NftVoter = {
     {
       "name": "voterWeightRecord",
       "docs": [
-        "VoterWeightRecord account as defined in spl-governance-addin-api",
+        "VoterWeightRecord account as defined in tpl-governance-addin-api",
         "It's redefined here without account_discriminator for Anchor to treat it as native account",
         "",
         "The account is used as an api interface to provide voting power to the governance program from external addin contracts"

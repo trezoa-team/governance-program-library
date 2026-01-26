@@ -4,7 +4,7 @@ import { Gateway } from './gateway';
 import GatewayIDL  from './gateway.json';
 import { Client, DEFAULT_GOVERNANCE_PROGRAM_ID } from '../common/Client';
 import { getGatewayTokenAddressForOwnerAndGatekeeperNetwork, getGatewayToken } from '@identity.com/trezoa-gateway-ts';
-import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/spl-governance';
+import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/tpl-governance';
 
 export const GATEWAY_PLUGIN_ID = new PublicKey(
   'GgathUhdrCWRHowoRKACjgWhYHfxCEdBi5ViqYN6HVxk'

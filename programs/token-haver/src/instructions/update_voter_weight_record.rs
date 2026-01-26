@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::TokenAccount;
 
 /// Updates VoterWeightRecord based on Realm DAO membership
-/// The membership is evaluated via a valid TokenOwnerRecord which must belong to one of the configured spl-governance instances
+/// The membership is evaluated via a valid TokenOwnerRecord which must belong to one of the configured tpl-governance instances
 ///
 /// This instruction sets VoterWeightRecord.voter_weight which is valid for the current slot only
 /// and must be executed inside the same transaction as the corresponding spl-gov instruction

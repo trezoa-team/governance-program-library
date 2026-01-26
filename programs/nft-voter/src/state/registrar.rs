@@ -16,7 +16,7 @@ use spl_governance::tools::tpl_token::{get_tpl_token_mint, get_tpl_token_owner};
 #[account]
 #[derive(Debug, PartialEq)]
 pub struct Registrar {
-    /// spl-governance program the Realm belongs to
+    /// tpl-governance program the Realm belongs to
     pub governance_program_id: Pubkey,
 
     /// Realm of the Registrar

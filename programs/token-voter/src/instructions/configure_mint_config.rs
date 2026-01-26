@@ -5,11 +5,11 @@ use {
     spl_governance::state::realm,
 };
 
-/// Creates or updates configuration for spl-governance program instances to
-/// define which spl-governance instances can be used to grant governance power
+/// Creates or updates configuration for tpl-governance program instances to
+/// define which tpl-governance instances can be used to grant governance power
 #[derive(Accounts)]
 pub struct ConfigureVotingMintConfig<'info> {
-    /// Registrar which we configure the provided spl-governance instance for
+    /// Registrar which we configure the provided tpl-governance instance for
     #[account(mut)]
     pub registrar: Account<'info, Registrar>,
 
@@ -17,7 +17,7 @@ pub struct ConfigureVotingMintConfig<'info> {
        owner = registrar.governance_program_id,
        constraint = realm.key() == registrar.realm @ TokenVoterError::InvalidRealmForRegistrar,
     )]
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     // Validated below
     pub realm: UncheckedAccount<'info>,
 
@@ -37,9 +37,9 @@ pub struct ConfigureVotingMintConfig<'info> {
     )]
     pub max_voter_weight_record: Account<'info, MaxVoterWeightRecord>,
 
-    /// CHECK: It can be any instance of spl-governance and there is no way to validate it's a correct instance
+    /// CHECK: It can be any instance of tpl-governance and there is no way to validate it's a correct instance
     /// The onus is entirely on the caller side to ensure the provided instance is correct
-    /// In future versions once we have the registry of spl-governance instances it could be validated against the registry
+    /// In future versions once we have the registry of tpl-governance instances it could be validated against the registry
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 }

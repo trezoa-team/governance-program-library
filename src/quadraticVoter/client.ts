@@ -3,7 +3,7 @@ import { PublicKey, TransactionInstruction } from '@trezoa/web3.js';
 import { Quadratic } from './quadratic';
 import QuadraticIDL from './quadratic.json';
 import { Client, DEFAULT_GOVERNANCE_PROGRAM_ID } from '../common/Client';
-import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/spl-governance';
+import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/tpl-governance';
 
 export const QUADRATIC_PLUGIN_ID = new PublicKey(
   'quadCSapU8nTdLg73KHDnmdxKnJQsh7GUbu5tZfnRRr'

@@ -12,11 +12,11 @@ pub enum CollectionItemChangeType {
     Remove,
 }
 
-/// Registrar which stores spl-governance configurations for the given Realm
+/// Registrar which stores tpl-governance configurations for the given Realm
 #[account]
 #[derive(Debug, PartialEq)]
 pub struct Registrar {
-    /// spl-governance program the Realm belongs to
+    /// tpl-governance program the Realm belongs to
     pub governance_program_id: Pubkey,
 
     /// Realm of the Registrar

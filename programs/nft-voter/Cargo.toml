@@ -24,8 +24,8 @@ anchor-spl = { version = "0.30.1", features = ["token"] }
 itertools = "0.10.2"
 mpl-token-metadata = "^4.1.2"
 trezoa-program = "1.18.18"
-spl-governance = { version = "4.0", features = ["no-entrypoint"] }
-spl-governance-tools =  "0.1.4"
+tpl-governance = { version = "4.0", features = ["no-entrypoint"] }
+tpl-governance-tools =  "0.1.4"
 tpl-token = { version = "4.0", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]

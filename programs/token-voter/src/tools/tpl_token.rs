@@ -36,7 +36,7 @@ pub fn get_tpl_token_amount(token_account_info: &AccountInfo) -> Result<u64> {
     Ok(u64::from_le_bytes(*amount_bytes))
 }
 
-/// Transfers SPL Tokens
+/// Transfers TPL Tokens
 pub fn transfer_checked_tpl_tokens<'a>(
     source_info: &AccountInfo<'a>,
     destination_info: &AccountInfo<'a>,
@@ -102,7 +102,7 @@ pub fn transfer_checked_tpl_tokens<'a>(
     Ok(())
 }
 
-/// Transfers SPL Tokens checked from a token account owned by the provided PDA
+/// Transfers TPL Tokens checked from a token account owned by the provided PDA
 /// authority with seeds
 #[allow(clippy::too_many_arguments)]
 pub fn transfer_tpl_tokens_signed_checked<'a>(
@@ -120,7 +120,7 @@ pub fn transfer_tpl_tokens_signed_checked<'a>(
 
     if authority_address != *authority_info.key {
         msg!(
-                "Transfer SPL Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
+                "Transfer TPL Token with Authority PDA: {:?} was requested while PDA: {:?} was expected",
                 authority_info.key,
                 authority_address
             );
@@ -192,7 +192,7 @@ pub fn transfer_tpl_tokens_signed_checked<'a>(
     Ok(())
 }
 
-/// Asserts the given account_info represents a valid SPL Token account which is
+/// Asserts the given account_info represents a valid TPL Token account which is
 /// initialized and belongs to tpl_token program
 pub fn assert_is_valid_tpl_token_account(account_info: &AccountInfo) -> Result<()> {
     if account_info.data_is_empty() {
@@ -212,7 +212,7 @@ pub fn assert_is_valid_tpl_token_account(account_info: &AccountInfo) -> Result<(
     Ok(())
 }
 
-/// Asserts the given mint_info represents a valid SPL Token Mint account  which
+/// Asserts the given mint_info represents a valid TPL Token Mint account  which
 /// is initialized and belongs to tpl_token program
 pub fn assert_is_valid_tpl_token_mint(mint_info: &AccountInfo) -> Result<()> {
     if mint_info.data_is_empty() {

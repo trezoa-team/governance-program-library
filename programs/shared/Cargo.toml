@@ -21,9 +21,9 @@ anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
 enum_dispatch = "0.3.8"
 num-derive = "0.4.1"
 num-traits = "0.2"
-spl-governance = { version = "4.0", features = ["no-entrypoint"] }
-spl-governance-tools =  "0.1.4"
-spl-governance-addin-api = "0.1.4"
+tpl-governance = { version = "4.0", features = ["no-entrypoint"] }
+tpl-governance-tools =  "0.1.4"
+tpl-governance-addin-api = "0.1.4"
 tpl-token = { version = "4.0.0", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]

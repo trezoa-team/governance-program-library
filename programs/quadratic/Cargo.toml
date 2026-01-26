@@ -28,13 +28,13 @@ num = "0.4"
 num-derive = "0.4.1"
 num-traits = "0.2"
 trezoa-program = "1.18.18"
-spl-governance = { version = "4.0", features = ["no-entrypoint"] }
-spl-governance-tools=  "0.1.4"
-spl-governance-addin-api = "0.1.4"
+tpl-governance = { version = "4.0", features = ["no-entrypoint"] }
+tpl-governance-tools=  "0.1.4"
+tpl-governance-addin-api = "0.1.4"
 tpl-token = { version = "4.0.0", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]
 borsh = "0.10.3"
 trezoa-sdk = "1.18.18"
 trezoa-program-test = "1.18.18"
-spl-governance-addin-mock = "0.1.4"
+tpl-governance-addin-mock = "0.1.4"

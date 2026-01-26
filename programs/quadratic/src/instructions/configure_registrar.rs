@@ -13,13 +13,13 @@ pub struct ConfigureRegistrar<'info> {
     #[account(mut)]
     pub registrar: Account<'info, Registrar>,
 
-    /// An spl-governance Realm
+    /// An tpl-governance Realm
     ///
     /// Realm is validated in the instruction:
     /// - Realm is owned by the governance_program_id
     /// - realm_authority is realm.authority
     ///
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     #[account(
         address = registrar.realm @ QuadraticError::InvalidRealmForRegistrar,
         owner = registrar.governance_program_id.key()

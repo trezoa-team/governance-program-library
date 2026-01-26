@@ -21,12 +21,12 @@ pub struct CreateVoterWeightRecord<'info> {
     )]
     pub voter_weight_record: Account<'info, VoterWeightRecord>,
 
-    /// The program id of the spl-governance program the realm belongs to
-    /// CHECK: Can be any instance of spl-governance and it's not known at the compilation time
+    /// The program id of the tpl-governance program the realm belongs to
+    /// CHECK: Can be any instance of tpl-governance and it's not known at the compilation time
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     #[account(owner = governance_program_id.key())]
     pub realm: UncheckedAccount<'info>,
 

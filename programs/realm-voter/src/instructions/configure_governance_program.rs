@@ -10,11 +10,11 @@ use spl_governance::state::realm;
 use crate::error::RealmVoterError;
 use crate::state::{CollectionItemChangeType, GovernanceProgramConfig, Registrar};
 
-/// Creates or updates configuration for spl-governance program instances to define which spl-governance instances can be used to grant governance power
+/// Creates or updates configuration for tpl-governance program instances to define which tpl-governance instances can be used to grant governance power
 #[derive(Accounts)]
 #[instruction(change_type: CollectionItemChangeType)]
 pub struct ConfigureGovernanceProgram<'info> {
-    /// Registrar which we configure the provided spl-governance instance for
+    /// Registrar which we configure the provided tpl-governance instance for
     #[account(mut)]
     pub registrar: Account<'info, Registrar>,
 
@@ -22,16 +22,16 @@ pub struct ConfigureGovernanceProgram<'info> {
        address = registrar.realm @ RealmVoterError::InvalidRealmForRegistrar,
        owner = registrar.governance_program_id
     )]
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     pub realm: UncheckedAccount<'info>,
 
     /// Authority of the Realm must sign the transaction and must match realm.authority
     pub realm_authority: Signer<'info>,
 
-    // spl-governance instance which will be inserted, updated or removed to configured instances allowed to participate in governance
-    /// CHECK: It can be any instance of spl-governance and there is no way to validate it's a correct instance
+    // tpl-governance instance which will be inserted, updated or removed to configured instances allowed to participate in governance
+    /// CHECK: It can be any instance of tpl-governance and there is no way to validate it's a correct instance
     /// The onus is entirely on the  caller side to ensure the provided instance is correct
-    /// In future versions once we have the registry of spl-governance instances it could be validated against the registry
+    /// In future versions once we have the registry of tpl-governance instances it could be validated against the registry
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 }

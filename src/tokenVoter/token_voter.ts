@@ -86,7 +86,7 @@ export type TokenVoter = {
         {
           "name": "registrar",
           "docs": [
-            "Registrar which we configure the provided spl-governance instance for"
+            "Registrar which we configure the provided tpl-governance instance for"
           ],
           "writable": true
         },
@@ -114,7 +114,7 @@ export type TokenVoter = {
           "name": "governanceProgramId",
           "docs": [
             "The onus is entirely on the caller side to ensure the provided instance is correct",
-            "In future versions once we have the registry of spl-governance instances it could be validated against the registry"
+            "In future versions once we have the registry of tpl-governance instances it could be validated against the registry"
           ]
         }
       ],
@@ -190,7 +190,7 @@ export type TokenVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
@@ -264,13 +264,13 @@ export type TokenVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -555,7 +555,7 @@ export type TokenVoter = {
         {
           "name": "tokenOwnerRecord",
           "docs": [
-            "TokenOwnerRecord for any of the configured spl-governance instances"
+            "TokenOwnerRecord for any of the configured tpl-governance instances"
           ]
         },
         {
@@ -703,13 +703,13 @@ export type TokenVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -1095,7 +1095,7 @@ export type TokenVoter = {
           {
             "name": "governanceProgramId",
             "docs": [
-              "spl-governance program the Realm belongs to"
+              "tpl-governance program the Realm belongs to"
             ],
             "type": "pubkey"
           },

@@ -10,7 +10,7 @@ use gpl_shared::{
 #[account]
 #[derive(Debug, PartialEq)]
 pub struct Registrar {
-    /// spl-governance program the Realm belongs to
+    /// tpl-governance program the Realm belongs to
     pub governance_program_id: Pubkey,
 
     /// Realm of the Registrar

@@ -9,7 +9,7 @@ use {
 };
 
 // Generate a VoteWeightRecord & MaxVoterWeightRecord Anchor wrapper, owned by the current program.
-// VoteWeightRecords & MaxVoterWeightRecord are unique in that they are defined by the SPL governance
+// VoteWeightRecords & MaxVoterWeightRecord are unique in that they are defined by the TPL governance
 // program, but they are actually owned by this program.
 vote_weight_record!(crate::ID);
 max_voter_weight_record!(crate::ID);
@@ -18,7 +18,7 @@ max_voter_weight_record!(crate::ID);
 #[account]
 #[derive(Debug, PartialEq)]
 pub struct Registrar {
-    /// spl-governance program the Realm belongs to
+    /// tpl-governance program the Realm belongs to
     pub governance_program_id: Pubkey,
 
     /// Realm of the Registrar

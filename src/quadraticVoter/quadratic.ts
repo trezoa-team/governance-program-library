@@ -36,7 +36,7 @@ export type Quadratic = {
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -116,13 +116,13 @@ export type Quadratic = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -345,7 +345,7 @@ export type Quadratic = {
           {
             "name": "governanceProgramId",
             "docs": [
-              "spl-governance program the Realm belongs to"
+              "tpl-governance program the Realm belongs to"
             ],
             "type": "pubkey"
           },
@@ -405,7 +405,7 @@ export type Quadratic = {
     {
       "name": "voterWeightAction",
       "docs": [
-        "VoterWeightAction enum as defined in spl-governance-addin-api",
+        "VoterWeightAction enum as defined in tpl-governance-addin-api",
         "It's redefined here for Anchor to export it to IDL"
       ],
       "type": {
@@ -432,7 +432,7 @@ export type Quadratic = {
     {
       "name": "voterWeightRecord",
       "docs": [
-        "VoterWeightRecord account as defined in spl-governance-addin-api",
+        "VoterWeightRecord account as defined in tpl-governance-addin-api",
         "It's redefined here without account_discriminator for Anchor to treat it as native account",
         "",
         "The account is used as an api interface to provide voting power to the governance program from external addin contracts"

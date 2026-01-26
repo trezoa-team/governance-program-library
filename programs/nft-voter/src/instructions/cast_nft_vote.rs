@@ -35,7 +35,7 @@ pub struct CastNftVote<'info> {
     #[account(
         owner = registrar.governance_program_id
      )]
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     voter_token_owner_record: UncheckedAccount<'info>,
 
     /// Authority of the voter who casts the vote

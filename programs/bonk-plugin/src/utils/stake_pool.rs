@@ -7,9 +7,9 @@ pub struct StakePool {
     /** Pubkey that can make updates to StakePool */
     pub authority: Pubkey,
     /** Total amount staked that accounts for the lock up period weighting.
-    Note, this is not equal to the amount of SPL Tokens staked. */
+    Note, this is not equal to the amount of TPL Tokens staked. */
     pub total_weighted_stake: u128,
-    /** Token Account to store the staked SPL Token */
+    /** Token Account to store the staked TPL Token */
     pub vault: Pubkey,
     /** Mint of the token being staked */
     pub mint: Pubkey,
@@ -44,7 +44,7 @@ pub struct StakePool {
 #[derive(Clone, Copy, Default, AnchorDeserialize, AnchorSerialize, Debug)]
 #[repr(C)]
 pub struct RewardPool {
-    /** Token Account to store the reward SPL Token */
+    /** Token Account to store the reward TPL Token */
     pub reward_vault: Pubkey,
     /** Ever increasing accumulator of the amount of rewards per effective stake.
     Said another way, if a user deposited before any rewards were added to the

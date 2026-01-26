@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 use spl_governance::state::token_owner_record;
 
 /// Updates VoterWeightRecord based on Realm DAO membership
-/// The membership is evaluated via a valid TokenOwnerRecord which must belong to one of the configured spl-governance instances
+/// The membership is evaluated via a valid TokenOwnerRecord which must belong to one of the configured tpl-governance instances
 ///
 /// This instruction sets VoterWeightRecord.voter_weight which is valid for the current slot only
 /// and must be executed inside the same transaction as the corresponding spl-gov instruction
@@ -23,8 +23,8 @@ pub struct UpdateVoterWeightRecord<'info> {
     )]
     pub voter_weight_record: Account<'info, VoterWeightRecord>,
 
-    /// TokenOwnerRecord for any of the configured spl-governance instances
-    /// CHECK: Owned by any of the spl-governance instances specified in registrar.governance_program_configs
+    /// TokenOwnerRecord for any of the configured tpl-governance instances
+    /// CHECK: Owned by any of the tpl-governance instances specified in registrar.governance_program_configs
     pub token_owner_record: UncheckedAccount<'info>,
 }
 
@@ -34,8 +34,8 @@ pub fn update_voter_weight_record(ctx: Context<UpdateVoterWeightRecord>) -> Resu
 
     let governance_program_id = ctx.accounts.token_owner_record.owner;
 
-    // Note: We only verify a valid TokenOwnerRecord account exists for one of the configured spl-governance instances
-    // The existence of the account proofs the governing_token_owner has interacted with spl-governance Realm at least once in the past
+    // Note: We only verify a valid TokenOwnerRecord account exists for one of the configured tpl-governance instances
+    // The existence of the account proofs the governing_token_owner has interacted with tpl-governance Realm at least once in the past
     if !registrar
         .governance_program_configs
         .iter()

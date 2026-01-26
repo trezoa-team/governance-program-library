@@ -10,11 +10,11 @@ use spl_governance_tools::account::dispose_account;
 /// It can only be executed when voting on the target Proposal ended or voter withdrew vote from the Proposal
 ///
 /// Note: If a voter votes with NFT and transfers the token then in the current version of the program the new owner can't withdraw the vote
-/// In order to support that scenario a change in spl-governance is needed
+/// In order to support that scenario a change in tpl-governance is needed
 /// It would have to support revoke_vote instruction which would take as input VoteWeightRecord with the following values:
 /// weight_action: RevokeVote, weight_action_target: VoteRecord, voter_weight: sum(previous owner NFT weight)
 /// The instruction would decrease the previous voter total VoteRecord.voter_weight by the provided VoteWeightRecord.voter_weight
-/// Once the spl-governance instruction is supported then nft-voter plugin should implement revoke_nft_vote instruction
+/// Once the tpl-governance instruction is supported then nft-voter plugin should implement revoke_nft_vote instruction
 /// to supply the required VoteWeightRecord and delete relevant NftVoteRecords
 #[derive(Accounts)]
 pub struct RelinquishNftVote<'info> {
@@ -31,12 +31,12 @@ pub struct RelinquishNftVote<'info> {
     )]
     pub voter_weight_record: Account<'info, VoterWeightRecord>,
 
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     /// Governance account the Proposal is for
     #[account(owner = registrar.governance_program_id)]
     pub governance: UncheckedAccount<'info>,
 
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     #[account(owner = registrar.governance_program_id)]
     pub proposal: UncheckedAccount<'info>,
 
@@ -44,14 +44,14 @@ pub struct RelinquishNftVote<'info> {
     #[account(
             owner = registrar.governance_program_id
          )]
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     voter_token_owner_record: UncheckedAccount<'info>,
 
     /// Authority of the voter who cast the original vote
     /// It can be either governing_token_owner or its delegate and must sign this instruction
     pub voter_authority: Signer<'info>,
 
-    /// CHECK: Owned by spl-governance instance specified in registrar.governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
     /// The account is used to validate that it doesn't exist and if it doesn't then Anchor owner check throws error
     /// The check is disabled here and performed inside the instruction
     /// #[account(owner = registrar.governance_program_id)]

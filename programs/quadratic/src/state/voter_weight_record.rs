@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use gpl_shared::anchor::{DISCRIMINATOR_SIZE, PUBKEY_SIZE};
 use num_derive::FromPrimitive;
 
-/// VoterWeightAction enum as defined in spl-governance-addin-api
+/// VoterWeightAction enum as defined in tpl-governance-addin-api
 /// It's redefined here for Anchor to export it to IDL
 #[derive(AnchorSerialize, AnchorDeserialize, Debug, Clone, Copy, PartialEq, FromPrimitive)]
 pub enum VoterWeightAction {
@@ -23,7 +23,7 @@ pub enum VoterWeightAction {
     SignOffProposal,
 }
 
-/// VoterWeightRecord account as defined in spl-governance-addin-api
+/// VoterWeightRecord account as defined in tpl-governance-addin-api
 /// It's redefined here without account_discriminator for Anchor to treat it as native account
 ///
 /// The account is used as an api interface to provide voting power to the governance program from external addin contracts

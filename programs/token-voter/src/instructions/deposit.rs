@@ -45,8 +45,8 @@ pub struct Deposit<'info> {
     )]
     pub voter_weight_record: Box<Account<'info, VoterWeightRecord>>,
 
-    /// TokenOwnerRecord for any of the configured spl-governance instances
-    /// CHECK: Owned by any of the spl-governance instances specified in registrar.governance_program_configs
+    /// TokenOwnerRecord for any of the configured tpl-governance instances
+    /// CHECK: Owned by any of the tpl-governance instances specified in registrar.governance_program_configs
     pub token_owner_record: UncheckedAccount<'info>,
 
     /// Tokens of this mint must be included in the Voting Mint Configs

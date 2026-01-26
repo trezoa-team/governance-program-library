@@ -37,7 +37,7 @@ export type StakeIdl = {
           "writable": false,
           "signer": false,
           "docs": [
-            "SPL Token Mint of the underlying token to be deposited for staking"
+            "TPL Token Mint of the underlying token to be deposited for staking"
           ]
         },
         {
@@ -129,7 +129,7 @@ export type StakeIdl = {
           "writable": false,
           "signer": false,
           "docs": [
-            "SPL Token Mint of the token that will be distributed as rewards"
+            "TPL Token Mint of the token that will be distributed as rewards"
           ]
         },
         {
@@ -571,14 +571,14 @@ export type StakeIdl = {
           {
             "name": "totalWeightedStake",
             "docs": [
-              "Total amount staked that accounts for the lock up period weighting.\n    Note, this is not equal to the amount of SPL Tokens staked."
+              "Total amount staked that accounts for the lock up period weighting.\n    Note, this is not equal to the amount of TPL Tokens staked."
             ],
             "type": "u128"
           },
           {
             "name": "vault",
             "docs": [
-              "Token Account to store the staked SPL Token"
+              "Token Account to store the staked TPL Token"
             ],
             "type": "pubkey"
           },
@@ -752,7 +752,7 @@ export type StakeIdl = {
           {
             "name": "rewardVault",
             "docs": [
-              "Token Account to store the reward SPL Token"
+              "Token Account to store the reward TPL Token"
             ],
             "type": "pubkey"
           },
@@ -933,7 +933,7 @@ export const stakeIdl: StakeIdl = {
           "writable": false,
           "signer": false,
           "docs": [
-            "SPL Token Mint of the underlying token to be deposited for staking"
+            "TPL Token Mint of the underlying token to be deposited for staking"
           ]
         },
         {
@@ -1025,7 +1025,7 @@ export const stakeIdl: StakeIdl = {
           "writable": false,
           "signer": false,
           "docs": [
-            "SPL Token Mint of the token that will be distributed as rewards"
+            "TPL Token Mint of the token that will be distributed as rewards"
           ]
         },
         {
@@ -1467,14 +1467,14 @@ export const stakeIdl: StakeIdl = {
           {
             "name": "totalWeightedStake",
             "docs": [
-              "Total amount staked that accounts for the lock up period weighting.\n    Note, this is not equal to the amount of SPL Tokens staked."
+              "Total amount staked that accounts for the lock up period weighting.\n    Note, this is not equal to the amount of TPL Tokens staked."
             ],
             "type": "u128"
           },
           {
             "name": "vault",
             "docs": [
-              "Token Account to store the staked SPL Token"
+              "Token Account to store the staked TPL Token"
             ],
             "type": "pubkey"
           },
@@ -1648,7 +1648,7 @@ export const stakeIdl: StakeIdl = {
           {
             "name": "rewardVault",
             "docs": [
-              "Token Account to store the reward SPL Token"
+              "Token Account to store the reward TPL Token"
             ],
             "type": "pubkey"
           },

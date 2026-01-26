@@ -29,7 +29,7 @@ export type RealmVoter = {
         {
           "name": "registrar",
           "docs": [
-            "Registrar which we configure the provided spl-governance instance for"
+            "Registrar which we configure the provided tpl-governance instance for"
           ],
           "writable": true
         },
@@ -47,7 +47,7 @@ export type RealmVoter = {
           "name": "governanceProgramId",
           "docs": [
             "The onus is entirely on the  caller side to ensure the provided instance is correct",
-            "In future versions once we have the registry of spl-governance instances it could be validated against the registry"
+            "In future versions once we have the registry of tpl-governance instances it could be validated against the registry"
           ]
         }
       ],
@@ -235,13 +235,13 @@ export type RealmVoter = {
         {
           "name": "governanceProgramId",
           "docs": [
-            "The program id of the spl-governance program the realm belongs to"
+            "The program id of the tpl-governance program the realm belongs to"
           ]
         },
         {
           "name": "realm",
           "docs": [
-            "An spl-governance Realm",
+            "An tpl-governance Realm",
             "",
             "Realm is validated in the instruction:",
             "- Realm is owned by the governance_program_id",
@@ -388,7 +388,7 @@ export type RealmVoter = {
         {
           "name": "tokenOwnerRecord",
           "docs": [
-            "TokenOwnerRecord for any of the configured spl-governance instances"
+            "TokenOwnerRecord for any of the configured tpl-governance instances"
           ]
         }
       ],
@@ -457,7 +457,7 @@ export type RealmVoter = {
     {
       "name": "governanceProgramConfig",
       "docs": [
-        "Configuration of an spl-governance instance used to grant governance power"
+        "Configuration of an tpl-governance instance used to grant governance power"
       ],
       "type": {
         "kind": "struct",
@@ -465,7 +465,7 @@ export type RealmVoter = {
           {
             "name": "programId",
             "docs": [
-              "The program id of the configured spl-governance instance"
+              "The program id of the configured tpl-governance instance"
             ],
             "type": "pubkey"
           },
@@ -487,7 +487,7 @@ export type RealmVoter = {
     {
       "name": "maxVoterWeightRecord",
       "docs": [
-        "MaxVoterWeightRecord account as defined in spl-governance-addin-api",
+        "MaxVoterWeightRecord account as defined in tpl-governance-addin-api",
         "It's redefined here without account_discriminator for Anchor to treat it as native account",
         "",
         "The account is used as an api interface to provide max voting power to the governance program from external addin contracts"
@@ -549,7 +549,7 @@ export type RealmVoter = {
     {
       "name": "registrar",
       "docs": [
-        "Registrar which stores spl-governance configurations for the given Realm"
+        "Registrar which stores tpl-governance configurations for the given Realm"
       ],
       "type": {
         "kind": "struct",
@@ -557,7 +557,7 @@ export type RealmVoter = {
           {
             "name": "governanceProgramId",
             "docs": [
-              "spl-governance program the Realm belongs to"
+              "tpl-governance program the Realm belongs to"
             ],
             "type": "pubkey"
           },
@@ -581,9 +581,9 @@ export type RealmVoter = {
           {
             "name": "governanceProgramConfigs",
             "docs": [
-              "spl-governance instances used for governance power",
-              "Any DAO member of any DAO created using the configured spl-governances would be given 1 vote",
-              "TODO: Once we have on-chain spl-governance registry this configuration won't be needed any longer"
+              "tpl-governance instances used for governance power",
+              "Any DAO member of any DAO created using the configured tpl-governances would be given 1 vote",
+              "TODO: Once we have on-chain tpl-governance registry this configuration won't be needed any longer"
             ],
             "type": {
               "vec": {
@@ -596,7 +596,7 @@ export type RealmVoter = {
           {
             "name": "realmMemberVoterWeight",
             "docs": [
-              "Vote weight assigned to a member of any of the Realms from the configured spl-governances"
+              "Vote weight assigned to a member of any of the Realms from the configured tpl-governances"
             ],
             "type": "u64"
           },
@@ -604,9 +604,9 @@ export type RealmVoter = {
             "name": "maxVoterWeight",
             "docs": [
               "Max voter weight (expressed in governing_token_mint decimal units) is used to establish the theoretical Max Attendance Quorum which is then used to calculate Approval Quorum",
-              "This manual configuration is a rough estimate because it's not practical to calculate on-chain the number of all DAO members for the given spl-governance instances",
+              "This manual configuration is a rough estimate because it's not practical to calculate on-chain the number of all DAO members for the given tpl-governance instances",
               "",
-              "Note: This is not a security vulnerability because the plugin is inherently not secure and used only to encourage DAO usage and registration of spl-governance instances"
+              "Note: This is not a security vulnerability because the plugin is inherently not secure and used only to encourage DAO usage and registration of tpl-governance instances"
             ],
             "type": "u64"
           },
@@ -628,7 +628,7 @@ export type RealmVoter = {
     {
       "name": "voterWeightAction",
       "docs": [
-        "VoterWeightAction enum as defined in spl-governance-addin-api",
+        "VoterWeightAction enum as defined in tpl-governance-addin-api",
         "It's redefined here for Anchor to export it to IDL"
       ],
       "type": {
@@ -655,7 +655,7 @@ export type RealmVoter = {
     {
       "name": "voterWeightRecord",
       "docs": [
-        "VoterWeightRecord account as defined in spl-governance-addin-api",
+        "VoterWeightRecord account as defined in tpl-governance-addin-api",
         "It's redefined here without account_discriminator for Anchor to treat it as native account",
         "",
         "The account is used as an api interface to provide voting power to the governance program from external addin contracts"

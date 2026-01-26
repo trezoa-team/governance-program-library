@@ -84,7 +84,7 @@ impl RealmVoterTest {
     ) -> GovernanceProgramCookie {
         let program_id = program_id.unwrap_or(GovernanceTest::program_id());
 
-        // Use the spl-governance instance used for testing
+        // Use the tpl-governance instance used for testing
         GovernanceProgramCookie { program_id }
     }
 

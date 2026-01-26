@@ -4,7 +4,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
 use spl_governance::state::realm;
 
-/// Creates Registrar storing Realm Voter configuration for spl-governance Realm
+/// Creates Registrar storing Realm Voter configuration for tpl-governance Realm
 /// This instruction should only be executed once per realm/governing_token_mint to create the account
 #[derive(Accounts)]
 #[instruction(max_governance_programs: u8)]
@@ -20,19 +20,19 @@ pub struct CreateRegistrar<'info> {
     )]
     pub registrar: Account<'info, Registrar>,
 
-    /// The program id of the spl-governance program the realm belongs to
-    /// CHECK: Can be any instance of spl-governance and it's not known at the compilation time
+    /// The program id of the tpl-governance program the realm belongs to
+    /// CHECK: Can be any instance of tpl-governance and it's not known at the compilation time
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 
-    /// An spl-governance Realm
+    /// An tpl-governance Realm
     ///
     /// Realm is validated in the instruction:
     /// - Realm is owned by the governance_program_id
     /// - governing_token_mint must be the community or council mint
     /// - realm_authority is realm.authority
     ///
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     #[account(owner = governance_program_id.key())]
     pub realm: UncheckedAccount<'info>,
 
@@ -54,10 +54,10 @@ pub struct CreateRegistrar<'info> {
 
 /// Creates a new Registrar which stores Realms voter configuration for the given Realm
 ///
-/// To use the registrar, call ConfigureGovernanceProgram to register spl-governance instance which will be
+/// To use the registrar, call ConfigureGovernanceProgram to register tpl-governance instance which will be
 /// used for governance
 ///
-/// max_governance_programs is used to allocate account size for the maximum number of configured spl-governance instances
+/// max_governance_programs is used to allocate account size for the maximum number of configured tpl-governance instances
 /// Note: Once Trezoa runtime supports account resizing the max value won't be required
 pub fn create_registrar(ctx: Context<CreateRegistrar>, _max_governance_programs: u8) -> Result<()> {
     let registrar = &mut ctx.accounts.registrar;

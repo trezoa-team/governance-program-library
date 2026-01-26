@@ -5,7 +5,7 @@ use {
     spl_governance::state::realm,
 };
 
-/// Resizes Registrar storing Realm Voter configuration for spl-governance Realm
+/// Resizes Registrar storing Realm Voter configuration for tpl-governance Realm
 /// This instruction can only be ran if the max_mint is higher than currently used voting_mint_configs length
 #[derive(Accounts)]
 #[instruction(max_mints: u8)]
@@ -22,19 +22,19 @@ pub struct ResizeRegistrar<'info> {
     )]
     pub registrar: Account<'info, Registrar>,
 
-    /// The program id of the spl-governance program the realm belongs to
-    /// CHECK: Can be any instance of spl-governance and it's not known at the compilation time
+    /// The program id of the tpl-governance program the realm belongs to
+    /// CHECK: Can be any instance of tpl-governance and it's not known at the compilation time
     #[account(executable)]
     pub governance_program_id: UncheckedAccount<'info>,
 
-    /// An spl-governance Realm
+    /// An tpl-governance Realm
     ///
     /// Realm is validated in the instruction:
     /// - Realm is owned by the governance_program_id
     /// - governing_token_mint must be the community or council mint
     /// - realm_authority is realm.authority
     ///
-    /// CHECK: Owned by spl-governance instance specified in governance_program_id
+    /// CHECK: Owned by tpl-governance instance specified in governance_program_id
     #[account(owner = governance_program_id.key())]
     pub realm: UncheckedAccount<'info>,
 

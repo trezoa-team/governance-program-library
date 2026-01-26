@@ -11,11 +11,11 @@ pub enum CollectionItemChangeType {
     Remove,
 }
 
-/// Registrar which stores spl-governance configurations for the given Realm
+/// Registrar which stores tpl-governance configurations for the given Realm
 #[account]
 #[derive(Debug, PartialEq)]
 pub struct Registrar {
-    /// spl-governance program the Realm belongs to
+    /// tpl-governance program the Realm belongs to
     pub governance_program_id: Pubkey,
 
     /// Realm of the Registrar
@@ -27,18 +27,18 @@ pub struct Registrar {
     /// and the actual token of the mint is not used
     pub governing_token_mint: Pubkey,
 
-    /// spl-governance instances used for governance power
-    /// Any DAO member of any DAO created using the configured spl-governances would be given 1 vote
-    /// TODO: Once we have on-chain spl-governance registry this configuration won't be needed any longer
+    /// tpl-governance instances used for governance power
+    /// Any DAO member of any DAO created using the configured tpl-governances would be given 1 vote
+    /// TODO: Once we have on-chain tpl-governance registry this configuration won't be needed any longer
     pub governance_program_configs: Vec<GovernanceProgramConfig>,
 
-    /// Vote weight assigned to a member of any of the Realms from the configured spl-governances
+    /// Vote weight assigned to a member of any of the Realms from the configured tpl-governances
     pub realm_member_voter_weight: u64,
 
     /// Max voter weight (expressed in governing_token_mint decimal units) is used to establish the theoretical Max Attendance Quorum which is then used to calculate Approval Quorum
-    /// This manual configuration is a rough estimate because it's not practical to calculate on-chain the number of all DAO members for the given spl-governance instances
+    /// This manual configuration is a rough estimate because it's not practical to calculate on-chain the number of all DAO members for the given tpl-governance instances
     ///
-    /// Note: This is not a security vulnerability because the plugin is inherently not secure and used only to encourage DAO usage and registration of spl-governance instances
+    /// Note: This is not a security vulnerability because the plugin is inherently not secure and used only to encourage DAO usage and registration of tpl-governance instances
     pub max_voter_weight: u64,
 
     /// Reserved for future upgrades

@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 use crate::state::{max_voter_weight_record::MaxVoterWeightRecord, Registrar};
 
-/// Creates MaxVoterWeightRecord used by spl-governance
+/// Creates MaxVoterWeightRecord used by tpl-governance
 /// This instruction should only be executed once per realm/governing_token_mint to create the account
 #[derive(Accounts)]
 pub struct CreateMaxVoterWeightRecord<'info> {
