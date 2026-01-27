@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 
 use gpl_realm_voter::state::max_voter_weight_record::{
     get_max_voter_weight_record_address, MaxVoterWeightRecord,
@@ -116,11 +116,11 @@ impl RealmVoterTest {
         let max_governance_programs = 10;
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_realm_voter::instruction::CreateRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_realm_voter::instruction::CreateRegistrar {
                 max_governance_programs,
             });
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_realm_voter::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -195,7 +195,7 @@ impl RealmVoterTest {
             &gpl_realm_voter::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_realm_voter::instruction::CreateVoterWeightRecord {
                 governing_token_owner,
             },
@@ -210,7 +210,7 @@ impl RealmVoterTest {
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_realm_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -257,7 +257,7 @@ impl RealmVoterTest {
             &registrar_cookie.account.governing_token_mint,
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_realm_voter::instruction::CreateMaxVoterWeightRecord {},
         );
 
@@ -270,7 +270,7 @@ impl RealmVoterTest {
 
         let mut create_max_voter_weight_record_ix = Instruction {
             program_id: gpl_realm_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -301,7 +301,7 @@ impl RealmVoterTest {
         voter_weight_record_cookie: &mut VoterWeightRecordCookie,
         token_owner_record_cookie: &TokenOwnerRecordCookie,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_realm_voter::instruction::UpdateVoterWeightRecord {},
         );
 
@@ -311,7 +311,7 @@ impl RealmVoterTest {
             token_owner_record: token_owner_record_cookie.address,
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         let instructions = vec![Instruction {
             program_id: gpl_realm_voter::id(),
@@ -351,7 +351,7 @@ impl RealmVoterTest {
         instruction_override: F,
         signers_override: Option<&[&Keypair]>,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_realm_voter::instruction::ConfigureVoterWeights {
                 max_voter_weight,
                 realm_member_voter_weight,
@@ -365,7 +365,7 @@ impl RealmVoterTest {
             realm_authority: registrar_cookie.realm_authority.pubkey(),
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         let mut configure_voter_weights_ix = Instruction {
             program_id: gpl_realm_voter::id(),
@@ -408,7 +408,7 @@ impl RealmVoterTest {
         instruction_override: F,
         signers_override: Option<&[&Keypair]>,
     ) -> Result<GovernanceProgramConfigCookie, BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_realm_voter::instruction::ConfigureGovernanceProgram { change_type },
         );
 
@@ -421,7 +421,7 @@ impl RealmVoterTest {
 
         let mut configure_governance_program_ix = Instruction {
             program_id: gpl_realm_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 

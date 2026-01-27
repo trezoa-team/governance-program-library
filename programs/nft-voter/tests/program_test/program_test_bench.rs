@@ -1,6 +1,6 @@
 use std::cell::RefCell;
 
-use anchor_lang::{
+use trezoaanchor_lang::{
     prelude::{Pubkey, Rent},
     AccountDeserialize,
 };

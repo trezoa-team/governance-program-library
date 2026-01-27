@@ -1,9 +1,9 @@
 use std::{str::FromStr, sync::Arc};
 
-use anchor_lang::prelude::Pubkey;
-use solana_program_test::ProgramTest;
-use solana_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
-use spl_governance::{
+use trezoaanchor_lang::prelude::Pubkey;
+use trezoa_program_test::ProgramTest;
+use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
+use tpl_governance::{
     instruction::{
         create_governance, create_proposal, create_realm, create_token_owner_record,
         deposit_governing_tokens, relinquish_vote, sign_off_proposal,
@@ -67,7 +67,7 @@ impl GovernanceTest {
 
     #[allow(dead_code)]
     pub fn add_program(program_test: &mut ProgramTest) {
-        program_test.add_program("spl_governance", Self::program_id(), None);
+        program_test.add_program("tpl_governance", Self::program_id(), None);
     }
 
     #[allow(dead_code)]
@@ -216,7 +216,7 @@ impl GovernanceTest {
             &self.bench.payer.pubkey(),
             &realm_cookie.realm_authority.pubkey(),
             None,
-            spl_governance::state::governance::GovernanceConfig {
+            tpl_governance::state::governance::GovernanceConfig {
                 min_community_weight_to_create_proposal: 1,
                 min_transaction_hold_up_time: 0,
                 min_council_weight_to_create_proposal: 1,
@@ -260,7 +260,7 @@ impl GovernanceTest {
             String::from("Proposal #1"),
             String::from("Proposal #1 link"),
             &proposal_governing_token_mint,
-            spl_governance::state::proposal::VoteType::SingleChoice,
+            tpl_governance::state::proposal::VoteType::SingleChoice,
             vec!["Yes".to_string()],
             true,
             &proposal_seed,
@@ -287,7 +287,7 @@ impl GovernanceTest {
             token_owner_record: proposal_owner_record_key,
             signatories_count: 1,
             signatories_signed_off_count: 1,
-            vote_type: spl_governance::state::proposal::VoteType::SingleChoice,
+            vote_type: tpl_governance::state::proposal::VoteType::SingleChoice,
             options: vec![],
             deny_vote_weight: Some(1),
             veto_vote_weight: 0,
@@ -300,7 +300,7 @@ impl GovernanceTest {
             voting_completed_at: None,
             executing_at: None,
             closed_at: None,
-            execution_flags: spl_governance::state::enums::InstructionExecutionFlags::None,
+            execution_flags: tpl_governance::state::enums::InstructionExecutionFlags::None,
             max_vote_weight: None,
             max_voting_time: None,
             reserved: [0; 64],

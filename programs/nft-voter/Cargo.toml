@@ -1,7 +1,7 @@
 [package]
 name = "gpl-nft-voter"
 version = "0.2.2"
-description = "SPL Governance addin implementing NFT based governance"
+description = "TPL Governance addin implementing NFT based governance"
 license = "Apache-2.0"
 edition = "2018"
 
@@ -15,12 +15,12 @@ no-idl = []
 no-log-ix-name = []
 cpi = ["no-entrypoint"]
 default = []
-idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+idl-build = ["trezoaanchor-lang/idl-build", "anchor-tpl/idl-build"]
 
 [dependencies]
 arrayref = "0.3.6"
-anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
-anchor-spl = { version = "0.30.1", features = ["token"] }
+trezoaanchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+anchor-tpl = { version = "0.30.1", features = ["token"] }
 itertools = "0.10.2"
 mpl-token-metadata = "^4.1.2"
 trezoa-program = "1.18.18"

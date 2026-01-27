@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use gpl_shared::anchor::{DISCRIMINATOR_SIZE, PUBKEY_SIZE};
 use num_derive::FromPrimitive;
 

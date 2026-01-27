@@ -1,8 +1,8 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use borsh::{BorshDeserialize, BorshSchema, BorshSerialize};
 use trezoa_program::program_pack::IsInitialized;
 
-use spl_governance_tools::account::{get_account_data, AccountMaxSize};
+use tpl_governance_tools::account::{get_account_data, AccountMaxSize};
 
 use crate::{error::NftVoterError, id};
 

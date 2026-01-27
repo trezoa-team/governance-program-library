@@ -1,4 +1,4 @@
-use anchor_lang::{prelude::*, trezoa_program::pubkey};
+use trezoaanchor_lang::{prelude::*, trezoa_program::pubkey};
 
 mod instructions;
 use instructions::*;
@@ -11,7 +11,7 @@ pub mod utils;
 declare_id!("7yJT49ajgYyuhWYzQMzwEt9u9Zbbt7r8Ft2wq1bhhfyy");
 
 #[constant]
-pub const SPL_TOKEN_STAKING_PROGRAM_ID: Pubkey =
+pub const TPL_TOKEN_STAKING_PROGRAM_ID: Pubkey =
     pubkey!("STAKEkKzbdeKkqzKpLkNQD3SUuLgshDKCD7U8duxAbB");
 
 #[program]

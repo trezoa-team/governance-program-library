@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use trezoa_program::pubkey::PUBKEY_BYTES;
 
 use crate::tools::anchor::DISCRIMINATOR_SIZE;

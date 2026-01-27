@@ -1,8 +1,8 @@
 use crate::error::TokenHaverError;
 use crate::state::*;
-use anchor_lang::system_program::Transfer;
-use anchor_lang::{prelude::*, system_program};
-use spl_governance::state::realm;
+use trezoaanchor_lang::system_program::Transfer;
+use trezoaanchor_lang::{prelude::*, system_program};
+use tpl_governance::state::realm;
 
 /// Configures mints for Registrar
 #[derive(Accounts)]

@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use gpl_shared::compose::VoterWeightRecordBase;
 use trezoa_program::pubkey::PUBKEY_BYTES;
 

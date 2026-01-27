@@ -1,4 +1,4 @@
-use anchor_lang::prelude::ErrorCode;
+use trezoaanchor_lang::prelude::ErrorCode;
 use program_test::nft_voter_test::NftVoterTest;
 use program_test::tools::{assert_anchor_err, assert_ix_err};
 use trezoa_program::instruction::InstructionError;

@@ -1,5 +1,5 @@
 use crate::error::*;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use std::convert::TryFrom;
 
 /// Exchange rate for an asset that can be used to mint voting rights.

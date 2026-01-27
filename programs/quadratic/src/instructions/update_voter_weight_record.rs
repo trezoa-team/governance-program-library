@@ -1,7 +1,7 @@
 use crate::error::QuadraticError;
 use crate::state::*;
 use crate::util::convert_vote;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use gpl_shared::compose::{resolve_input_voter_weight, VoterWeightRecordBase};
 use gpl_shared::generic_voter_weight::GenericVoterWeight;
 use std::cmp::max;
@@ -18,7 +18,7 @@ impl<'a> VoterWeightRecordBase<'a> for VoterWeightRecord {
 
 /// Updates VoterWeightRecord to evaluate governance power for non voting use cases: CreateProposal, CreateGovernance etc...
 /// This instruction updates VoterWeightRecord which is valid for the current Slot and the given target action only
-/// and hence the instruction has to be executed inside the same transaction as the corresponding spl-gov instruction
+/// and hence the instruction has to be executed inside the same transaction as the corresponding tpl-gov instruction
 #[derive(Accounts)]
 #[instruction()]
 pub struct UpdateVoterWeightRecord<'info> {

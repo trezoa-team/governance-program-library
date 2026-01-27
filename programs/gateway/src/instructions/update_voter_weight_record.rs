@@ -1,14 +1,14 @@
 use crate::error::GatewayError;
 use crate::state::*;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use trezoa_gateway::Gateway;
-use spl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
-use spl_governance_tools::account::get_account_data;
+use tpl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
+use tpl_governance_tools::account::get_account_data;
 use std::cmp::max;
 
 /// Updates VoterWeightRecord to evaluate governance power for non voting use cases: CreateProposal, CreateGovernance etc...
 /// This instruction updates VoterWeightRecord which is valid for the current Slot and the given target action only
-/// and hence the instruction has to be executed inside the same transaction as the corresponding spl-gov instruction
+/// and hence the instruction has to be executed inside the same transaction as the corresponding tpl-gov instruction
 #[derive(Accounts)]
 #[instruction()]
 pub struct UpdateVoterWeightRecord<'info> {
@@ -133,7 +133,7 @@ fn get_generic_voter_weight_record_data<'a>(
         }
         Some(predecessor) => {
             // If there is a predecessor plugin registrar, then the input account must be a VoterWeightRecord
-            let record: spl_governance_addin_api::voter_weight::VoterWeightRecord =
+            let record: tpl_governance_addin_api::voter_weight::VoterWeightRecord =
                 get_account_data(&predecessor, input_account)
                     .map_err(|_| error!(GatewayError::InvalidPredecessorVoterWeightRecord))?;
 

@@ -5,7 +5,7 @@ use program_test::{quadratic_voter_test::QuadraticVoterTest, tools::*};
 use trezoa_program::instruction::InstructionError;
 use trezoa_program_test::*;
 use trezoa_sdk::transport::TransportError;
-use spl_governance::state::realm::RealmV2;
+use tpl_governance::state::realm::RealmV2;
 
 mod program_test;
 

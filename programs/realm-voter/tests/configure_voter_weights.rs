@@ -134,7 +134,7 @@ async fn test_configure_voter_weights_with_realm_authority_must_sign_error(
 
     // Assert
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }

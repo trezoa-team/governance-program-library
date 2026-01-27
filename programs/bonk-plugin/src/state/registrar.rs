@@ -5,9 +5,9 @@ use {
         error::BonkPluginError, id, state::VoterWeightRecord,
         utils::stake_deposit_receipt::StakeDepositReceipt,
     },
-    anchor_lang::prelude::*,
+    trezoaanchor_lang::prelude::*,
     trezoa_program::pubkey::Pubkey,
-    spl_governance::state::{governance, proposal, token_owner_record},
+    tpl_governance::state::{governance, proposal, token_owner_record},
 };
 
 /// Registrar which stores Token Voting configuration for the given Realm

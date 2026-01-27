@@ -2,7 +2,7 @@ use crate::state::VoterWeightAction;
 use enum_dispatch::enum_dispatch;
 use num_traits::FromPrimitive;
 use trezoa_program::pubkey::Pubkey;
-use spl_governance::state::token_owner_record::TokenOwnerRecordV2;
+use tpl_governance::state::token_owner_record::TokenOwnerRecordV2;
 
 /// A generic trait representing a voter weight,
 /// that can be passed as an input into the plugin
@@ -19,14 +19,14 @@ pub trait GenericVoterWeight {
 
 #[enum_dispatch(GenericVoterWeight)]
 pub enum GenericVoterWeightEnum {
-    VoterWeightRecord(spl_governance_addin_api::voter_weight::VoterWeightRecord),
+    VoterWeightRecord(tpl_governance_addin_api::voter_weight::VoterWeightRecord),
     TokenOwnerRecord(TokenOwnerRecordV2),
 }
 
 // the "official" on-chain voter weight record has a discriminator field
 // when a predecessor voter weight is provided, it uses this struct
 // We add the GenericVoterWeight trait here to hide this from the rest of the code.
-impl GenericVoterWeight for spl_governance_addin_api::voter_weight::VoterWeightRecord {
+impl GenericVoterWeight for tpl_governance_addin_api::voter_weight::VoterWeightRecord {
     fn get_governing_token_mint(&self) -> Pubkey {
         self.governing_token_mint
     }
@@ -44,9 +44,9 @@ impl GenericVoterWeight for spl_governance_addin_api::voter_weight::VoterWeightR
     }
 
     // The GenericVoterWeight interface expects a crate-defined VoterWeightAction.
-    // This is identical to spl_governance_addin_api::voter_weight::VoterWeightAction, but added here
+    // This is identical to tpl_governance_addin_api::voter_weight::VoterWeightAction, but added here
     // so that Anchor will create the mapping correctly in the IDL.
-    // This function converts the spl_governance_addin_api::voter_weight::VoterWeightAction to the
+    // This function converts the tpl_governance_addin_api::voter_weight::VoterWeightAction to the
     // crate-defined VoterWeightAction by mapping the enum values by integer.
     // Note - it is imperative that the two enums stay in sync to avoid errors here.
     fn get_weight_action(&self) -> Option<VoterWeightAction> {

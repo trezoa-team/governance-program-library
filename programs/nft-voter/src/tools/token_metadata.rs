@@ -1,6 +1,6 @@
 use std::convert::TryFrom;
 
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use mpl_token_metadata::accounts::Metadata;
 
 use crate::error::NftVoterError;

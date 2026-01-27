@@ -1,10 +1,10 @@
-use anchor_lang::prelude::*;
-use anchor_spl::token::Mint;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use anchor_tpl::token::Mint;
+use tpl_governance::state::realm;
 
 use crate::state::max_voter_weight_record::MaxVoterWeightRecord;
 
-/// Creates MaxVoterWeightRecord used by spl-gov
+/// Creates MaxVoterWeightRecord used by tpl-gov
 /// This instruction should only be executed once per realm/governing_token_mint to create the account
 #[derive(Accounts)]
 pub struct CreateMaxVoterWeightRecord<'info> {

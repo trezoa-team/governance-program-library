@@ -1,6 +1,6 @@
 mod program_test;
 
-use anchor_lang::prelude::{ErrorCode, Pubkey};
+use trezoaanchor_lang::prelude::{ErrorCode, Pubkey};
 use gpl_nft_voter::error::NftVoterError;
 use program_test::nft_voter_test::NftVoterTest;
 
@@ -69,13 +69,13 @@ async fn test_create_registrar_with_realm_authority_must_sign_error() -> Result<
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }
 
 #[tokio::test]
-async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result<(), TransportError>
+async fn test_create_registrar_with_invalid_tpl_gov_program_id_error() -> Result<(), TransportError>
 {
     // Arrange
     let mut nft_voter_test = NftVoterTest::start_new().await;
@@ -97,7 +97,7 @@ async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::ConstraintOwner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::ConstraintOwner);
 
     Ok(())
 }

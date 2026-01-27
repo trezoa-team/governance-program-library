@@ -1,7 +1,7 @@
 mod program_test;
 
-use anchor_lang::error::ErrorCode;
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::error::ErrorCode;
+use trezoaanchor_lang::prelude::Pubkey;
 
 use gpl_quadratic::error::QuadraticError;
 use gpl_quadratic::quadratic;
@@ -137,13 +137,13 @@ async fn test_create_registrar_with_realm_authority_must_sign_error() -> Result<
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }
 
 #[tokio::test]
-async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result<(), TransportError>
+async fn test_create_registrar_with_invalid_tpl_gov_program_id_error() -> Result<(), TransportError>
 {
     // Arrange
     let mut quadratic_voter_test = QuadraticVoterTest::start_new().await;
@@ -169,7 +169,7 @@ async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::ConstraintOwner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::ConstraintOwner);
 
     Ok(())
 }

@@ -1,7 +1,7 @@
 use crate::error::BonkPluginError;
 use crate::state::*;
-use anchor_lang::prelude::*;
-use anchor_lang::Accounts;
+use trezoaanchor_lang::prelude::*;
+use trezoaanchor_lang::Accounts;
 use gpl_shared::compose::resolve_input_voter_weight;
 use gpl_shared::generic_voter_weight::GenericVoterWeight;
 

@@ -3,7 +3,7 @@ use trezoa_program::pubkey::Pubkey;
 // so that they can be used as input voter weights into the plugin
 use crate::state::generic_voter_weight::GenericVoterWeight;
 use crate::state::VoterWeightAction;
-use spl_governance::state::token_owner_record::TokenOwnerRecordV2;
+use tpl_governance::state::token_owner_record::TokenOwnerRecordV2;
 
 impl GenericVoterWeight for TokenOwnerRecordV2 {
     fn get_governing_token_mint(&self) -> Pubkey {

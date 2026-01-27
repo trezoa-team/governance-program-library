@@ -1,11 +1,11 @@
-use anchor_lang::{
+use trezoaanchor_lang::{
     prelude::{Pubkey, Rent},
     AccountDeserialize,
 };
 use std::cell::RefCell;
 use std::convert::TryInto;
 
-use anchor_spl::associated_token;
+use anchor_tpl::associated_token;
 use borsh::BorshDeserialize;
 use trezoa_program::system_program;
 use trezoa_program_test::{BanksClientError, ProgramTest, ProgramTestContext};
@@ -21,13 +21,13 @@ use trezoa_sdk::{
     transaction::Transaction,
     transport::TransportError,
 };
-use spl_associated_token_account::get_associated_token_address_with_program_id;
-use spl_tlv_account_resolution::{
+use tpl_associated_token_account::get_associated_token_address_with_program_id;
+use tpl_tlv_account_resolution::{
     account::ExtraAccountMeta, seeds::Seed, state::ExtraAccountMetaList,
 };
 use tpl_token_2022::extension::ExtensionType;
 use tpl_token_client::token::ExtensionInitializationParams;
-use spl_transfer_hook_interface::{
+use tpl_transfer_hook_interface::{
     get_extra_account_metas_address,
     instruction::{initialize_extra_account_meta_list, update_extra_account_meta_list},
 };
@@ -155,10 +155,10 @@ pub struct ProgramTestBench {
 
 #[allow(dead_code)]
 pub enum MintType {
-    SplToken,
-    SplTokenExtensions,
-    SplTokenExtensionsWithTransferFees,
-    SplTokenExtensionsWithTransferHook,
+    TplToken,
+    TplTokenExtensions,
+    TplTokenExtensionsWithTransferFees,
+    TplTokenExtensionsWithTransferHook,
 }
 
 impl ProgramTestBench {
@@ -184,7 +184,7 @@ impl ProgramTestBench {
         mint_type: MintType,
     ) -> (Vec<MintCookie>, Vec<UserCookie>) {
         let (token_program_id, is_token_2022) = match mint_type {
-            MintType::SplToken => (tpl_token::id(), false),
+            MintType::TplToken => (tpl_token::id(), false),
             _ => (tpl_token_2022::id(), true),
         };
         // Mints
@@ -334,15 +334,15 @@ impl ProgramTestBench {
         let freeze_authority = Keypair::new();
 
         match mint_type {
-            MintType::SplToken => {
+            MintType::TplToken => {
                 self.create_mint(&mint_keypair, &mint_authority.pubkey(), None)
                     .await?;
             }
-            MintType::SplTokenExtensions => {
+            MintType::TplTokenExtensions => {
                 self.create_mint_token_extension(&mint_keypair, &mint_authority.pubkey(), None)
                     .await?;
             }
-            MintType::SplTokenExtensionsWithTransferFees => {
+            MintType::TplTokenExtensionsWithTransferFees => {
                 self.create_mint_token_extension_with_transfer_fees(
                     &mint_keypair,
                     &mint_authority.pubkey(),
@@ -350,7 +350,7 @@ impl ProgramTestBench {
                 )
                 .await?;
             }
-            MintType::SplTokenExtensionsWithTransferHook => {
+            MintType::TplTokenExtensionsWithTransferHook => {
                 self.create_mint_token_extension_with_transfer_hook(
                     &mint_keypair,
                     &mint_authority.pubkey(),
@@ -819,7 +819,7 @@ impl ProgramTestBench {
         is_token_account: bool,
     ) -> Result<(), BanksClientError> {
         match mint_type {
-            MintType::SplToken => {
+            MintType::TplToken => {
                 let mint_instruction = tpl_token_2022::instruction::mint_to(
                     &tpl_token::id(),
                     token_mint,
@@ -876,7 +876,7 @@ impl ProgramTestBench {
         is_token_account: bool,
     ) -> Result<(), BanksClientError> {
         match mint_type {
-            MintType::SplToken => {
+            MintType::TplToken => {
                 let create_account_instruction = system_instruction::create_account(
                     &self.context.borrow().payer.pubkey(),
                     &token_account_keypair.pubkey(),
@@ -899,7 +899,7 @@ impl ProgramTestBench {
                 )
                 .await
             }
-            MintType::SplTokenExtensionsWithTransferFees => {
+            MintType::TplTokenExtensionsWithTransferFees => {
                 let extension_type_space = ExtensionType::try_calculate_account_len::<
                     tpl_token_2022::state::Account,
                 >(&[ExtensionType::TransferFeeConfig])
@@ -928,7 +928,7 @@ impl ProgramTestBench {
                     .await
                 } else {
                     let create_ata_account =
-                        spl_associated_token_account::instruction::create_associated_token_account(
+                        tpl_associated_token_account::instruction::create_associated_token_account(
                             &self.context.borrow().payer.pubkey(),
                             owner,
                             token_mint,
@@ -964,7 +964,7 @@ impl ProgramTestBench {
                     .await
                 } else {
                     let create_ata_account =
-                        spl_associated_token_account::instruction::create_associated_token_account(
+                        tpl_associated_token_account::instruction::create_associated_token_account(
                             &self.context.borrow().payer.pubkey(),
                             owner,
                             token_mint,
@@ -1058,7 +1058,7 @@ impl ProgramTestBench {
     #[allow(dead_code)]
     pub async fn get_borsh_account<
         T: BorshDeserialize
-            + anchor_spl::token_2022_extensions::tpl_token_metadata_interface::borsh::BorshDeserialize,
+            + anchor_tpl::token_2022_extensions::tpl_token_metadata_interface::borsh::BorshDeserialize,
     >(
         &self,
         address: &Pubkey,

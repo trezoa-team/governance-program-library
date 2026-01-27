@@ -1,6 +1,6 @@
 use crate::program_test::program_test_bench::MintType;
-use anchor_lang::error::ErrorCode;
-use anchor_spl::associated_token;
+use trezoaanchor_lang::error::ErrorCode;
+use anchor_tpl::associated_token;
 use gpl_token_voter::error::TokenVoterError;
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
@@ -114,7 +114,7 @@ async fn test_deposit_entry_with_token_extension_transfer_hooks() -> Result<(), 
     let first_mint_cookie_transfer_hook = token_voter_test
         .bench
         .with_mint(
-            &MintType::SplTokenExtensionsWithTransferHook,
+            &MintType::TplTokenExtensionsWithTransferHook,
             Some(&transfer_hook_program_id),
         )
         .await
@@ -125,7 +125,7 @@ async fn test_deposit_entry_with_token_extension_transfer_hooks() -> Result<(), 
             &first_mint_cookie_transfer_hook,
             &first_user_cookie.key.pubkey(),
             100,
-            &MintType::SplTokenExtensionsWithTransferHook,
+            &MintType::TplTokenExtensionsWithTransferHook,
             false,
         )
         .await;
@@ -243,7 +243,7 @@ async fn test_deposit_entry_with_token_extension_transfer_fees() -> Result<(), T
     let first_user_cookie = token_voter_test.users.first().unwrap();
     let first_mint_cookie_transfer_fees = token_voter_test
         .bench
-        .with_mint(&MintType::SplTokenExtensionsWithTransferFees, None)
+        .with_mint(&MintType::TplTokenExtensionsWithTransferFees, None)
         .await
         .unwrap();
     let _first_user_cookie_token_account = token_voter_test
@@ -252,7 +252,7 @@ async fn test_deposit_entry_with_token_extension_transfer_fees() -> Result<(), T
             &first_mint_cookie_transfer_fees,
             &first_user_cookie.key.pubkey(),
             100,
-            &MintType::SplTokenExtensionsWithTransferFees,
+            &MintType::TplTokenExtensionsWithTransferFees,
             false,
         )
         .await;

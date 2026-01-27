@@ -1,6 +1,6 @@
 mod program_test;
 
-use anchor_lang::prelude::{ErrorCode, Pubkey};
+use trezoaanchor_lang::prelude::{ErrorCode, Pubkey};
 use gpl_realm_voter::error::RealmVoterError;
 use program_test::realm_voter_test::RealmVoterTest;
 
@@ -69,13 +69,13 @@ async fn test_create_registrar_with_realm_authority_must_sign_error() -> Result<
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }
 
 #[tokio::test]
-async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result<(), TransportError>
+async fn test_create_registrar_with_invalid_tpl_gov_program_id_error() -> Result<(), TransportError>
 {
     // Arrange
     let mut realm_voter_test = RealmVoterTest::start_new().await;
@@ -96,7 +96,7 @@ async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::ConstraintOwner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::ConstraintOwner);
 
     Ok(())
 }

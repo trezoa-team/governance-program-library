@@ -3,9 +3,9 @@ use {
         error::TokenVoterError, id, max_voter_weight_record, state::VotingMintConfig,
         vote_weight_record,
     },
-    anchor_lang::{prelude::*, Discriminator},
+    trezoaanchor_lang::{prelude::*, Discriminator},
     trezoa_program::pubkey::PUBKEY_BYTES,
-    spl_governance::state::token_owner_record,
+    tpl_governance::state::token_owner_record,
 };
 
 // Generate a VoteWeightRecord & MaxVoterWeightRecord Anchor wrapper, owned by the current program.

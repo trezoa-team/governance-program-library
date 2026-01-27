@@ -1,14 +1,14 @@
 use std::sync::Arc;
 
-use anchor_lang::prelude::{AccountMeta, Pubkey};
+use trezoaanchor_lang::prelude::{AccountMeta, Pubkey};
 
 use gpl_nft_voter::state::max_voter_weight_record::{
     get_max_voter_weight_record_address, MaxVoterWeightRecord,
 };
 use gpl_nft_voter::state::*;
 
-use spl_governance::instruction::cast_vote;
-use spl_governance::state::vote_record::{self, Vote, VoteChoice};
+use tpl_governance::instruction::cast_vote;
+use tpl_governance::state::vote_record::{self, Vote, VoteChoice};
 
 use gpl_nft_voter::state::{
     get_nft_vote_record_address, get_registrar_address, CollectionConfig, NftVoteRecord, Registrar,
@@ -68,13 +68,13 @@ pub struct NftVoteRecordCookie {
 }
 
 pub struct CastNftVoteArgs {
-    pub cast_spl_gov_vote: bool,
+    pub cast_tpl_gov_vote: bool,
 }
 
 impl Default for CastNftVoteArgs {
     fn default() -> Self {
         Self {
-            cast_spl_gov_vote: true,
+            cast_tpl_gov_vote: true,
         }
     }
 }
@@ -139,11 +139,11 @@ impl NftVoterTest {
         let max_collections = 10;
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_nft_voter::instruction::CreateRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_nft_voter::instruction::CreateRegistrar {
                 max_collections,
             });
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_nft_voter::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -216,7 +216,7 @@ impl NftVoterTest {
             &gpl_nft_voter::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_nft_voter::instruction::CreateVoterWeightRecord {
                 governing_token_owner,
             },
@@ -233,7 +233,7 @@ impl NftVoterTest {
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_nft_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -280,7 +280,7 @@ impl NftVoterTest {
             &registrar_cookie.account.governing_token_mint,
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_nft_voter::instruction::CreateMaxVoterWeightRecord {},
         );
 
@@ -295,7 +295,7 @@ impl NftVoterTest {
 
         let mut create_max_voter_weight_record_ix = Instruction {
             program_id: gpl_nft_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -327,7 +327,7 @@ impl NftVoterTest {
         voter_weight_action: VoterWeightAction,
         nft_cookies: &[&NftCookie],
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_nft_voter::instruction::UpdateVoterWeightRecord {
                 voter_weight_action,
             },
@@ -338,7 +338,7 @@ impl NftVoterTest {
             voter_weight_record: voter_weight_record_cookie.address,
         };
 
-        let mut account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let mut account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         for nft_cookie in nft_cookies {
             account_metas.push(AccountMeta::new_readonly(nft_cookie.address, false));
@@ -365,7 +365,7 @@ impl NftVoterTest {
         nft_vote_record_cookies: &Vec<NftVoteRecordCookie>,
     ) -> Result<(), BanksClientError> {
         let data =
-            anchor_lang::InstructionData::data(&gpl_nft_voter::instruction::RelinquishNftVote {});
+            trezoaanchor_lang::InstructionData::data(&gpl_nft_voter::instruction::RelinquishNftVote {});
 
         let vote_record_key = vote_record::get_vote_record_address(
             &self.governance.program_id,
@@ -384,7 +384,7 @@ impl NftVoterTest {
             voter_authority: voter_cookie.address,
         };
 
-        let mut account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let mut account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         for nft_vote_record_cookie in nft_vote_record_cookies {
             account_metas.push(AccountMeta::new(nft_vote_record_cookie.address, false));
@@ -435,7 +435,7 @@ impl NftVoterTest {
         let args = args.unwrap_or_default();
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_nft_voter::instruction::ConfigureCollection {
+            trezoaanchor_lang::InstructionData::data(&gpl_nft_voter::instruction::ConfigureCollection {
                 weight: args.weight,
                 size: args.size,
             });
@@ -450,7 +450,7 @@ impl NftVoterTest {
 
         let mut configure_collection_ix = Instruction {
             program_id: gpl_nft_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -473,7 +473,7 @@ impl NftVoterTest {
         Ok(CollectionConfigCookie { collection_config })
     }
 
-    /// Casts NFT Vote and spl-gov Vote
+    /// Casts NFT Vote and tpl-gov Vote
     #[allow(dead_code)]
     pub async fn cast_nft_vote(
         &mut self,
@@ -488,7 +488,7 @@ impl NftVoterTest {
     ) -> Result<Vec<NftVoteRecordCookie>, BanksClientError> {
         let args = args.unwrap_or_default();
 
-        let data = anchor_lang::InstructionData::data(&gpl_nft_voter::instruction::CastNftVote {
+        let data = trezoaanchor_lang::InstructionData::data(&gpl_nft_voter::instruction::CastNftVote {
             proposal: proposal_cookie.address,
         });
 
@@ -501,7 +501,7 @@ impl NftVoterTest {
             system_program: trezoa_sdk::system_program::id(),
         };
 
-        let mut account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let mut account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
         let mut nft_vote_record_cookies = vec![];
 
         for nft_cookie in nft_cookies {
@@ -536,8 +536,8 @@ impl NftVoterTest {
 
         let mut instruction = vec![cast_nft_vote_ix];
 
-        if args.cast_spl_gov_vote {
-            // spl-gov cast vote
+        if args.cast_tpl_gov_vote {
+            // tpl-gov cast vote
             let vote = Vote::Approve(vec![VoteChoice {
                 rank: 0,
                 weight_percentage: 100,

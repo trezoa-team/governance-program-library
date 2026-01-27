@@ -1,5 +1,5 @@
 use crate::program_test::program_test_bench::MintType;
-use anchor_spl::associated_token;
+use anchor_tpl::associated_token;
 use gpl_token_voter::error::TokenVoterError;
 use program_test::token_voter_test::TokenVoterTest;
 use program_test::tools::*;
@@ -27,7 +27,7 @@ async fn test_withdraw_with_token_extensions_transfer_hooks() -> Result<(), Tran
     let first_mint_cookie_transfer_hook = token_voter_test
         .bench
         .with_mint(
-            &MintType::SplTokenExtensionsWithTransferHook,
+            &MintType::TplTokenExtensionsWithTransferHook,
             Some(&transfer_hook_program_id),
         )
         .await
@@ -38,7 +38,7 @@ async fn test_withdraw_with_token_extensions_transfer_hooks() -> Result<(), Tran
             &first_mint_cookie_transfer_hook,
             &first_user_cookie.key.pubkey(),
             100,
-            &MintType::SplTokenExtensionsWithTransferHook,
+            &MintType::TplTokenExtensionsWithTransferHook,
             false,
         )
         .await;

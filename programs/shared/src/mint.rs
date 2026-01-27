@@ -1,6 +1,6 @@
-// Add the generic max voter weight trait to SPL-Token mint structs
+// Add the generic max voter weight trait to TPL-Token mint structs
 use crate::generic_max_voter_weight::GenericMaxVoterWeight;
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 use tpl_token::state::Mint;
 
 pub struct MintMaxVoterWeight {

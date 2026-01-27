@@ -1,8 +1,8 @@
-//! General purpose SPL token utility functions
+//! General purpose TPL token utility functions
 
 use {
     crate::error::TokenVoterError,
-    anchor_lang::prelude::*,
+    trezoaanchor_lang::prelude::*,
     arrayref::array_ref,
     trezoa_program::{
         entrypoint::ProgramResult,
@@ -21,7 +21,7 @@ use {
         pod::PodMint,
         state::{Account, Mint},
     },
-    spl_transfer_hook_interface::onchain::add_extra_accounts_for_execute_cpi,
+    tpl_transfer_hook_interface::onchain::add_extra_accounts_for_execute_cpi,
 };
 
 /// Computationally cheap method to get amount from a token account
@@ -196,17 +196,17 @@ pub fn transfer_tpl_tokens_signed_checked<'a>(
 /// initialized and belongs to tpl_token program
 pub fn assert_is_valid_tpl_token_account(account_info: &AccountInfo) -> Result<()> {
     if account_info.data_is_empty() {
-        return Err(TokenVoterError::SplTokenAccountDoesNotExist.into());
+        return Err(TokenVoterError::TplTokenAccountDoesNotExist.into());
     }
 
     if account_info.owner != &tpl_token_2022::id() && account_info.owner != &tpl_token::id() {
-        return Err(TokenVoterError::SplTokenAccountWithInvalidOwner.into());
+        return Err(TokenVoterError::TplTokenAccountWithInvalidOwner.into());
     }
 
     // Check if the account data is a valid token account
     // also checks if the account is initialized or not.
     if !Account::valid_account_data(&account_info.try_borrow_data()?) {
-        return Err(TokenVoterError::SplTokenInvalidTokenAccountData.into());
+        return Err(TokenVoterError::TplTokenInvalidTokenAccountData.into());
     }
 
     Ok(())
@@ -216,16 +216,16 @@ pub fn assert_is_valid_tpl_token_account(account_info: &AccountInfo) -> Result<(
 /// is initialized and belongs to tpl_token program
 pub fn assert_is_valid_tpl_token_mint(mint_info: &AccountInfo) -> Result<()> {
     if mint_info.data_is_empty() {
-        return Err(TokenVoterError::SplTokenMintDoesNotExist.into());
+        return Err(TokenVoterError::TplTokenMintDoesNotExist.into());
     }
 
     if mint_info.owner != &tpl_token_2022::id() && mint_info.owner != &tpl_token::id() {
-        return Err(TokenVoterError::SplTokenMintWithInvalidOwner.into());
+        return Err(TokenVoterError::TplTokenMintWithInvalidOwner.into());
     }
 
     // assert that length is mint
     if !valid_mint_length(&mint_info.try_borrow_data()?) {
-        return Err(TokenVoterError::SplTokenInvalidMintAccountData.into());
+        return Err(TokenVoterError::TplTokenInvalidMintAccountData.into());
     }
 
     // In token program [36, 8, 1, is_initialized(1), 36] is the layout
@@ -233,7 +233,7 @@ pub fn assert_is_valid_tpl_token_mint(mint_info: &AccountInfo) -> Result<()> {
     let is_initialized = array_ref![data, 45, 1];
 
     if is_initialized == &[0] {
-        return Err(TokenVoterError::SplTokenMintNotInitialized.into());
+        return Err(TokenVoterError::TplTokenMintNotInitialized.into());
     }
 
     Ok(())

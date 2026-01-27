@@ -10,7 +10,7 @@ export type TokenVoter = {
     "name": "tokenVoter",
     "version": "0.0.1",
     "spec": "0.1.0",
-    "description": "SPL Governance plugin implementing token based governance power"
+    "description": "TPL Governance plugin implementing token based governance power"
   },
   "instructions": [
     {

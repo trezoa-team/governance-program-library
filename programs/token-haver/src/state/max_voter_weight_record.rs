@@ -1,7 +1,7 @@
 use crate::id;
 use crate::tools::anchor::DISCRIMINATOR_SIZE;
-use anchor_lang::prelude::Pubkey;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::*;
 use trezoa_program::pubkey::PUBKEY_BYTES;
 
 /// MaxVoterWeightRecord account as defined in tpl-governance-addin-api

@@ -1,19 +1,19 @@
-use anchor_lang::{
+use trezoaanchor_lang::{
     account,
     prelude::{Context, Signer},
     Accounts,
 };
 
-use anchor_lang::prelude::*;
-use anchor_spl::token::Mint;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use anchor_tpl::token::Mint;
+use tpl_governance::state::realm;
 
 use crate::error::NftVoterError;
 use crate::state::{max_voter_weight_record::MaxVoterWeightRecord, CollectionConfig, Registrar};
 
 /// Configures NFT voting collection which defines what NFTs can be used for governances
 /// and what weight they have
-/// The instruction updates MaxVoterWeightRecord which is used by spl-gov to determine max voting power
+/// The instruction updates MaxVoterWeightRecord which is used by tpl-gov to determine max voting power
 /// used to calculate voting quorum    
 #[derive(Accounts)]
 pub struct ConfigureCollection<'info> {
@@ -65,8 +65,8 @@ pub fn configure_collection(
         NftVoterError::InvalidRealmAuthority
     );
 
-    // spl-gov doesn't track voting_proposal_count any longer and we can't enforce the check here
-    // It's not ideal but acceptable. The proper solution would require proposal queuing in spl-gov
+    // tpl-gov doesn't track voting_proposal_count any longer and we can't enforce the check here
+    // It's not ideal but acceptable. The proper solution would require proposal queuing in tpl-gov
     //
     // Changes to the collections config can accidentally tip the scales for outstanding proposals and hence we disallow it
     // if realm.voting_proposal_count > 0 {

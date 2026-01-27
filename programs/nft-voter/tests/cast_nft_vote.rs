@@ -9,7 +9,7 @@ use program_test::{
 
 use trezoa_program_test::*;
 use trezoa_sdk::transport::TransportError;
-use spl_governance::error::GovernanceError;
+use tpl_governance::error::GovernanceError;
 
 mod program_test;
 
@@ -964,7 +964,7 @@ async fn test_cast_nft_vote_using_multiple_instructions() -> Result<(), Transpor
     let clock = nft_voter_test.bench.get_clock().await;
 
     let args = CastNftVoteArgs {
-        cast_spl_gov_vote: false,
+        cast_tpl_gov_vote: false,
     };
 
     nft_voter_test
@@ -1070,7 +1070,7 @@ async fn test_cast_nft_vote_using_multiple_instructions_with_nft_already_voted_e
         .await?;
 
     let args = CastNftVoteArgs {
-        cast_spl_gov_vote: false,
+        cast_tpl_gov_vote: false,
     };
 
     nft_voter_test
@@ -1159,7 +1159,7 @@ async fn test_cast_nft_vote_using_multiple_instructions_with_attempted_sandwiche
         .await?;
 
     let args = CastNftVoteArgs {
-        cast_spl_gov_vote: false,
+        cast_tpl_gov_vote: false,
     };
 
     // Cast vote with NFT

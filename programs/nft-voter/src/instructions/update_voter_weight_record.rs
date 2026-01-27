@@ -1,11 +1,11 @@
 use crate::error::NftVoterError;
 use crate::state::*;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use itertools::Itertools;
 
 /// Updates VoterWeightRecord to evaluate governance power for non voting use cases: CreateProposal, CreateGovernance etc...
 /// This instruction updates VoterWeightRecord which is valid for the current Slot and the given target action only
-/// and hance the instruction has to be executed inside the same transaction as the corresponding spl-gov instruction
+/// and hance the instruction has to be executed inside the same transaction as the corresponding tpl-gov instruction
 ///
 /// Note: UpdateVoterWeight is not cumulative the same way as CastNftVote and hence voter_weight for non voting scenarios
 /// can only be used with max 5 NFTs due to Trezoa transaction size limit

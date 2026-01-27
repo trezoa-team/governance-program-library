@@ -2,7 +2,7 @@ import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import {TokenVoter} from "../../target/types/token_voter";
 import idl from "../../target/idl/token_voter.json";
-import { GovernanceConfig, SplGovernance } from "governance-idl-sdk";
+import { GovernanceConfig, TplGovernance } from "governance-idl-sdk";
 import secret from "../../../../sol/id.json";
 import { Connection, Transaction, sendAndConfirmTransaction } from "@trezoa/web3.js";
 import { token } from "@coral-xyz/anchor/dist/cjs/utils";
@@ -14,7 +14,7 @@ const wallet = new anchor.Wallet(keypair);
 
 const provider = new anchor.AnchorProvider(connection, wallet, {});
 const program = new Program<TokenVoter>(idl as TokenVoter, provider);
-const splGovernance = new SplGovernance(web3Connection)
+const tplGovernance = new TplGovernance(web3Connection)
 
 describe("token-voter", () => {
   const governanceProgramId = new anchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")

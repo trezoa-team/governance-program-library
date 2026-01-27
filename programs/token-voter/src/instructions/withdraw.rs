@@ -1,7 +1,7 @@
 use {
     crate::{error::*, state::*, tools::tpl_token::transfer_tpl_tokens_signed_checked, ID},
-    anchor_lang::prelude::*,
-    anchor_spl::{
+    trezoaanchor_lang::prelude::*,
+    anchor_tpl::{
         associated_token::AssociatedToken,
         token_interface::{Mint, TokenAccount, TokenInterface},
     },

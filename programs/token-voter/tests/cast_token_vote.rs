@@ -8,7 +8,7 @@ use trezoa_sdk::signer::Signer;
 use trezoa_sdk::transport::TransportError;
 mod program_test;
 use crate::program_test::program_test_bench::TokenAccountCookie;
-use anchor_lang::AnchorDeserialize;
+use trezoaanchor_lang::AnchorDeserialize;
 
 #[tokio::test]
 async fn test_cast_token_vote() -> Result<(), TransportError> {
@@ -43,7 +43,7 @@ async fn test_cast_token_vote() -> Result<(), TransportError> {
             &token_account_keypair,
             &council_mint_cookie.address,
             &first_user_cookie.key.pubkey(),
-            &MintType::SplToken,
+            &MintType::TplToken,
             true,
         )
         .await?;
@@ -55,7 +55,7 @@ async fn test_cast_token_vote() -> Result<(), TransportError> {
             &council_mint_cookie.mint_authority,
             &token_account_keypair.pubkey(),
             100,
-            &MintType::SplToken,
+            &MintType::TplToken,
             &first_user_cookie.key.pubkey(),
             false,
         )
@@ -166,8 +166,8 @@ async fn test_cast_token_vote() -> Result<(), TransportError> {
         .get_account_data(proposal_cookie.address)
         .await;
     let mut data_slice: &[u8] = &proposal_data;
-    let proposal_state: spl_governance::state::proposal::ProposalV2 =
-        spl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
+    let proposal_state: tpl_governance::state::proposal::ProposalV2 =
+        tpl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
     assert_eq!(
         proposal_state.options[0].vote_weight,
         voter_weight_record.voter_weight
@@ -209,7 +209,7 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
             &token_account_keypair,
             &council_mint_cookie.address,
             &first_user_cookie.key.pubkey(),
-            &MintType::SplToken,
+            &MintType::TplToken,
             true,
         )
         .await?;
@@ -221,7 +221,7 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
             &council_mint_cookie.mint_authority,
             &token_account_keypair.pubkey(),
             100,
-            &MintType::SplToken,
+            &MintType::TplToken,
             &first_user_cookie.key.pubkey(),
             true,
         )
@@ -235,7 +235,7 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
             &first_mint_cookie.mint_authority,
             &token_account_keypair.pubkey(),
             100,
-            &MintType::SplTokenExtensions,
+            &MintType::TplTokenExtensions,
             &first_user_cookie.key.pubkey(),
             false,
         )
@@ -347,8 +347,8 @@ async fn test_cast_token_vote_token_extension() -> Result<(), TransportError> {
         .get_account_data(proposal_cookie.address)
         .await;
     let mut data_slice: &[u8] = &proposal_data;
-    let proposal_state: spl_governance::state::proposal::ProposalV2 =
-        spl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
+    let proposal_state: tpl_governance::state::proposal::ProposalV2 =
+        tpl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
     // println!("proposal_state: {:?}", proposal_state.options[0]);
     assert_eq!(
         proposal_state.options[0].vote_weight,
@@ -392,7 +392,7 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
             &token_account_keypair,
             &council_mint_cookie.address,
             &first_user_cookie.key.pubkey(),
-            &MintType::SplToken,
+            &MintType::TplToken,
             true,
         )
         .await?;
@@ -404,7 +404,7 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
             &council_mint_cookie.mint_authority,
             &token_account_keypair.pubkey(),
             100,
-            &MintType::SplToken,
+            &MintType::TplToken,
             &first_user_cookie.key.pubkey(),
             true,
         )
@@ -418,7 +418,7 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
             &first_mint_cookie.mint_authority,
             &token_account_keypair.pubkey(),
             100,
-            &MintType::SplTokenExtensionsWithTransferFees,
+            &MintType::TplTokenExtensionsWithTransferFees,
             &first_user_cookie.key.pubkey(),
             false,
         )
@@ -529,8 +529,8 @@ async fn test_cast_token_vote_token_extension_transfer_fees() -> Result<(), Tran
         .get_account_data(proposal_cookie.address)
         .await;
     let mut data_slice: &[u8] = &proposal_data;
-    let proposal_state: spl_governance::state::proposal::ProposalV2 =
-        spl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
+    let proposal_state: tpl_governance::state::proposal::ProposalV2 =
+        tpl_governance::state::proposal::ProposalV2::deserialize(&mut data_slice).unwrap();
 
     assert_eq!(
         proposal_state.options[0].vote_weight,

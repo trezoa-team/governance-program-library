@@ -1,19 +1,19 @@
 use crate::error::NftVoterError;
 use crate::{id, state::*};
-use anchor_lang::prelude::*;
-use anchor_lang::Accounts;
+use trezoaanchor_lang::prelude::*;
+use trezoaanchor_lang::Accounts;
 use itertools::Itertools;
-use spl_governance_tools::account::create_and_serialize_account_signed;
+use tpl_governance_tools::account::create_and_serialize_account_signed;
 
 /// Casts NFT vote. The NFTs used for voting are tracked using NftVoteRecord accounts
 /// This instruction updates VoterWeightRecord which is valid for the current Slot and the target Proposal only
-/// and hance the instruction has to be executed inside the same transaction as spl-gov.CastVote
+/// and hance the instruction has to be executed inside the same transaction as tpl-gov.CastVote
 ///
 /// CastNftVote is accumulative and can be invoked using several transactions if voter owns more than 5 NFTs to calculate total voter_weight
-/// In this scenario only the last CastNftVote should be bundled  with spl-gov.CastVote in the same transaction
+/// In this scenario only the last CastNftVote should be bundled  with tpl-gov.CastVote in the same transaction
 ///
 /// CastNftVote instruction and NftVoteRecord are not directional. They don't record vote choice (ex Yes/No)
-/// VoteChoice is recorded by spl-gov in VoteRecord and this CastNftVote only tracks voting NFTs
+/// VoteChoice is recorded by tpl-gov in VoteRecord and this CastNftVote only tracks voting NFTs
 ///
 #[derive(Accounts)]
 #[instruction(proposal: Pubkey)]
@@ -93,7 +93,7 @@ pub fn cast_nft_vote<'info>(
         );
 
         // Note: proposal.governing_token_mint must match voter_weight_record.governing_token_mint
-        // We don't verify it here because spl-gov does the check in cast_vote
+        // We don't verify it here because tpl-gov does the check in cast_vote
         // and it would reject voter_weight_record if governing_token_mint doesn't match
 
         // Note: Once the NFT plugin is enabled the governing_token_mint is used only as identity

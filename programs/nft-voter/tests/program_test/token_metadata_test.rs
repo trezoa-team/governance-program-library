@@ -1,6 +1,6 @@
 use std::{str::FromStr, sync::Arc};
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 use mpl_token_metadata::{types::Collection, types::DataV2};
 use trezoa_program_test::ProgramTest;
 use trezoa_sdk::{signer::Signer, system_program, transport::TransportError};

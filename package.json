@@ -9,7 +9,7 @@
     "files": [
         "dist/**/*"
     ],
-    "repository": "https://github.com/trezoa-labs/governance-program-library",
+    "repository": "https://github.com/trezoa-team/governance-program-library",
     "scripts": {
         "build": "tsc",
         "clean": "rm -rf dist",
@@ -40,6 +40,6 @@
     "dependencies": {
         "@identity.com/trezoa-gateway-ts": "^0.12.0",
         "@trezoa/tpl-governance": "^0.3.28",
-        "@coral-xyz/anchor": "^0.30.1"
+        "@trezoacoral-xyz/anchor": "^0.30.1"
     }
 }

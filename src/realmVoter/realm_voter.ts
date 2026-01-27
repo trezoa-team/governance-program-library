@@ -10,7 +10,7 @@ export type RealmVoter = {
     "name": "realmVoter",
     "version": "0.0.1",
     "spec": "0.1.0",
-    "description": "SPL Governance plugin granting governance power through Realms membership"
+    "description": "TPL Governance plugin granting governance power through Realms membership"
   },
   "instructions": [
     {

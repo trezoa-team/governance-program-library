@@ -1,8 +1,8 @@
 use crate::error::RealmVoterError;
 use crate::state::max_voter_weight_record::MaxVoterWeightRecord;
 use crate::state::*;
-use anchor_lang::prelude::*;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use tpl_governance::state::realm;
 
 /// Configures realm_member_voter_weight and max_voter_weight for Registrar
 /// It also sets MaxVoterWeightRecord.max_voter_weight to the provided value

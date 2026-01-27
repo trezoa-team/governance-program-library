@@ -59,7 +59,7 @@
         {
           "name": "reward_vault",
           "docs": [
-            "An SPL token Account for holding rewards to be claimed"
+            "An TPL token Account for holding rewards to be claimed"
           ],
           "writable": true,
           "pda": {
@@ -339,14 +339,14 @@
         {
           "name": "stake_mint",
           "docs": [
-            "An SPL token Mint for the effective stake weight token"
+            "An TPL token Mint for the effective stake weight token"
           ],
           "writable": true
         },
         {
           "name": "vault",
           "docs": [
-            "An SPL token Account for staging A tokens"
+            "An TPL token Account for staging A tokens"
           ],
           "writable": true
         },
@@ -755,7 +755,7 @@
           {
             "name": "deposit_amount",
             "docs": [
-              "Amount of SPL token deposited"
+              "Amount of TPL token deposited"
             ],
             "type": "u64"
           },

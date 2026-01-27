@@ -2,7 +2,7 @@ use crate::{
     id,
     tools::anchor::{DISCRIMINATOR_SIZE, PUBKEY_SIZE},
 };
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
 /// Registrar which stores Civic Pass voting configuration for the given Realm
 #[account]

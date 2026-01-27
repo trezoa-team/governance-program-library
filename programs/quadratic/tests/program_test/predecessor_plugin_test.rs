@@ -1,11 +1,11 @@
 use std::str::FromStr;
 use std::sync::Arc;
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 
 use gpl_quadratic::state::*;
 use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
-use spl_governance_addin_mock::instruction::*;
+use tpl_governance_addin_mock::instruction::*;
 
 use crate::program_test::{
     governance_test::RealmCookie,
@@ -26,7 +26,7 @@ impl PredecessorPluginTest {
 
     #[allow(dead_code)]
     pub fn add_program(program_test: &mut ProgramTest) {
-        program_test.add_program("spl_governance_addin_mock", Self::program_id(), None);
+        program_test.add_program("tpl_governance_addin_mock", Self::program_id(), None);
     }
 
     #[allow(dead_code)]

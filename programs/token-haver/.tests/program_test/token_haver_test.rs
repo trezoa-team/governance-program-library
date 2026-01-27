@@ -1,14 +1,14 @@
 use std::sync::Arc;
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 
 use gpl_token_haver::state::max_voter_weight_record::MaxVoterWeightRecord;
 use gpl_token_haver::state::*;
 
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::instruction::Instruction;
-use solana_sdk::signature::Keypair;
-use solana_sdk::signer::Signer;
+use trezoa_program_test::{BanksClientError, ProgramTest};
+use trezoa_sdk::instruction::Instruction;
+use trezoa_sdk::signature::Keypair;
+use trezoa_sdk::signer::Signer;
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
@@ -110,11 +110,11 @@ impl RealmVoterTest {
         let mints = &[realm_cookie.account.community_mint].to_vec();
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_token_haver::instruction::CreateRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_token_haver::instruction::CreateRegistrar {
                 mints: mints.clone(),
             });
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_token_haver::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -122,7 +122,7 @@ impl RealmVoterTest {
                 governing_token_mint: realm_cookie.account.community_mint,
                 realm_authority: realm_cookie.get_realm_authority().pubkey(),
                 payer: self.bench.payer.pubkey(),
-                system_program: solana_sdk::system_program::id(),
+                system_program: trezoa_sdk::system_program::id(),
             },
             None,
         );
@@ -186,7 +186,7 @@ impl RealmVoterTest {
             &gpl_token_haver::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_token_haver::instruction::CreateVoterWeightRecord {
                 governing_token_owner,
             },
@@ -196,12 +196,12 @@ impl RealmVoterTest {
             registrar: registrar_cookie.address,
             voter_weight_record: voter_weight_record_key,
             payer: self.bench.payer.pubkey(),
-            system_program: solana_sdk::system_program::id(),
+            system_program: trezoa_sdk::system_program::id(),
         };
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_token_haver::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -235,7 +235,7 @@ impl RealmVoterTest {
         voter_weight_record_cookie: &mut VoterWeightRecordCookie,
         token_owner_record_cookie: &TokenOwnerRecordCookie,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_token_haver::instruction::UpdateVoterWeightRecord {},
         );
 
@@ -244,7 +244,7 @@ impl RealmVoterTest {
             voter_weight_record: voter_weight_record_cookie.address,
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         let instructions = vec![Instruction {
             program_id: gpl_token_haver::id(),

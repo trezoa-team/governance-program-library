@@ -1,11 +1,11 @@
 use std::str::FromStr;
 use std::sync::Arc;
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 
 use gpl_civic_gateway::state::*;
 use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
-use spl_governance_addin_mock::instruction::*;
+use tpl_governance_addin_mock::instruction::*;
 
 use crate::program_test::{
     gateway_voter_test::VoterWeightRecordCookie,
@@ -26,9 +26,9 @@ impl PredecessorPluginTest {
     #[allow(dead_code)]
     pub fn add_program(program_test: &mut ProgramTest) {
         program_test.add_program(
-            "spl_governance_addin_mock",
+            "tpl_governance_addin_mock",
             Self::program_id(),
-            processor!(spl_governance_addin_mock::processor::process_instruction),
+            processor!(tpl_governance_addin_mock::processor::process_instruction),
         );
     }
 

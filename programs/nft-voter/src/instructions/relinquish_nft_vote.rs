@@ -2,9 +2,9 @@ use crate::error::NftVoterError;
 use crate::state::*;
 use crate::state::{get_nft_vote_record_data_for_proposal_and_token_owner, Registrar};
 use crate::tools::governance::get_vote_record_address;
-use anchor_lang::prelude::*;
-use spl_governance::state::{enums::ProposalState, governance, proposal};
-use spl_governance_tools::account::dispose_account;
+use trezoaanchor_lang::prelude::*;
+use tpl_governance::state::{enums::ProposalState, governance, proposal};
+use tpl_governance_tools::account::dispose_account;
 
 /// Disposes NftVoteRecord and recovers the rent from the accounts   
 /// It can only be executed when voting on the target Proposal ended or voter withdrew vote from the Proposal
@@ -88,8 +88,8 @@ pub fn relinquish_nft_vote(ctx: Context<RelinquishNftVote>) -> Result<()> {
         &registrar.governing_token_mint,
     )?;
 
-    // If the Proposal is still in Voting state then we can only Relinquish the NFT votes if the Vote was withdrawn in spl-gov first
-    // When vote is withdrawn in spl-gov then VoteRecord is disposed and we have to assert it doesn't exist
+    // If the Proposal is still in Voting state then we can only Relinquish the NFT votes if the Vote was withdrawn in tpl-gov first
+    // When vote is withdrawn in tpl-gov then VoteRecord is disposed and we have to assert it doesn't exist
     //
     // If the Proposal is in any other state then we can dispose NftVoteRecords without any additional Proposal checks
     if proposal.state == ProposalState::Voting {
@@ -122,7 +122,7 @@ pub fn relinquish_nft_vote(ctx: Context<RelinquishNftVote>) -> Result<()> {
     // 1) nft-voter.cast_nft_vote()
     // 2) voter-weight-plugin.cast_vote()
     // 3) nft-voter.relinquish_nft_vote()
-    // 4) spl-gov.cast_vote() -> spl-gov uses VoterWeightRecord provided by voter-weight-plugin in step 2) while the nft vote is withdrawn and could be used to vote again
+    // 4) tpl-gov.cast_vote() -> tpl-gov uses VoterWeightRecord provided by voter-weight-plugin in step 2) while the nft vote is withdrawn and could be used to vote again
     if voter_weight_record.voter_weight_expiry >= Some(Clock::get()?.slot) {
         return err!(NftVoterError::VoterWeightRecordMustBeExpired);
     }

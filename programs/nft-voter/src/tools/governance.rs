@@ -1,5 +1,5 @@
-use anchor_lang::prelude::Pubkey;
-use spl_governance::state::{token_owner_record, vote_record};
+use trezoaanchor_lang::prelude::Pubkey;
+use tpl_governance::state::{token_owner_record, vote_record};
 
 pub fn get_vote_record_address(
     program_id: &Pubkey,

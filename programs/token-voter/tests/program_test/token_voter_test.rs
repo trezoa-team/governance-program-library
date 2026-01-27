@@ -1,8 +1,8 @@
 use std::sync::{Arc, RwLock};
 
-use anchor_lang::{prelude::Pubkey, system_program::System, Id};
+use trezoaanchor_lang::{prelude::Pubkey, system_program::System, Id};
 
-use anchor_spl::{
+use anchor_tpl::{
     associated_token::{self, AssociatedToken},
     token_interface::TokenAccount,
 };
@@ -11,7 +11,7 @@ use trezoa_sdk::{instruction::AccountMeta, sysvar::instructions};
 
 use crate::program_test::governance_test::GovernanceTest;
 use crate::program_test::program_test_bench::ProgramTestBench;
-use anchor_lang::ToAccountMetas;
+use trezoaanchor_lang::ToAccountMetas;
 use trezoa_program::program_pack::Pack;
 use trezoa_program_test::{processor, BanksClientError, ProgramTest};
 use trezoa_sdk::instruction::Instruction;
@@ -83,7 +83,7 @@ impl TokenVoterTest {
         let mut program_test = ProgramTest::new("gpl_token_voter", gpl_token_voter::id(), None);
         let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_tpl_token(
             &mut program_test,
-            MintType::SplToken,
+            MintType::TplToken,
         );
         GovernanceTest::add_program(&mut program_test);
         let program_id = gpl_token_voter::id();
@@ -124,15 +124,15 @@ impl TokenVoterTest {
         let mut program_test = ProgramTest::new("gpl_token_voter", gpl_token_voter::id(), None);
         let (mints, users) = ProgramTestBench::add_mints_and_user_cookies_tpl_token(
             &mut program_test,
-            MintType::SplTokenExtensions,
+            MintType::TplTokenExtensions,
         );
 
         if transfer_hook_program_id.is_some() {
             program_test.set_compute_max_units(500_000);
             program_test.add_program(
-                "spl_transfer_hook_example",
+                "tpl_transfer_hook_example",
                 *transfer_hook_program_id.unwrap(),
-                processor!(spl_transfer_hook_example::processor::process),
+                processor!(tpl_transfer_hook_example::processor::process),
             );
         };
 
@@ -202,11 +202,11 @@ impl TokenVoterTest {
 
         let max_mints = 10;
         let data =
-            anchor_lang::InstructionData::data(&gpl_token_voter::instruction::CreateRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_token_voter::instruction::CreateRegistrar {
                 max_mints,
             });
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_token_voter::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -273,11 +273,11 @@ impl TokenVoterTest {
             get_registrar_address(&realm_cookie.address, &realm_cookie.account.community_mint);
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_token_voter::instruction::ResizeRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_token_voter::instruction::ResizeRegistrar {
                 max_mints,
             });
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_token_voter::accounts::ResizeRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -357,7 +357,7 @@ impl TokenVoterTest {
             &gpl_token_voter::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_token_voter::instruction::CreateVoterWeightRecord {},
         );
 
@@ -372,7 +372,7 @@ impl TokenVoterTest {
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_token_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -424,7 +424,7 @@ impl TokenVoterTest {
             &registrar_cookie.account.governing_token_mint,
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_token_voter::instruction::CreateMaxVoterWeightRecord {},
         );
 
@@ -440,7 +440,7 @@ impl TokenVoterTest {
 
         let mut create_max_voter_weight_record_ix = Instruction {
             program_id: gpl_token_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -495,7 +495,7 @@ impl TokenVoterTest {
         instruction_override: F,
         signers_override: Option<&[&Keypair]>,
     ) -> Result<VotingMintConfig, BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_token_voter::instruction::ConfigureMintConfig { digit_shift },
         );
 
@@ -510,7 +510,7 @@ impl TokenVoterTest {
 
         let mut configure_mint_config_ix = Instruction {
             program_id: gpl_token_voter::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -578,7 +578,7 @@ impl TokenVoterTest {
         // additional accounts for transfer_hooks to work
         additional_account_meta: Option<Vec<AccountMeta>>,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(&gpl_token_voter::instruction::Deposit {
+        let data = trezoaanchor_lang::InstructionData::data(&gpl_token_voter::instruction::Deposit {
             deposit_entry_index,
             amount,
         });
@@ -678,7 +678,7 @@ impl TokenVoterTest {
         // additional accounts for transfer_hooks to work
         additional_account_meta: Option<Vec<AccountMeta>>,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(&gpl_token_voter::instruction::Withdraw {
+        let data = trezoaanchor_lang::InstructionData::data(&gpl_token_voter::instruction::Withdraw {
             deposit_entry_index,
             amount,
         });
@@ -764,7 +764,7 @@ impl TokenVoterTest {
         instruction_override: F,
         signers_override: Option<&[&Keypair]>,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(&gpl_token_voter::instruction::CloseVoter {});
+        let data = trezoaanchor_lang::InstructionData::data(&gpl_token_voter::instruction::CloseVoter {});
 
         let accounts = gpl_token_voter::accounts::CloseVoter {
             registrar: registrar_cookie.address,
@@ -873,7 +873,7 @@ impl TokenVoterTest {
         mint: &MintCookie,
         token_program_id: &Pubkey,
     ) -> Pubkey {
-        spl_associated_token_account::get_associated_token_address_with_program_id(
+        tpl_associated_token_account::get_associated_token_address_with_program_id(
             &address,
             &&mint.address,
             token_program_id,

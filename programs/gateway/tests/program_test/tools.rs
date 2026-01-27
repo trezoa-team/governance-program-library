@@ -2,13 +2,13 @@ use crate::{
     program_test::gateway_voter_test::VoterWeightRecordCookie,
     program_test::governance_test::TokenOwnerRecordCookie,
 };
-use anchor_lang::prelude::ERROR_CODE_OFFSET;
+use trezoaanchor_lang::prelude::ERROR_CODE_OFFSET;
 use gpl_civic_gateway::error::GatewayError;
 use itertools::Either;
 use trezoa_program::{instruction::InstructionError, pubkey::Pubkey};
 use trezoa_program_test::BanksClientError;
 use trezoa_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError};
-use spl_governance_tools::error::GovernanceToolsError;
+use tpl_governance_tools::error::GovernanceToolsError;
 
 pub fn clone_keypair(source: &Keypair) -> Keypair {
     Keypair::from_bytes(&source.to_bytes()).unwrap()
@@ -54,7 +54,7 @@ pub fn assert_gov_tools_err(
 #[allow(dead_code)]
 pub fn assert_anchor_err(
     banks_client_error: BanksClientError,
-    anchor_error: anchor_lang::error::ErrorCode,
+    anchor_error: trezoaanchor_lang::error::ErrorCode,
 ) {
     let tx_error = banks_client_error.unwrap();
 

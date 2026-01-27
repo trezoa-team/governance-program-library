@@ -10,7 +10,7 @@ export type Gateway = {
     "name": "gateway",
     "version": "0.1.1",
     "spec": "0.1.0",
-    "description": "SPL Governance addin for Civic Pass (www.civic.com)"
+    "description": "TPL Governance addin for Civic Pass (www.civic.com)"
   },
   "instructions": [
     {

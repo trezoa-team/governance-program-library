@@ -10,7 +10,7 @@ export type Quadratic = {
     "name": "quadratic",
     "version": "0.1.1",
     "spec": "0.1.0",
-    "description": "SPL Governance quadratic voting plugin"
+    "description": "TPL Governance quadratic voting plugin"
   },
   "instructions": [
     {

@@ -54,7 +54,7 @@ async fn test_resize_registrar_with_configured_mint() -> Result<(), TransportErr
             &first_mint_cookie,
             &first_user_cookie.key.pubkey(),
             100,
-            &MintType::SplTokenExtensionsWithTransferFees,
+            &MintType::TplTokenExtensionsWithTransferFees,
             false,
         )
         .await;

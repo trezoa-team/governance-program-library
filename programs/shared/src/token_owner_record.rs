@@ -1,8 +1,8 @@
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 // Add the generic voter weight trait to TokenOwnerRecord structs
 use crate::generic_voter_weight::GenericVoterWeight;
-use spl_governance::state::token_owner_record::TokenOwnerRecordV2;
-use spl_governance_addin_api::voter_weight::VoterWeightAction;
+use tpl_governance::state::token_owner_record::TokenOwnerRecordV2;
+use tpl_governance_addin_api::voter_weight::VoterWeightAction;
 
 impl GenericVoterWeight for TokenOwnerRecordV2 {
     fn get_governing_token_mint(&self) -> Pubkey {

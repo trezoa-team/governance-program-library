@@ -50,7 +50,7 @@ export type StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Mint for the effective stake weight token"
+            "An TPL token Mint for the effective stake weight token"
           ]
         },
         {
@@ -58,7 +58,7 @@ export type StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Account for staging A tokens"
+            "An TPL token Account for staging A tokens"
           ]
         },
         {
@@ -145,7 +145,7 @@ export type StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Account for holding rewards to be claimed"
+            "An TPL token Account for holding rewards to be claimed"
           ]
         },
         {
@@ -721,7 +721,7 @@ export type StakeIdl = {
           {
             "name": "depositAmount",
             "docs": [
-              "Amount of SPL token deposited"
+              "Amount of TPL token deposited"
             ],
             "type": "u64"
           },
@@ -946,7 +946,7 @@ export const stakeIdl: StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Mint for the effective stake weight token"
+            "An TPL token Mint for the effective stake weight token"
           ]
         },
         {
@@ -954,7 +954,7 @@ export const stakeIdl: StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Account for staging A tokens"
+            "An TPL token Account for staging A tokens"
           ]
         },
         {
@@ -1041,7 +1041,7 @@ export const stakeIdl: StakeIdl = {
           "writable": true,
           "signer": false,
           "docs": [
-            "An SPL token Account for holding rewards to be claimed"
+            "An TPL token Account for holding rewards to be claimed"
           ]
         },
         {
@@ -1617,7 +1617,7 @@ export const stakeIdl: StakeIdl = {
           {
             "name": "depositAmount",
             "docs": [
-              "Amount of SPL token deposited"
+              "Amount of TPL token deposited"
             ],
             "type": "u64"
           },

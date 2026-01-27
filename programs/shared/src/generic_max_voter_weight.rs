@@ -1,7 +1,7 @@
 use crate::mint::MintMaxVoterWeight;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use enum_dispatch::enum_dispatch;
-use spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord;
+use tpl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord;
 
 /// A generic trait representing a max voter weight,
 /// that can be passed as an input into the plugin
@@ -43,9 +43,9 @@ impl GenericMaxVoterWeight for MaxVoterWeightRecord {
     }
 
     // The GenericVoterWeight interface expects a crate-defined VoterWeightAction.
-    // This is identical to spl_governance_addin_api::voter_weight::VoterWeightAction, but added here
+    // This is identical to tpl_governance_addin_api::voter_weight::VoterWeightAction, but added here
     // so that Anchor will create the mapping correctly in the IDL.
-    // This function converts the spl_governance_addin_api::voter_weight::VoterWeightAction to the
+    // This function converts the tpl_governance_addin_api::voter_weight::VoterWeightAction to the
     // crate-defined VoterWeightAction by mapping the enum values by integer.
     // Note - it is imperative that the two enums stay in sync to avoid errors here.
     // fn get_weight_action(&self) -> Option<VoterWeightAction> {

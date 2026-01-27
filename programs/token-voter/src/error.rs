@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
 #[error_code]
 pub enum TokenVoterError {
@@ -28,31 +28,31 @@ pub enum TokenVoterError {
 
     /// Invalid Token account owner
     #[msg("Invalid Token account owner")]
-    SplTokenAccountWithInvalidOwner,
+    TplTokenAccountWithInvalidOwner,
 
     /// Invalid Mint account owner
     #[msg("Invalid Mint account owner")]
-    SplTokenMintWithInvalidOwner,
+    TplTokenMintWithInvalidOwner,
 
     /// Token Account doesn't exist
     #[msg("Token Account doesn't exist")]
-    SplTokenAccountDoesNotExist,
+    TplTokenAccountDoesNotExist,
 
     /// Token account data is invalid
     #[msg("Token account data is invalid")]
-    SplTokenInvalidTokenAccountData,
+    TplTokenInvalidTokenAccountData,
 
     /// Token mint account data is invalid
     #[msg("Token mint account data is invalid")]
-    SplTokenInvalidMintAccountData,
+    TplTokenInvalidMintAccountData,
 
     /// Token Mint is not initialized
     #[msg("Token Mint account is not initialized")]
-    SplTokenMintNotInitialized,
+    TplTokenMintNotInitialized,
 
     /// Token Mint account doesn't exist
     #[msg("Token Mint account doesn't exist")]
-    SplTokenMintDoesNotExist,
+    TplTokenMintDoesNotExist,
 
     /// Account data is empty or invalid
     #[msg("Account Data is empty or invalid")]

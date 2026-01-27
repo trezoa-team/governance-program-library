@@ -1,13 +1,13 @@
 use crate::error::RealmVoterError;
 use crate::state::*;
-use anchor_lang::prelude::*;
-use spl_governance::state::token_owner_record;
+use trezoaanchor_lang::prelude::*;
+use tpl_governance::state::token_owner_record;
 
 /// Updates VoterWeightRecord based on Realm DAO membership
 /// The membership is evaluated via a valid TokenOwnerRecord which must belong to one of the configured tpl-governance instances
 ///
 /// This instruction sets VoterWeightRecord.voter_weight which is valid for the current slot only
-/// and must be executed inside the same transaction as the corresponding spl-gov instruction
+/// and must be executed inside the same transaction as the corresponding tpl-gov instruction
 #[derive(Accounts)]
 pub struct UpdateVoterWeightRecord<'info> {
     /// The RealmVoter voting Registrar

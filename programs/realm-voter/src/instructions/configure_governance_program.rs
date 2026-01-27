@@ -1,11 +1,11 @@
-use anchor_lang::{
+use trezoaanchor_lang::{
     account,
     prelude::{Context, Signer},
     Accounts,
 };
 
-use anchor_lang::prelude::*;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use tpl_governance::state::realm;
 
 use crate::error::RealmVoterError;
 use crate::state::{CollectionItemChangeType, GovernanceProgramConfig, Registrar};

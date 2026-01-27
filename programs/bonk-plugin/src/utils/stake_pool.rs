@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
 #[repr(C)]
 #[derive(AnchorDeserialize, Debug)]
@@ -66,8 +66,8 @@ impl StakePool {
         let stake_pool = Self::try_from_slice(data)?;
 
         if stake_pool.discriminator.to_le_bytes() != Self::ACCOUNT_DISCRIMINATOR {
-            return Err(anchor_lang::error!(
-                anchor_lang::error::ErrorCode::AccountDiscriminatorMismatch
+            return Err(trezoaanchor_lang::error!(
+                trezoaanchor_lang::error::ErrorCode::AccountDiscriminatorMismatch
             )
             .with_account_name("StakePool"));
         }

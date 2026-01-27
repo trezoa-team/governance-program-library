@@ -1,10 +1,10 @@
 use {
     crate::{error::*, state::*},
-    anchor_lang::prelude::*,
-    anchor_lang::trezoa_program::sysvar::instructions as tx_instructions,
+    trezoaanchor_lang::prelude::*,
+    trezoaanchor_lang::trezoa_program::sysvar::instructions as tx_instructions,
 };
 
-/// Creates VoterWeightRecord used by spl-gov
+/// Creates VoterWeightRecord used by tpl-gov
 /// This instruction should only be executed once per realm/governing_token_mint/governing_token_owner
 /// to create the account
 #[derive(Accounts)]
@@ -68,7 +68,7 @@ pub fn create_voter_weight_record(ctx: Context<CreateVoterWeightRecord>) -> Resu
     let voter_weight_record = &mut ctx.accounts.voter_weight_record;
 
     voter_weight_record.account_discriminator =
-        spl_governance_addin_api::voter_weight::VoterWeightRecord::ACCOUNT_DISCRIMINATOR;
+        tpl_governance_addin_api::voter_weight::VoterWeightRecord::ACCOUNT_DISCRIMINATOR;
     voter_weight_record.realm = registrar.realm.key();
     voter_weight_record.governing_token_mint = registrar.governing_token_mint.key();
     voter_weight_record.governing_token_owner = voter_authority.key();

@@ -1,9 +1,9 @@
 use {
     super::{DepositEntry, Registrar},
     crate::error::TokenVoterError,
-    anchor_lang::{prelude::*, Discriminator},
+    trezoaanchor_lang::{prelude::*, Discriminator},
     trezoa_program::pubkey::PUBKEY_BYTES,
-    spl_governance::state::token_owner_record,
+    tpl_governance::state::token_owner_record,
 };
 
 /// User account for mint voting rights.

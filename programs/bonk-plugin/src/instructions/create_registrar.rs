@@ -1,9 +1,9 @@
-use anchor_lang::prelude::*;
-use anchor_spl::token::Mint;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use anchor_tpl::token::Mint;
+use tpl_governance::state::realm;
 
 use crate::{
-    error::BonkPluginError, state::*, utils::stake_pool::StakePool, SPL_TOKEN_STAKING_PROGRAM_ID,
+    error::BonkPluginError, state::*, utils::stake_pool::StakePool, TPL_TOKEN_STAKING_PROGRAM_ID,
 };
 
 /// Creates Registrar storing Stake Pool details for Bonk
@@ -34,9 +34,9 @@ pub struct CreateRegistrar<'info> {
     #[account(owner = governance_program_id.key())]
     pub realm: UncheckedAccount<'info>,
 
-    /// CHECK: Owned by SPL Staking Program
+    /// CHECK: Owned by TPL Staking Program
     #[account(
-        owner = SPL_TOKEN_STAKING_PROGRAM_ID,
+        owner = TPL_TOKEN_STAKING_PROGRAM_ID,
     )]
     pub stake_pool: AccountInfo<'info>,
 

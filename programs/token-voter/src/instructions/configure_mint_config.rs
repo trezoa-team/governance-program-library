@@ -1,8 +1,8 @@
 use {
     crate::{error::*, state::*},
-    anchor_lang::prelude::*,
-    anchor_spl::token_interface::Mint,
-    spl_governance::state::realm,
+    trezoaanchor_lang::prelude::*,
+    anchor_tpl::token_interface::Mint,
+    tpl_governance::state::realm,
 };
 
 /// Creates or updates configuration for tpl-governance program instances to

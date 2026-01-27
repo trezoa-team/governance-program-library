@@ -10,7 +10,7 @@ export type TokenHaver = {
     "name": "tokenHaver",
     "version": "0.0.2",
     "spec": "0.1.0",
-    "description": "SPL Governance plugin granting governance power based on the nonzero presence of locked tokens"
+    "description": "TPL Governance plugin granting governance power based on the nonzero presence of locked tokens"
   },
   "instructions": [
     {

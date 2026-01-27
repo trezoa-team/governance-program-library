@@ -8,7 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  SOLANA_VERSION: '1.18.18'
+  TREZOA_VERSION: '1.18.18'
   RUST_TOOLCHAIN: stable
 
 jobs:
@@ -54,22 +54,22 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v1
 
-      - name: Cache Solana binaries
+      - name: Cache Trezoa binaries
         uses: actions/cache@v2
         with:
           path: |
-            ~/.cache/solana
-            ~/.local/share/solana
-          key: ${{ runner.os }}-${{ env.SOLANA_VERSION }}
+            ~/.cache/trezoa
+            ~/.local/share/trezoa
+          key: ${{ runner.os }}-${{ env.TREZOA_VERSION }}
 
-      - name: Install Solana
+      - name: Install Trezoa
         run: |
-          echo Installing Solana v${{ env.SOLANA_VERSION }}...🧬
-          sh -c "$(curl -sSfL https://release.solana.com/v${{ env.SOLANA_VERSION }}/install)"
-          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          echo Installing Trezoa v${{ env.TREZOA_VERSION }}...🧬
+          sh -c "$(curl -sSfL https://release.trezoa.com/v${{ env.TREZOA_VERSION }}/install)"
+          echo "$HOME/.local/share/trezoa/install/active_release/bin" >> $GITHUB_PATH
+          export PATH="/home/runner/.local/share/trezoa/install/active_release/bin:$PATH"
           echo Generating keypair...
-          solana-keygen new -o "$HOME/.config/solana/id.json" --no-passphrase --silent
+          trezoa-keygen new -o "$HOME/.config/trezoa/id.json" --no-passphrase --silent
 
       - name: Run SBF tests
         run: cargo test-sbf

@@ -1,4 +1,4 @@
-use {crate::state::VotingMintConfig, anchor_lang::prelude::*};
+use {crate::state::VotingMintConfig, trezoaanchor_lang::prelude::*};
 
 /// Bookkeeping for a single deposit for a given mint.
 #[derive(AnchorSerialize, AnchorDeserialize, Debug, Clone, Copy, PartialEq)]

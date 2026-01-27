@@ -7,10 +7,10 @@ use crate::{
         token_metadata::get_token_metadata_for_mint,
     },
 };
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use trezoa_program::pubkey::PUBKEY_BYTES;
-use spl_governance::state::token_owner_record;
-use spl_governance::tools::tpl_token::{get_tpl_token_mint, get_tpl_token_owner};
+use tpl_governance::state::token_owner_record;
+use tpl_governance::tools::tpl_token::{get_tpl_token_mint, get_tpl_token_owner};
 
 /// Registrar which stores NFT voting configuration for the given Realm
 #[account]

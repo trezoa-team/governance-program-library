@@ -1,8 +1,8 @@
 use crate::error::QuadraticError;
 use crate::state::quadratic_coefficients::QuadraticCoefficients;
 use crate::state::*;
-use anchor_lang::prelude::*;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use tpl_governance::state::realm;
 
 /// Configures the quadratic Registrar,
 /// allowing the gatekeeper network or previous plugin to be updated

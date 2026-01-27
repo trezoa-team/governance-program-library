@@ -3,7 +3,7 @@ import { Program } from "@coral-xyz/anchor";
 import {BonkPlugin} from "../../target/types/bonk_plugin";
 import idl from "../../target/idl/bonk_plugin.json";
 import {StakeIdl, stakeIdl} from "./stake-idl";
-import { GovernanceConfig, SplGovernance } from "governance-idl-sdk";
+import { GovernanceConfig, TplGovernance } from "governance-idl-sdk";
 import secret from "../../../../sol/id.json";
 import { Connection, Transaction, sendAndConfirmTransaction, clusterApiUrl } from "@trezoa/web3.js";
 import { token } from "@coral-xyz/anchor/dist/cjs/utils";
@@ -16,7 +16,7 @@ const wallet = new anchor.Wallet(keypair);
 const provider = new anchor.AnchorProvider(connection, wallet, {});
 const program = new Program<BonkPlugin>(idl as BonkPlugin, provider);
 const stakeProgram = new Program<StakeIdl>(stakeIdl as StakeIdl, provider);
-const splGovernance = new SplGovernance(web3Connection)
+const tplGovernance = new TplGovernance(web3Connection)
 
 describe("bonk-plugin", () => {
   const governanceProgramId = new anchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")
@@ -34,12 +34,12 @@ describe("bonk-plugin", () => {
   const vaultAta = "5DpomEty6Rgpe46wu8dyCs8bQviFJdo2yRbxBBxH8NbM"
   const ownerStakeMintAta = token.associatedAddress({mint: stakeMintToken, owner: keypair.publicKey})
 
-  // const governanceKey = splGovernance.pda.governanceAccount({
+  // const governanceKey = tplGovernance.pda.governanceAccount({
   //   realmAccount: realm,
   //   seed: realm
   // }).publicKey
 
-  // const proposalKey = splGovernance.pda.proposalAccount({
+  // const proposalKey = tplGovernance.pda.proposalAccount({
   //   governanceAccount: governanceKey,
   //   governingTokenMint,
   //   proposalSeed: realm
@@ -252,7 +252,7 @@ describe("bonk-plugin", () => {
 
   xit("creates proposal", async() => {
     try {
-    const createProposalIx = await splGovernance.createProposalInstruction(
+    const createProposalIx = await tplGovernance.createProposalInstruction(
       `This is the test proposal ${Math.floor(Math.random()*100000)}`,
       "",
       {
@@ -296,7 +296,7 @@ describe("bonk-plugin", () => {
       depositExemptProposalCount: 100
     }
 
-    const createGovernanceIx = await splGovernance.createGovernanceInstruction(
+    const createGovernanceIx = await tplGovernance.createGovernanceInstruction(
       config,
       realm,
       wallet.publicKey,

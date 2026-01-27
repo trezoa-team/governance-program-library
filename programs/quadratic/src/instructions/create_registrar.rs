@@ -1,11 +1,11 @@
 use crate::error::QuadraticError;
 use crate::state::quadratic_coefficients::QuadraticCoefficients;
 use crate::state::*;
-use anchor_lang::prelude::*;
-use anchor_spl::token::Mint;
-use spl_governance::state::realm;
+use trezoaanchor_lang::prelude::*;
+use anchor_tpl::token::Mint;
+use tpl_governance::state::realm;
 
-/// Creates a Plugin Registrar for spl-gov Realm
+/// Creates a Plugin Registrar for tpl-gov Realm
 /// This instruction should only be executed once per realm/governing_token_mint to create the account
 #[derive(Accounts)]
 #[instruction(coefficients: QuadraticCoefficients, use_previous_voter_weight_plugin:bool)]

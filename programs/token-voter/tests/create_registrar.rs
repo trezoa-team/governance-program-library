@@ -1,6 +1,6 @@
 mod program_test;
 
-use anchor_lang::prelude::{ErrorCode, Pubkey};
+use trezoaanchor_lang::prelude::{ErrorCode, Pubkey};
 use gpl_token_voter::error::TokenVoterError;
 use program_test::token_voter_test::TokenVoterTest;
 
@@ -89,13 +89,13 @@ async fn test_create_registrar_with_realm_authority_must_sign_error() -> Result<
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }
 
 #[tokio::test]
-async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result<(), TransportError>
+async fn test_create_registrar_with_invalid_tpl_gov_program_id_error() -> Result<(), TransportError>
 {
     // Arrange
     let mut token_voter_test = TokenVoterTest::start_new().await;
@@ -116,7 +116,7 @@ async fn test_create_registrar_with_invalid_spl_gov_program_id_error() -> Result
         .err()
         .unwrap();
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::ConstraintOwner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::ConstraintOwner);
 
     Ok(())
 }
@@ -155,7 +155,7 @@ async fn test_create_registrar_with_invalid_governing_token_mint_error(
 
     let mint_cookie = token_voter_test
         .bench
-        .with_mint(&MintType::SplToken, None)
+        .with_mint(&MintType::TplToken, None)
         .await?;
 
     // Act

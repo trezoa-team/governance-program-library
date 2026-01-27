@@ -4,7 +4,7 @@ use program_test::nft_voter_test::{CastNftVoteArgs, NftVoterTest};
 use program_test::tools::{assert_gov_err, assert_nft_voter_err};
 use trezoa_program_test::*;
 use trezoa_sdk::transport::TransportError;
-use spl_governance::error::GovernanceError;
+use tpl_governance::error::GovernanceError;
 
 mod program_test;
 
@@ -159,7 +159,7 @@ async fn test_relinquish_nft_vote_for_proposal_in_voting_state() -> Result<(), T
         )
         .await?;
 
-    // Relinquish Vote from spl-gov
+    // Relinquish Vote from tpl-gov
     nft_voter_test
         .governance
         .relinquish_vote(
@@ -417,7 +417,7 @@ async fn test_relinquish_nft_vote_with_unexpired_vote_weight_record() -> Result<
         .await?;
 
     let args = CastNftVoteArgs {
-        cast_spl_gov_vote: false,
+        cast_tpl_gov_vote: false,
     };
 
     // Cast vote with NFT

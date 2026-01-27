@@ -10,7 +10,7 @@ export type NftVoter = {
     "name": "nftVoter",
     "version": "0.2.2",
     "spec": "0.1.0",
-    "description": "SPL Governance addin implementing NFT based governance"
+    "description": "TPL Governance addin implementing NFT based governance"
   },
   "instructions": [
     {

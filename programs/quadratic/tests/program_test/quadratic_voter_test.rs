@@ -1,12 +1,12 @@
 use std::sync::Arc;
 
-use anchor_lang::prelude::Pubkey;
+use trezoaanchor_lang::prelude::Pubkey;
 use itertools::Either;
 use trezoa_program::instruction::AccountMeta;
 
 use gpl_quadratic::state::{get_registrar_address, Registrar, *};
 use trezoa_sdk::{instruction::Instruction, signature::Keypair, signer::Signer};
-use spl_governance::{
+use tpl_governance::{
     instruction::cast_vote,
     state::vote_record::{Vote, VoteChoice},
 };
@@ -35,13 +35,13 @@ pub struct VoterWeightRecordCookie {
 }
 
 pub struct CastVoteArgs {
-    pub cast_spl_gov_vote: bool,
+    pub cast_tpl_gov_vote: bool,
 }
 
 impl Default for CastVoteArgs {
     fn default() -> Self {
         Self {
-            cast_spl_gov_vote: true,
+            cast_tpl_gov_vote: true,
         }
     }
 }
@@ -124,12 +124,12 @@ impl QuadraticVoterTest {
             get_registrar_address(&realm_cookie.address, &realm_cookie.account.community_mint);
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_quadratic::instruction::CreateRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_quadratic::instruction::CreateRegistrar {
                 coefficients: *coefficients,
                 use_previous_voter_weight_plugin,
             });
 
-        let mut accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let mut accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_quadratic::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -230,7 +230,7 @@ impl QuadraticVoterTest {
             &gpl_quadratic::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_quadratic::instruction::CreateVoterWeightRecord {
                 governing_token_owner,
             },
@@ -245,7 +245,7 @@ impl QuadraticVoterTest {
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_quadratic::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -279,7 +279,7 @@ impl QuadraticVoterTest {
         input_voter_weight_cookie: &mut Either<&VoterWeightRecordCookie, &TokenOwnerRecordCookie>,
         output_voter_weight_record_cookie: &mut VoterWeightRecordCookie,
     ) -> Result<(), BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_quadratic::instruction::UpdateVoterWeightRecord {},
         );
 
@@ -289,7 +289,7 @@ impl QuadraticVoterTest {
             input_voter_weight: extract_voting_weight_address(input_voter_weight_cookie),
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         let instructions = vec![Instruction {
             program_id: gpl_quadratic::id(),
@@ -329,12 +329,12 @@ impl QuadraticVoterTest {
         signers_override: Option<Option<&[&Keypair]>>,
     ) -> Result<(), BanksClientError> {
         let data =
-            anchor_lang::InstructionData::data(&gpl_quadratic::instruction::ConfigureRegistrar {
+            trezoaanchor_lang::InstructionData::data(&gpl_quadratic::instruction::ConfigureRegistrar {
                 coefficients: QuadraticCoefficients::default(),
                 use_previous_voter_weight_plugin,
             });
 
-        let mut accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let mut accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_quadratic::accounts::ConfigureRegistrar {
                 registrar: registrar_cookie.address,
                 realm: realm_cookie.address,
@@ -377,7 +377,7 @@ impl QuadraticVoterTest {
     ) -> Result<(), BanksClientError> {
         let args = args.unwrap_or_default();
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_quadratic::instruction::UpdateVoterWeightRecord {},
         );
 
@@ -387,7 +387,7 @@ impl QuadraticVoterTest {
             input_voter_weight: extract_voting_weight_address(input_voter_weight_cookie),
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
 
         let update_voter_weight_ix = Instruction {
             program_id: gpl_quadratic::id(),
@@ -397,8 +397,8 @@ impl QuadraticVoterTest {
 
         let mut instructions = vec![update_voter_weight_ix];
 
-        if args.cast_spl_gov_vote {
-            // spl-gov cast vote
+        if args.cast_tpl_gov_vote {
+            // tpl-gov cast vote
             let vote = Vote::Approve(vec![VoteChoice {
                 rank: 0,
                 weight_percentage: 100,

@@ -4,8 +4,8 @@ use {
         state::*,
         tools::tpl_token::{get_tpl_token_amount, get_tpl_token_owner},
     },
-    anchor_lang::prelude::*,
-    anchor_spl::{
+    trezoaanchor_lang::prelude::*,
+    anchor_tpl::{
         token_2022::{self, CloseAccount},
         token_interface::TokenInterface,
     },

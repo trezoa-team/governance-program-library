@@ -1,6 +1,6 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
-use crate::SPL_TOKEN_STAKING_PROGRAM_ID;
+use crate::TPL_TOKEN_STAKING_PROGRAM_ID;
 
 #[repr(C)]
 #[derive(AnchorDeserialize, Debug)]
@@ -16,7 +16,7 @@ pub struct StakeDepositReceipt {
     pub lockup_duration: u64,
     /** Timestamp in seconds of when the stake lockup began */
     pub deposit_timestamp: i64,
-    /** Amount of SPL token deposited */
+    /** Amount of TPL token deposited */
     pub deposit_amount: u64,
     /** Amount of stake weighted by lockup duration. */
     pub effective_stake: u128,
@@ -29,9 +29,9 @@ impl StakeDepositReceipt {
     pub const ACCOUNT_DISCRIMINATOR: [u8; 8] = [210, 98, 254, 196, 151, 68, 235, 0];
 
     pub fn deserialize_checked(stake_deposit_receipt_account_info: &AccountInfo) -> Result<Self> {
-        if stake_deposit_receipt_account_info.owner != &SPL_TOKEN_STAKING_PROGRAM_ID {
-            return Err(anchor_lang::error!(
-                anchor_lang::error::ErrorCode::AccountOwnedByWrongProgram
+        if stake_deposit_receipt_account_info.owner != &TPL_TOKEN_STAKING_PROGRAM_ID {
+            return Err(trezoaanchor_lang::error!(
+                trezoaanchor_lang::error::ErrorCode::AccountOwnedByWrongProgram
             )
             .with_account_name("StakeDepositReceipt"));
         }
@@ -42,8 +42,8 @@ impl StakeDepositReceipt {
         let stake_deposit_receipt = Self::try_from_slice(data)?;
 
         if stake_deposit_receipt.discriminator.to_le_bytes() != Self::ACCOUNT_DISCRIMINATOR {
-            return Err(anchor_lang::error!(
-                anchor_lang::error::ErrorCode::AccountDiscriminatorMismatch
+            return Err(trezoaanchor_lang::error!(
+                trezoaanchor_lang::error::ErrorCode::AccountDiscriminatorMismatch
             )
             .with_account_name("StakeDepositReceipt"));
         }

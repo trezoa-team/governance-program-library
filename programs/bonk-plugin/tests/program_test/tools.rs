@@ -1,10 +1,10 @@
-use anchor_lang::prelude::ERROR_CODE_OFFSET;
+use trezoaanchor_lang::prelude::ERROR_CODE_OFFSET;
 use gpl_bonk_plugin::error::BonkPluginError;
 use trezoa_program::instruction::InstructionError;
 use trezoa_program_test::BanksClientError;
 use trezoa_sdk::{signature::Keypair, transaction::TransactionError, transport::TransportError};
-use spl_governance::error::GovernanceError;
-use spl_governance_tools::error::GovernanceToolsError;
+use tpl_governance::error::GovernanceError;
+use tpl_governance_tools::error::GovernanceToolsError;
 
 pub fn clone_keypair(source: &Keypair) -> Keypair {
     Keypair::from_bytes(&source.to_bytes()).unwrap()
@@ -67,7 +67,7 @@ pub fn assert_gov_err(banks_client_error: TransportError, gov_error: GovernanceE
 #[allow(dead_code)]
 pub fn assert_anchor_err(
     banks_client_error: BanksClientError,
-    anchor_error: anchor_lang::error::ErrorCode,
+    anchor_error: trezoaanchor_lang::error::ErrorCode,
 ) {
     let tx_error = banks_client_error.unwrap();
 

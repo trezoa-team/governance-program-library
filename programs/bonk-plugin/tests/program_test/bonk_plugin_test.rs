@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use anchor_lang::prelude::{AccountMeta, Pubkey};
+use trezoaanchor_lang::prelude::{AccountMeta, Pubkey};
 use gpl_bonk_plugin::state::*;
 
 use trezoa_program_test::{BanksClientError, ProgramTest};
@@ -17,7 +17,7 @@ use crate::program_test::program_test_bench::WalletCookie;
 use crate::program_test::tools::NopOverride;
 
 use super::governance_test::TokenOwnerRecordCookie;
-use super::tpl_token_staking_test::SplTokenStakingCookie;
+use super::tpl_token_staking_test::TplTokenStakingCookie;
 
 #[derive(Debug, PartialEq)]
 pub struct RegistrarCookie {
@@ -58,7 +58,7 @@ impl BonkPluginTest {
 
         BonkPluginTest::add_program(&mut program_test);
         GovernanceTest::add_program(&mut program_test);
-        SplTokenStakingCookie::add_program(&mut program_test);
+        TplTokenStakingCookie::add_program(&mut program_test);
 
         let program_id = gpl_bonk_plugin::id();
 
@@ -109,9 +109,9 @@ impl BonkPluginTest {
         let max_governance_programs = 10;
 
         let data =
-            anchor_lang::InstructionData::data(&gpl_bonk_plugin::instruction::CreateRegistrar {});
+            trezoaanchor_lang::InstructionData::data(&gpl_bonk_plugin::instruction::CreateRegistrar {});
 
-        let accounts = anchor_lang::ToAccountMetas::to_account_metas(
+        let accounts = trezoaanchor_lang::ToAccountMetas::to_account_metas(
             &gpl_bonk_plugin::accounts::CreateRegistrar {
                 registrar: registrar_key,
                 realm: realm_cookie.address,
@@ -196,7 +196,7 @@ impl BonkPluginTest {
             &gpl_bonk_plugin::id(),
         );
 
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_bonk_plugin::instruction::CreateVoterWeightRecord {
                 governing_token_owner,
             },
@@ -212,7 +212,7 @@ impl BonkPluginTest {
 
         let mut create_voter_weight_record_ix = Instruction {
             program_id: gpl_bonk_plugin::id(),
-            accounts: anchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
+            accounts: trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None),
             data,
         };
 
@@ -253,7 +253,7 @@ impl BonkPluginTest {
         governance_key: Pubkey,
         stake_deposit_receipts: &Option<Vec<Pubkey>>,
     ) -> Result<Instruction, BanksClientError> {
-        let data = anchor_lang::InstructionData::data(
+        let data = trezoaanchor_lang::InstructionData::data(
             &gpl_bonk_plugin::instruction::UpdateVoterWeightRecord {
                 stake_receipts_count: if stake_deposit_receipts.is_some() {
                     stake_deposit_receipts.as_ref().unwrap().len() as u8
@@ -285,7 +285,7 @@ impl BonkPluginTest {
             system_program: trezoa_sdk::system_program::id(),
         };
 
-        let account_metas = anchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
+        let account_metas = trezoaanchor_lang::ToAccountMetas::to_account_metas(&accounts, None);
         let remaining_accounts: Vec<_> = stake_deposit_receipts
             .clone()
             .unwrap_or_default() // Use unwrap_or_default() to get empty Vec if None

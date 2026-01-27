@@ -1,5 +1,5 @@
 use crate::{id, state::GovernanceProgramConfig, tools::anchor::DISCRIMINATOR_SIZE};
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use trezoa_program::pubkey::PUBKEY_BYTES;
 
 /// Enum defining collection item change type

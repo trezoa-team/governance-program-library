@@ -1,7 +1,7 @@
 use crate::state::*;
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
-/// Creates VoterWeightRecord used by spl-gov
+/// Creates VoterWeightRecord used by tpl-gov
 /// This instruction should only be executed once per realm/governing_token_mint/governing_token_owner
 /// to create the account
 #[derive(Accounts)]

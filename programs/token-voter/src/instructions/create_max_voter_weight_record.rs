@@ -1,6 +1,6 @@
 use {
-    crate::state::*, anchor_lang::prelude::*, anchor_spl::token_interface::Mint,
-    spl_governance::state::realm,
+    crate::state::*, trezoaanchor_lang::prelude::*, anchor_tpl::token_interface::Mint,
+    tpl_governance::state::realm,
 };
 
 /// Creates MaxVoterWeightRecord used by tpl-governance
@@ -50,7 +50,7 @@ pub fn create_max_voter_weight_record(ctx: Context<CreateMaxVoterWeightRecord>) 
     let max_voter_weight_record = &mut ctx.accounts.max_voter_weight_record;
     let registrar = &ctx.accounts.registrar;
     max_voter_weight_record.account_discriminator =
-        spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord::ACCOUNT_DISCRIMINATOR;
+        tpl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord::ACCOUNT_DISCRIMINATOR;
     max_voter_weight_record.realm = registrar.realm;
     max_voter_weight_record.governing_token_mint = registrar.governing_token_mint;
 

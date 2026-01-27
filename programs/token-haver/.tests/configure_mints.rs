@@ -1,7 +1,7 @@
 use gpl_token_haver::{error::TokenHaverError, state::CollectionItemChangeType};
 use program_test::token_haver_test::RealmVoterTest;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
+use trezoa_program_test::*;
+use trezoa_sdk::{signature::Keypair, signer::Signer, transport::TransportError};
 mod program_test;
 use program_test::tools::{assert_anchor_err, assert_realm_voter_err};
 
@@ -188,7 +188,7 @@ async fn test_configure_governance_program_with_realm_authority_must_sign_error(
 
     // Assert
 
-    assert_anchor_err(err, anchor_lang::error::ErrorCode::AccountNotSigner);
+    assert_anchor_err(err, trezoaanchor_lang::error::ErrorCode::AccountNotSigner);
 
     Ok(())
 }

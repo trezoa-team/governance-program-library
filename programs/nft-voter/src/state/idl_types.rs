@@ -1,5 +1,5 @@
 //! IDL only types which are required in IDL but not exported automatically by Anchor
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 
 /// NftVoteRecord exported to IDL without account_discriminator
 /// TODO: Once we can support these accounts in Anchor via remaining_accounts then it should be possible to remove it

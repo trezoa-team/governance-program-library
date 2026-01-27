@@ -1,29 +1,29 @@
 use std::u64;
 use std::{str::FromStr, sync::Arc};
 
-use anchor_lang::prelude::AccountMeta;
-use anchor_lang::ToAccountMetas;
-use anchor_lang::{prelude::Pubkey, system_program, InstructionData};
-use anchor_spl::associated_token::get_associated_token_address;
-use anchor_spl::associated_token::spl_associated_token_account::instruction::create_associated_token_account;
+use trezoaanchor_lang::prelude::AccountMeta;
+use trezoaanchor_lang::ToAccountMetas;
+use trezoaanchor_lang::{prelude::Pubkey, system_program, InstructionData};
+use anchor_tpl::associated_token::get_associated_token_address;
+use anchor_tpl::associated_token::tpl_associated_token_account::instruction::create_associated_token_account;
 use trezoa_program_test::ProgramTest;
 use trezoa_sdk::{
     instruction::Instruction, signature::Keypair, signer::Signer, sysvar::rent,
     transport::TransportError,
 };
 
-use anchor_lang::declare_program;
+use trezoaanchor_lang::declare_program;
 
 use super::program_test_bench::ProgramTestBench;
 
 declare_program!(tpl_token_staking);
 
-pub struct SplTokenStakingCookie {
+pub struct TplTokenStakingCookie {
     pub program_id: Pubkey,
     pub bench: Arc<ProgramTestBench>,
 }
 
-impl SplTokenStakingCookie {
+impl TplTokenStakingCookie {
     pub fn program_id() -> Pubkey {
         Pubkey::from_str("STAKEkKzbdeKkqzKpLkNQD3SUuLgshDKCD7U8duxAbB").unwrap()
     }
@@ -35,7 +35,7 @@ impl SplTokenStakingCookie {
 
     #[allow(dead_code)]
     pub fn new(bench: Arc<ProgramTestBench>) -> Self {
-        SplTokenStakingCookie {
+        TplTokenStakingCookie {
             bench,
             program_id: Self::program_id(),
         }
@@ -135,7 +135,7 @@ impl SplTokenStakingCookie {
             system_program: system_program::ID,
         };
         let mut account_metas =
-            anchor_lang::ToAccountMetas::to_account_metas(&deposit_to_pool_accounts, None);
+            trezoaanchor_lang::ToAccountMetas::to_account_metas(&deposit_to_pool_accounts, None);
 
         for reward_vault_account in reward_vault_accounts {
             account_metas.push(AccountMeta::new_readonly(**reward_vault_account, false));

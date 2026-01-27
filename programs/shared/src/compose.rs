@@ -4,13 +4,13 @@ use crate::{
     generic_voter_weight::{GenericVoterWeight, GenericVoterWeightEnum},
     mint::MintMaxVoterWeight,
 };
-use anchor_lang::prelude::{Account, ProgramError, Pubkey};
-use anchor_lang::trezoa_program::program_pack::Pack;
-use anchor_lang::{
+use trezoaanchor_lang::prelude::{Account, ProgramError, Pubkey};
+use trezoaanchor_lang::trezoa_program::program_pack::Pack;
+use trezoaanchor_lang::{
     error, prelude::AccountInfo, require_eq, AccountDeserialize, AccountSerialize, Owner, Result,
 };
-use spl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
-use spl_governance_tools::account::get_account_data;
+use tpl_governance::state::token_owner_record::get_token_owner_record_data_for_realm_and_governing_mint;
+use tpl_governance_tools::account::get_account_data;
 use tpl_token::state::Mint;
 
 pub trait RegistrarBase<'a> {
@@ -88,7 +88,7 @@ fn get_generic_voter_weight_record_data<
         }
         Some(predecessor) => {
             // If there is a predecessor plugin registrar, then the input account must be a VoterWeightRecord
-            let record: spl_governance_addin_api::voter_weight::VoterWeightRecord =
+            let record: tpl_governance_addin_api::voter_weight::VoterWeightRecord =
                 get_account_data(predecessor, input_account)
                     .map_err(|_| error!(VoterWeightError::InvalidPredecessorVoterWeightRecord))?;
 
@@ -112,7 +112,7 @@ fn get_generic_max_voter_weight_record_data<
             // if that fails, try to parse it as a Mint.
 
             let record: core::result::Result<
-                spl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord,
+                tpl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord,
                 ProgramError,
             > = get_account_data(predecessor, input_account);
 

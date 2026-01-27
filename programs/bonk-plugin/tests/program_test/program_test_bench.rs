@@ -1,12 +1,12 @@
 use std::cell::RefCell;
 
-use anchor_lang::{
+use trezoaanchor_lang::{
     prelude::{Pubkey, Rent},
     AccountDeserialize,
 };
-use anchor_spl::associated_token::{
+use anchor_tpl::associated_token::{
     get_associated_token_address,
-    spl_associated_token_account::instruction::create_associated_token_account,
+    tpl_associated_token_account::instruction::create_associated_token_account,
 };
 #[allow(deprecated)]
 use trezoa_program::{borsh::try_from_slice_unchecked, system_program};

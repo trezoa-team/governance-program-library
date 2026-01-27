@@ -1,6 +1,6 @@
-use anchor_lang::prelude::*;
+use trezoaanchor_lang::prelude::*;
 use arrayref::array_ref;
-use spl_governance::tools::tpl_token::assert_is_valid_tpl_token_account;
+use tpl_governance::tools::tpl_token::assert_is_valid_tpl_token_account;
 
 /// Computationally cheap method to get amount from a token account
 /// It reads amount without deserializing full account data

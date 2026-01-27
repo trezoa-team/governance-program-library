@@ -4,12 +4,12 @@ use {
         state::*,
         tools::tpl_token::{get_current_mint_fee, transfer_checked_tpl_tokens},
     },
-    anchor_lang::{prelude::*, trezoa_program::sysvar::instructions as tx_instructions},
-    anchor_spl::{
+    trezoaanchor_lang::{prelude::*, trezoa_program::sysvar::instructions as tx_instructions},
+    anchor_tpl::{
         associated_token::AssociatedToken,
         token_interface::{Mint, TokenAccount, TokenInterface},
     },
-    spl_governance::state::token_owner_record,
+    tpl_governance::state::token_owner_record,
 };
 
 /// Deposits and creates vault based on the tokens configured in mint_configs
