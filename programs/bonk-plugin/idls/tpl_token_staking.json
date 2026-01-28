@@ -93,7 +93,7 @@
         },
         {
           "name": "token_program",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          "address": "4JkrrPuuQPxDZuBW1bgrM1GBa8oYg1LxcuX9szBPh3ic"
         },
         {
           "name": "rent",
@@ -239,7 +239,7 @@
         },
         {
           "name": "token_program",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          "address": "4JkrrPuuQPxDZuBW1bgrM1GBa8oYg1LxcuX9szBPh3ic"
         },
         {
           "name": "rent",
@@ -352,7 +352,7 @@
         },
         {
           "name": "token_program",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          "address": "4JkrrPuuQPxDZuBW1bgrM1GBa8oYg1LxcuX9szBPh3ic"
         },
         {
           "name": "rent",
@@ -544,7 +544,7 @@
         },
         {
           "name": "token_program",
-          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          "address": "4JkrrPuuQPxDZuBW1bgrM1GBa8oYg1LxcuX9szBPh3ic"
         },
         {
           "name": "vault",
