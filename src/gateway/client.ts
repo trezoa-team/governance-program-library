@@ -1,4 +1,4 @@
-import { BN, Program, Provider } from '@coral-xyz/anchor';
+import { BN, Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { PublicKey } from '@trezoa/web3.js';
 import { Gateway } from './gateway';
 import GatewayIDL  from './gateway.json';

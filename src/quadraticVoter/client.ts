@@ -1,4 +1,4 @@
-import { BN, Program, Provider } from '@coral-xyz/anchor';
+import { BN, Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { PublicKey, TransactionInstruction } from '@trezoa/web3.js';
 import { Quadratic } from './quadratic';
 import QuadraticIDL from './quadratic.json';
@@ -11,7 +11,7 @@ export const QUADRATIC_PLUGIN_ID = new PublicKey(
 
 export type Coefficients = [ a: number, b: number, c: number ];
 
-const toAnchorType = (coefficients: Coefficients) => ({
+const toTrezoaAnchorType = (coefficients: Coefficients) => ({
   a: coefficients[0],
   b: coefficients[1],
   c: coefficients[2],
@@ -42,7 +42,7 @@ export class QuadraticClient extends Client<Quadratic> {
     const { registrar, registrarBump } = this.getRegistrarPDA(realm, mint);
 
     const methodsBuilder = this.program.methods
-      .configureRegistrar(toAnchorType(coefficients), !!previousVoterWeightPluginProgramId)
+      .configureRegistrar(toTrezoaAnchorType(coefficients), !!previousVoterWeightPluginProgramId)
       .accounts({
         registrar,
         realm,
@@ -72,11 +72,11 @@ export class QuadraticClient extends Client<Quadratic> {
     // otherwise, the input voter weight is passed through
     return QuadraticClient.applyCoefficients(
       inputVoterWeight,
-      QuadraticClient.convertCoefficientsFromAnchorType(coefficients)
+      QuadraticClient.convertCoefficientsFromTrezoaAnchorType(coefficients)
     );
   }
 
-  public static convertCoefficientsFromAnchorType(coefficients: { a: number, b: number, c: number }): Coefficients {
+  public static convertCoefficientsFromTrezoaAnchorType(coefficients: { a: number, b: number, c: number }): Coefficients {
     return [ coefficients.a, coefficients.b, coefficients.c ];
   }
 

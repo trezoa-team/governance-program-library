@@ -1,4 +1,4 @@
-import { Program, Provider } from '@coral-xyz/anchor';
+import { Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { RealmVoter } from './realm_voter';
 import RealmVoterIDL  from './realm_voter.json';
 

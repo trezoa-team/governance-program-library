@@ -1,4 +1,4 @@
-import { Program, Provider } from '@coral-xyz/anchor';
+import { Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { TokenHaver } from './token_haver';
 import TokenHaverIDL  from './token_haver.json';
 

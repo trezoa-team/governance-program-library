@@ -8,7 +8,7 @@ use {
     tpl_governance::state::token_owner_record,
 };
 
-// Generate a VoteWeightRecord & MaxVoterWeightRecord Anchor wrapper, owned by the current program.
+// Generate a VoteWeightRecord & MaxVoterWeightRecord TrezoaAnchor wrapper, owned by the current program.
 // VoteWeightRecords & MaxVoterWeightRecord are unique in that they are defined by the TPL governance
 // program, but they are actually owned by this program.
 vote_weight_record!(crate::ID);

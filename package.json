@@ -2,7 +2,7 @@
     "name": "@trezoa/governance-program-library",
     "version": "0.18.0",
     "description": "Client for Governance Program Library which is a set of extensions for Trezoa's tpl-governance program.",
-    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "author": "Trezoa Maintainers <maintainers@trzledgerfoundation>",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -40,6 +40,6 @@
     "dependencies": {
         "@identity.com/trezoa-gateway-ts": "^0.12.0",
         "@trezoa/tpl-governance": "^0.3.28",
-        "@trezoacoral-xyz/anchor": "^0.30.1"
+        "@trezoa-xyz/trezoaanchor": "^0.30.1"
     }
 }

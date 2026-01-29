@@ -52,7 +52,7 @@ pub struct RelinquishNftVote<'info> {
     pub voter_authority: Signer<'info>,
 
     /// CHECK: Owned by tpl-governance instance specified in registrar.governance_program_id
-    /// The account is used to validate that it doesn't exist and if it doesn't then Anchor owner check throws error
+    /// The account is used to validate that it doesn't exist and if it doesn't then TrezoaTrezoaAnchor owner check throws error
     /// The check is disabled here and performed inside the instruction
     /// #[account(owner = registrar.governance_program_id)]
     pub vote_record: UncheckedAccount<'info>,

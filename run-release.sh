@@ -13,11 +13,11 @@ set -euo pipefail
 # fi
 
 # build program
-anchor build
+trezoaanchor build
 
 # update on chain program and IDL, atm used for testing/developing
-# anchor deploy --provider.cluster devnet --provider.wallet ${PROVIDER_WALLET}
-# anchor idl upgrade --provider.cluster devnet --provider.wallet ${PROVIDER_WALLET}\
+# trezoaanchor deploy --provider.cluster devnet --provider.wallet ${PROVIDER_WALLET}
+# trezoaanchor idl upgrade --provider.cluster devnet --provider.wallet ${PROVIDER_WALLET}\
 #  --filepath target/idl/nft_voter.json GnftV5kLjd67tvHpNGyodwWveEKivz3ZWvvE3Z4xi2iw
 
 # update types in npm package and publish the npm package

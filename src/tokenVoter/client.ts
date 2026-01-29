@@ -1,4 +1,4 @@
-import { Program, Provider } from '@coral-xyz/anchor';
+import { Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { TokenVoter } from './token_voter';
 import TokenVoterIDL  from './token_voter.json';
 

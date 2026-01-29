@@ -1,4 +1,4 @@
-import { Program, Provider } from '@coral-xyz/anchor';
+import { Program, Provider } from '@trezoa-xyz/trezoaanchor';
 import { NftVoter } from './nft_voter';
 import NftVoterIDL  from './nft_voter.json';
 

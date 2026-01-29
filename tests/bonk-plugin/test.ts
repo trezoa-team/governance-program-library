@@ -1,36 +1,36 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as trezoaanchor from "@trezoa-xyz/trezoaanchor";
+import { Program } from "@trezoa-xyz/trezoaanchor";
 import {BonkPlugin} from "../../target/types/bonk_plugin";
 import idl from "../../target/idl/bonk_plugin.json";
 import {StakeIdl, stakeIdl} from "./stake-idl";
 import { GovernanceConfig, TplGovernance } from "governance-idl-sdk";
 import secret from "../../../../sol/id.json";
 import { Connection, Transaction, sendAndConfirmTransaction, clusterApiUrl } from "@trezoa/web3.js";
-import { token } from "@coral-xyz/anchor/dist/cjs/utils";
+import { token } from "@trezoa-xyz/trezoaanchor/dist/cjs/utils";
 
-const connection = new anchor.web3.Connection(anchor.web3.clusterApiUrl("devnet"));
+const connection = new trezoaanchor.web3.Connection(trezoaanchor.web3.clusterApiUrl("devnet"));
 const web3Connection = new Connection(clusterApiUrl("devnet"));
-const keypair = anchor.web3.Keypair.fromSecretKey(Uint8Array.from(secret));
-const wallet = new anchor.Wallet(keypair);
+const keypair = trezoaanchor.web3.Keypair.fromSecretKey(Uint8Array.from(secret));
+const wallet = new trezoaanchor.Wallet(keypair);
 
-const provider = new anchor.AnchorProvider(connection, wallet, {});
+const provider = new trezoaanchor.TrezoaAnchorProvider(connection, wallet, {});
 const program = new Program<BonkPlugin>(idl as BonkPlugin, provider);
 const stakeProgram = new Program<StakeIdl>(stakeIdl as StakeIdl, provider);
 const tplGovernance = new TplGovernance(web3Connection)
 
 describe("bonk-plugin", () => {
-  const governanceProgramId = new anchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")
-  const realm = new anchor.web3.PublicKey("A2MqSD5iEqTjBkTg9naHoS5x1YLhQemrJTcBEFXoasph")
-  const stakePool = new anchor.web3.PublicKey("9YbGRA8qfDeJuonKJuZYzDXcRVyB2B6cMPCWpTeC1eRL")
+  const governanceProgramId = new trezoaanchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")
+  const realm = new trezoaanchor.web3.PublicKey("A2MqSD5iEqTjBkTg9naHoS5x1YLhQemrJTcBEFXoasph")
+  const stakePool = new trezoaanchor.web3.PublicKey("9YbGRA8qfDeJuonKJuZYzDXcRVyB2B6cMPCWpTeC1eRL")
   //8TPev5NsgJoViPrRUXp7F1HjUhmHDjzknG4i82FPVWkT
-  const governingTokenMint = new anchor.web3.PublicKey("6WddAU5ryy4BSNWqNPM3LsPYcirKY2ax7U2yfkzwe1kq")
+  const governingTokenMint = new trezoaanchor.web3.PublicKey("6WddAU5ryy4BSNWqNPM3LsPYcirKY2ax7U2yfkzwe1kq")
   const governingTokenOwner = wallet.publicKey
-  const previousVoterWeightPluginProgramId = new anchor.web3.PublicKey("BUsq2cFH6cmfYcoveaf52BkPaXUW3ZhTUnFybyaJrtkN")
+  const previousVoterWeightPluginProgramId = new trezoaanchor.web3.PublicKey("BUsq2cFH6cmfYcoveaf52BkPaXUW3ZhTUnFybyaJrtkN")
 
-  const governanceKey = new anchor.web3.PublicKey("GyzFPcYaG6wfoi7Y3jLxAvXZWDR3nNqni1cJxkTSQHuq")
-  const proposalKey = new anchor.web3.PublicKey("AmGnTWwrJSszBgtRTA3j4pRL6o9GNsBuEQj3UY85AQwB")
+  const governanceKey = new trezoaanchor.web3.PublicKey("GyzFPcYaG6wfoi7Y3jLxAvXZWDR3nNqni1cJxkTSQHuq")
+  const proposalKey = new trezoaanchor.web3.PublicKey("AmGnTWwrJSszBgtRTA3j4pRL6o9GNsBuEQj3UY85AQwB")
   const ownerAta = token.associatedAddress({mint: governingTokenMint, owner: keypair.publicKey})
-  const stakeMintToken = new anchor.web3.PublicKey("J5d7DVTTdGj7KcDtuFWL3322rasxHjpHhUmEzqFLHjuB")
+  const stakeMintToken = new trezoaanchor.web3.PublicKey("J5d7DVTTdGj7KcDtuFWL3322rasxHjpHhUmEzqFLHjuB")
   const vaultAta = "5DpomEty6Rgpe46wu8dyCs8bQviFJdo2yRbxBBxH8NbM"
   const ownerStakeMintAta = token.associatedAddress({mint: stakeMintToken, owner: keypair.publicKey})
 
@@ -46,7 +46,7 @@ describe("bonk-plugin", () => {
   // }).publicKey
 
 
-  const [registrar] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [registrar] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("registrar"),
       realm.toBytes(),
@@ -55,7 +55,7 @@ describe("bonk-plugin", () => {
     program.programId
   )
 
-  const [voterWeightRecord] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [voterWeightRecord] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("voter-weight-record"),
       realm.toBytes(),
@@ -65,16 +65,16 @@ describe("bonk-plugin", () => {
     program.programId
   )
 
-  const [inputVoterWeight] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [inputVoterWeight] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
-      new anchor.web3.PublicKey("D5UGhWTuEoDzgk5NFJL1zdeogV5HP3Fa9VT5Ep12yzXG").toBytes(),
+      new trezoaanchor.web3.PublicKey("D5UGhWTuEoDzgk5NFJL1zdeogV5HP3Fa9VT5Ep12yzXG").toBytes(),
       Buffer.from("voter-weight-record"),
       governingTokenOwner.toBytes()
     ], 
     previousVoterWeightPluginProgramId
   )
 
-  const [stakeDepositRecord] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [stakeDepositRecord] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("stake-deposit-record"),
       voterWeightRecord.toBytes()
@@ -82,7 +82,7 @@ describe("bonk-plugin", () => {
     program.programId
   )
 
-  const [tokenOwnerRecord] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [tokenOwnerRecord] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("governance"),
       realm.toBytes(),
@@ -92,11 +92,11 @@ describe("bonk-plugin", () => {
     governanceProgramId
   ) 
 
-  const [stakeDepositReceiptOne] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [stakeDepositReceiptOne] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       keypair.publicKey.toBytes(),
       stakePool.toBytes(),
-      new anchor.BN(0).toArrayLike(Buffer, 'le', 4),
+      new trezoaanchor.BN(0).toArrayLike(Buffer, 'le', 4),
       Buffer.from("stakeDepositReceipt")
     ],
     stakeProgram.programId
@@ -111,11 +111,11 @@ describe("bonk-plugin", () => {
     // 13,
     // 14,
   ].map(i => {
-    const [stakeDepositReceipt] = anchor.web3.PublicKey.findProgramAddressSync(
+    const [stakeDepositReceipt] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
       [
         keypair.publicKey.toBytes(),
         stakePool.toBytes(),
-        new anchor.BN(i).toArrayLike(Buffer, 'le', 4),
+        new trezoaanchor.BN(i).toArrayLike(Buffer, 'le', 4),
         Buffer.from("stakeDepositReceipt")
       ],
       stakeProgram.programId
@@ -226,8 +226,8 @@ describe("bonk-plugin", () => {
       const ixs = await Promise.all(stakeDepositReceipts.map(async(nn,i) => {
         return await stakeProgram.methods.deposit(
           i+15,
-          new anchor.BN(1000),
-          new anchor.BN(364000)
+          new trezoaanchor.BN(1000),
+          new trezoaanchor.BN(364000)
         ).accounts({
           owner: keypair.publicKey,
           from: ownerAta,
@@ -235,8 +235,8 @@ describe("bonk-plugin", () => {
           stakeMint: stakeMintToken,
           stakePool,
           stakeDepositReceipt: nn,
-          systemProgram: anchor.web3.SystemProgram.programId,
-          rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+          systemProgram: trezoaanchor.web3.SystemProgram.programId,
+          rent: trezoaanchor.web3.SYSVAR_RENT_PUBKEY,
           tokenProgram: token.TOKEN_PROGRAM_ID,
           payer: keypair.publicKey,
           destination: ownerStakeMintAta
@@ -282,8 +282,8 @@ describe("bonk-plugin", () => {
 
   xit("creates governance", async() => {
     const config: GovernanceConfig = {
-      minCommunityWeightToCreateProposal: new anchor.BN(1),
-      minCouncilWeightToCreateProposal: new anchor.BN(1),
+      minCommunityWeightToCreateProposal: new trezoaanchor.BN(1),
+      minCouncilWeightToCreateProposal: new trezoaanchor.BN(1),
       communityVoteThreshold: { yesVotePercentage: [20]},
       communityVetoVoteThreshold: {disabled: {}},
       councilVetoVoteThreshold: {yesVotePercentage: [1]},

@@ -439,7 +439,7 @@ export type NftVoter = {
         {
           "name": "voteRecord",
           "docs": [
-            "The account is used to validate that it doesn't exist and if it doesn't then Anchor owner check throws error",
+            "The account is used to validate that it doesn't exist and if it doesn't then TrezoaTrezoaAnchor owner check throws error",
             "The check is disabled here and performed inside the instruction",
             "#[account(owner = registrar.governance_program_id)]"
           ]
@@ -582,7 +582,7 @@ export type NftVoter = {
       "name": "maxVoterWeightRecord",
       "docs": [
         "MaxVoterWeightRecord account as defined in tpl-governance-addin-api",
-        "It's redefined here without account_discriminator for Anchor to treat it as native account",
+        "It's redefined here without account_discriminator for TrezoaAnchor to treat it as native account",
         "",
         "The account is used as an api interface to provide max voting power to the governance program from external addin contracts"
       ],
@@ -704,7 +704,7 @@ export type NftVoter = {
       "name": "voterWeightAction",
       "docs": [
         "VoterWeightAction enum as defined in tpl-governance-addin-api",
-        "It's redefined here for Anchor to export it to IDL"
+        "It's redefined here for TrezoaAnchor to export it to IDL"
       ],
       "type": {
         "kind": "enum",
@@ -731,7 +731,7 @@ export type NftVoter = {
       "name": "voterWeightRecord",
       "docs": [
         "VoterWeightRecord account as defined in tpl-governance-addin-api",
-        "It's redefined here without account_discriminator for Anchor to treat it as native account",
+        "It's redefined here without account_discriminator for TrezoaAnchor to treat it as native account",
         "",
         "The account is used as an api interface to provide voting power to the governance program from external addin contracts"
       ],

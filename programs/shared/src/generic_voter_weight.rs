@@ -44,7 +44,7 @@ impl GenericVoterWeight for VoterWeightRecord {
 
     // The GenericVoterWeight interface expects a crate-defined VoterWeightAction.
     // This is identical to tpl_governance_addin_api::voter_weight::VoterWeightAction, but added here
-    // so that Anchor will create the mapping correctly in the IDL.
+    // so that TrezoaAnchor will create the mapping correctly in the IDL.
     // This function converts the tpl_governance_addin_api::voter_weight::VoterWeightAction to the
     // crate-defined VoterWeightAction by mapping the enum values by integer.
     // Note - it is imperative that the two enums stay in sync to avoid errors here.

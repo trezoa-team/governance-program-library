@@ -1,7 +1,7 @@
 import { PublicKey, TransactionInstruction } from '@trezoa/web3.js';
-import { BN, Idl, Program } from '@coral-xyz/anchor';
+import { BN, Idl, Program } from '@trezoa-xyz/trezoaanchor';
 import { PluginProgramAccounts } from './types';
-import { IdlAccounts } from '@coral-xyz/anchor/dist/cjs/program/namespace/types';
+import { IdlAccounts } from '@trezoa-xyz/trezoaanchor/dist/cjs/program/namespace/types';
 import { getTokenOwnerRecordAddress, VoterWeightAction } from '@trezoa/tpl-governance';
 
 export const DEFAULT_GOVERNANCE_PROGRAM_ID = new PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw");

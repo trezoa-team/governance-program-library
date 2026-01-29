@@ -3,7 +3,7 @@ use gpl_shared::anchor::{DISCRIMINATOR_SIZE, PUBKEY_SIZE};
 use num_derive::FromPrimitive;
 
 /// VoterWeightAction enum as defined in tpl-governance-addin-api
-/// It's redefined here for Anchor to export it to IDL
+/// It's redefined here for TrezoaAnchor to export it to IDL
 #[derive(AnchorSerialize, AnchorDeserialize, Debug, Clone, Copy, PartialEq, FromPrimitive)]
 pub enum VoterWeightAction {
     /// Cast vote for a proposal. Target: Proposal
@@ -24,7 +24,7 @@ pub enum VoterWeightAction {
 }
 
 /// VoterWeightRecord account as defined in tpl-governance-addin-api
-/// It's redefined here without account_discriminator for Anchor to treat it as native account
+/// It's redefined here without account_discriminator for TrezoaAnchor to treat it as native account
 ///
 /// The account is used as an api interface to provide voting power to the governance program from external addin contracts
 #[account]

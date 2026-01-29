@@ -1,4 +1,4 @@
-anchor_version = "0.30.1"
+trezoaanchor_version = "0.30.1"
 trezoa_version = "1.18.18"
 
 [features]
@@ -14,7 +14,7 @@ token_voter = "3JhBg9bSPcfWGFa3t8LH7ooVtrjm45yCkHpxYXMXstUM"
 bonk-plugin = "7yJT49ajgYyuhWYzQMzwEt9u9Zbbt7r8Ft2wq1bhhfyy"
 
 [registry]
-url = "https://anchor.projectserum.com"
+url = "https://trezoaanchor.trezoaserum.com"
 
 [provider]
 cluster = "localnet"

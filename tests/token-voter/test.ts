@@ -1,28 +1,28 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as trezoaanchor from "@trezoa-xyz/trezoaanchor";
+import { Program } from "@trezoa-xyz/trezoaanchor";
 import {TokenVoter} from "../../target/types/token_voter";
 import idl from "../../target/idl/token_voter.json";
 import { GovernanceConfig, TplGovernance } from "governance-idl-sdk";
 import secret from "../../../../sol/id.json";
 import { Connection, Transaction, sendAndConfirmTransaction } from "@trezoa/web3.js";
-import { token } from "@coral-xyz/anchor/dist/cjs/utils";
+import { token } from "@trezoa-xyz/trezoaanchor/dist/cjs/utils";
 
-const connection = new anchor.web3.Connection(anchor.web3.clusterApiUrl("devnet"));
-const web3Connection = new Connection(anchor.web3.clusterApiUrl("devnet"));
-const keypair = anchor.web3.Keypair.fromSecretKey(Uint8Array.from(secret));
-const wallet = new anchor.Wallet(keypair);
+const connection = new trezoaanchor.web3.Connection(trezoaanchor.web3.clusterApiUrl("devnet"));
+const web3Connection = new Connection(trezoaanchor.web3.clusterApiUrl("devnet"));
+const keypair = trezoaanchor.web3.Keypair.fromSecretKey(Uint8Array.from(secret));
+const wallet = new trezoaanchor.Wallet(keypair);
 
-const provider = new anchor.AnchorProvider(connection, wallet, {});
+const provider = new trezoaanchor.TrezoaAnchorProvider(connection, wallet, {});
 const program = new Program<TokenVoter>(idl as TokenVoter, provider);
 const tplGovernance = new TplGovernance(web3Connection)
 
 describe("token-voter", () => {
-  const governanceProgramId = new anchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")
-  const realm = new anchor.web3.PublicKey("A2MqSD5iEqTjBkTg9naHoS5x1YLhQemrJTcBEFXoasph")
-  const governingTokenMint = new anchor.web3.PublicKey("6WddAU5ryy4BSNWqNPM3LsPYcirKY2ax7U2yfkzwe1kq")
+  const governanceProgramId = new trezoaanchor.web3.PublicKey("GovER5Lthms3bLBqWub97yVrMmEogzX7xNjdXpPPCVZw")
+  const realm = new trezoaanchor.web3.PublicKey("A2MqSD5iEqTjBkTg9naHoS5x1YLhQemrJTcBEFXoasph")
+  const governingTokenMint = new trezoaanchor.web3.PublicKey("6WddAU5ryy4BSNWqNPM3LsPYcirKY2ax7U2yfkzwe1kq")
   const governingTokenOwner = wallet.publicKey
 
-  const [registrar] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [registrar] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("registrar"),
       realm.toBytes(),
@@ -31,7 +31,7 @@ describe("token-voter", () => {
     program.programId
   )
 
-  const [tokenOwnerRecord] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [tokenOwnerRecord] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("governance"),
       realm.toBytes(),
@@ -41,7 +41,7 @@ describe("token-voter", () => {
     governanceProgramId
   )
 
-  const [maxVoterWeightRecord] = anchor.web3.PublicKey.findProgramAddressSync(
+  const [maxVoterWeightRecord] = trezoaanchor.web3.PublicKey.findProgramAddressSync(
     [
       Buffer.from("max-voter-weight-record"),
       realm.toBytes(),
@@ -104,7 +104,7 @@ describe("token-voter", () => {
   })
 
   it("deposits tokens", async() => {
-    const tx = await program.methods.deposit(0, new anchor.BN(350))
+    const tx = await program.methods.deposit(0, new trezoaanchor.BN(350))
     .accountsPartial({
       mint: governingTokenMint,
       tokenOwnerRecord,

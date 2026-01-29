@@ -40,6 +40,6 @@ pub mod token_haver {
 }
 
 fn log_version() {
-    // TODO: Check if Anchor allows to log it before instruction is deserialized
+    // TODO: Check if TrezoaAnchor allows to log it before instruction is deserialized
     msg!("VERSION:{:?}", env!("CARGO_PKG_VERSION"));
 }

@@ -2,7 +2,7 @@
 #[macro_export]
 macro_rules! vote_weight_record {
     ($id:expr) => {
-        /// Anchor wrapper for the TPL governance program's VoterWeightRecord type.
+        /// TrezoaAnchor wrapper for the TPL governance program's VoterWeightRecord type.
         #[derive(Clone)]
         pub struct VoterWeightRecord(tpl_governance_addin_api::voter_weight::VoterWeightRecord);
 
@@ -101,7 +101,7 @@ macro_rules! vote_weight_record {
 #[macro_export]
 macro_rules! max_voter_weight_record {
     ($id:expr) => {
-        /// Anchor wrapper for the TPL governance program's MaxVoterWeightRecord type.
+        /// TrezoaAnchor wrapper for the TPL governance program's MaxVoterWeightRecord type.
         #[derive(Clone)]
         pub struct MaxVoterWeightRecord(tpl_governance_addin_api::max_voter_weight::MaxVoterWeightRecord);
 

@@ -1,5 +1,5 @@
-import { AccountClient, Idl, Program } from '@coral-xyz/anchor';
-import { IdlDefinedFieldsNamed, IdlField, IdlTypeDefTyStruct } from '@coral-xyz/anchor/dist/cjs/idl';
+import { AccountClient, Idl, Program } from '@trezoa-xyz/trezoaanchor';
+import { IdlDefinedFieldsNamed, IdlField, IdlTypeDefTyStruct } from '@trezoa-xyz/trezoaanchor/dist/cjs/idl';
 
 type RegistrarAccountTemplate = {
   name: 'registrar'

@@ -5,7 +5,7 @@ use trezoaanchor_lang::prelude::*;
 use trezoa_program::pubkey::PUBKEY_BYTES;
 
 /// MaxVoterWeightRecord account as defined in tpl-governance-addin-api
-/// It's redefined here without account_discriminator for Anchor to treat it as native account
+/// It's redefined here without account_discriminator for TrezoaAnchor to treat it as native account
 ///
 /// The account is used as an api interface to provide max voting power to the governance program from external addin contracts
 #[account]

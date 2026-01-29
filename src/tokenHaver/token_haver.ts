@@ -388,7 +388,7 @@ export type TokenHaver = {
       "name": "voterWeightAction",
       "docs": [
         "VoterWeightAction enum as defined in tpl-governance-addin-api",
-        "It's redefined here for Anchor to export it to IDL"
+        "It's redefined here for TrezoaAnchor to export it to IDL"
       ],
       "type": {
         "kind": "enum",
@@ -415,7 +415,7 @@ export type TokenHaver = {
       "name": "voterWeightRecord",
       "docs": [
         "VoterWeightRecord account as defined in tpl-governance-addin-api",
-        "It's redefined here without account_discriminator for Anchor to treat it as native account",
+        "It's redefined here without account_discriminator for TrezoaAnchor to treat it as native account",
         "",
         "The account is used as an api interface to provide voting power to the governance program from external addin contracts"
       ],

@@ -1,10 +1,10 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as trezoaanchor from "@trezoa-xyz/trezoaanchor";
+import { Program } from "@trezoa-xyz/trezoaanchor";
 import { NftVoter } from "../target/types/nft_voter";
 
 describe("nft-voter", () => {
 
-  const program = anchor.workspace.NftVoter as Program<NftVoter>;
+  const program = trezoaanchor.workspace.NftVoter as Program<NftVoter>;
 
   it("Is initialized!", async () => {
 
